@@ -320,7 +320,7 @@ button { font: inherit; color: inherit; }
 .over-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
 /* ---------- Toast, Blatt (Regeln/Menü) ---------- */
-.toast { position: absolute; z-index: 30; left: 50%; bottom: calc(var(--hw) * 1.4 + 84px); transform: translateX(-50%); max-width: min(92%, 420px); padding: 9px 14px; border-radius: 12px; background: #f6efe0; color: #1e1a12; font-weight: 600; font-size: 13px; box-shadow: 0 12px 30px -10px rgba(0,0,0,.7); animation: pop2 .25s ease-out; text-align: center; }
+.toast { position: fixed; z-index: 30; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 150px); transform: translateX(-50%); max-width: min(92%, 420px); padding: 9px 14px; border-radius: 12px; background: #f6efe0; color: #1e1a12; font-weight: 600; font-size: 13px; box-shadow: 0 12px 30px -10px rgba(0,0,0,.7); animation: pop2 .25s ease-out; text-align: center; }
 @keyframes pop2 { from { transform: translate(-50%, 8px); opacity: 0; } }
 .sheet-bg { position: fixed; inset: 0; z-index: 20; background: rgba(2, 10, 8, .62); display: flex; align-items: flex-end; justify-content: center; animation: fade .2s; }
 .sheet { width: min(100%, 640px); max-height: 86%; overflow-y: auto; background: #0b2b23; border: 1px solid var(--line); border-bottom: 0; border-radius: 22px 22px 0 0; padding: 18px max(18px, env(safe-area-inset-right, 0px)) calc(22px + env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px)); }
@@ -1601,10 +1601,27 @@ const E = (() => {
   window.addEventListener("resize", () => { clearTimeout(resizeT); resizeT = setTimeout(() => { measure(); render(); }, 80); });
 
   // ---------- Rendern ----------
+  // Während jemand in ein Textfeld tippt, nicht neu aufbauen (sonst springt die Tastatur und der Text verschwindet)
+  let renderPending = false;
+  function typing() {
+    const a = document.activeElement;
+    return !!(a && app.contains(a) && (a.tagName === "INPUT" || a.tagName === "TEXTAREA") && !a.readOnly);
+  }
+  // Während ein Finger auf dem Bildschirm ist, auch nicht neu aufbauen – sonst geht das Antippen verloren
+  let pressing = false;
+  function flushPending() { if (renderPending && !typing() && !pressing) { renderPending = false; render(); } }
+  app.addEventListener("pointerdown", () => { pressing = true; }, true);
+  const release = () => setTimeout(() => { pressing = false; flushPending(); }, 0);
+  document.addEventListener("pointerup", release, true);
+  document.addEventListener("pointercancel", release, true);
+  app.addEventListener("focusout", () => setTimeout(flushPending, 0));
   function render() {
+    renderToast();
+    if (typing() || pressing) { renderPending = true; return; }
+    renderPending = false;
     if (!st) {
       const fail = ui.connFail ? `<p style="max-width:32ch;margin:0">Der Server antwortet gerade nicht. Prüf dein Internet, die Seite verbindet sich automatisch neu.</p><button class="btn ghost" data-act="solo">Solange gegen Bots spielen</button>` : `<div>${room ? "Verbinde mit dem Tisch…" : "Suche den Tisch…"}</div>`;
-      app.innerHTML = `<div class="top"><div class="mark"><b>Durak</b><span>Дурак</span></div>${netHtml()}</div><div></div><div class="loading"><div class="card back"></div>${fail}</div>`;
+      app.innerHTML = `<div class="top"><div class="mark"><b>Durak</b><span>Дурак</span></div>${netHtml()}</div><div></div><div class="loading"><div class="card back"></div>${fail}</div>` + (ui.sheet === "name" ? nameSheetHtml() : "");
       return;
     }
     const active = document.activeElement;
@@ -1619,10 +1636,9 @@ const E = (() => {
     } else {
       html += oppsHtml(r) + feltHtml(r) + barHtml(r) + handHtml(r);
     }
-    if (ui.toast) html += `<div class="toast" role="status">${esc(ui.toast)}</div>`;
     if (ui.sheet === "rules") html += rulesHtml();
     if (ui.sheet === "menu") html += menuHtml();
-    if (ui.sheet === "name") html += `<div class="sheet-bg"><div class="sheet" role="dialog" aria-label="Dein Name"><div class="sheet-head"><h2>Wie heißt du?</h2></div><p>So sehen dich die anderen am Tisch.</p><form class="namebox" autocomplete="off"><input id="nameFirst" maxlength="16" placeholder="Dein Name" aria-label="Dein Name"><button class="btn" type="submit">Los geht's</button></form></div></div>`;
+    if (ui.sheet === "name") html += nameSheetHtml();
     if (ui.sheet === "invite") html += `<div class="sheet-bg"><div class="sheet" role="dialog" aria-label="Freunde einladen"><div class="sheet-head"><h2>Freunde einladen</h2><button class="icon-btn" data-act="close">Schließen</button></div>${inviteHtml()}</div></div>`;
     app.innerHTML = html;
     measureTable();
@@ -1641,6 +1657,21 @@ const E = (() => {
     ui.prevTable = now;
     const me = myIdx();
     ui.prevHand = me >= 0 && st.ph === "play" ? new Set(st.pl[me].h) : null;
+  }
+
+  const toastLayer = document.createElement("div");
+  toastLayer.setAttribute("role", "status");
+  toastLayer.setAttribute("aria-live", "polite");
+  document.body.appendChild(toastLayer);
+  let lastToastShown = null;
+  function renderToast() {
+    if (ui.toast === lastToastShown) return;
+    lastToastShown = ui.toast;
+    toastLayer.innerHTML = ui.toast ? `<div class="toast">${esc(ui.toast)}</div>` : "";
+  }
+
+  function nameSheetHtml() {
+    return `<div class="sheet-bg"><div class="sheet" role="dialog" aria-label="Dein Name"><div class="sheet-head"><h2>Wie heißt du?</h2></div><p>So sehen dich die anderen am Tisch.</p><form class="namebox" autocomplete="off"><input id="nameFirst" maxlength="16" placeholder="Dein Name" aria-label="Dein Name" enterkeyhint="done" autocapitalize="words" autocorrect="off" spellcheck="false"><button class="btn" type="submit">Los geht's</button></form></div></div>`;
   }
 
   function netHtml() {
