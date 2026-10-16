@@ -78,7 +78,7 @@ button { font: inherit; color: inherit; }
 /* ---------- Kopfzeile ---------- */
 .top { display: flex; align-items: center; gap: 8px; min-height: 42px; min-width: 0; }
 .mark { display: flex; align-items: baseline; gap: 8px; margin-right: auto; min-width: 0; }
-.mark b { font-family: var(--f-display); font-weight: 800; font-size: 20px; letter-spacing: .1em; text-transform: uppercase; background: linear-gradient(180deg, #f6e3a1, #d4af37 55%, #a98629); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mark b { font-family: var(--f-display); font-weight: 700; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
 .mark span { font-family: var(--f-display); font-weight: 500; font-size: 11px; color: var(--ink-3); letter-spacing: .04em; }
 .net { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); white-space: nowrap; flex: 0 0 auto; }
 .net i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); box-shadow: 0 0 0 3px rgba(122,151,139,.18); }
@@ -130,7 +130,7 @@ button { font: inherit; color: inherit; }
 }
 .opp .av { position: relative; left: auto; bottom: auto; transform: none; width: 32px; height: 32px; font-size: 14px; box-shadow: 0 4px 10px -4px rgba(0,0,0,.8); }
 .opp .cnt { position: absolute; left: calc(50% + 10px); top: -6px; }
-.cnt { min-width: 20px; height: 18px; padding: 0 5px; border-radius: 9px; background: linear-gradient(180deg, #f0d77c, #d4af37); box-shadow: 0 0 0 1px rgba(0,0,0,.5); color: var(--brass-ink); font-size: 11px; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.cnt { min-width: 20px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--brass); box-shadow: 0 0 0 1px rgba(0,0,0,.5); color: var(--brass-ink); font-size: 11px; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
 .opp .nm { max-width: 100%; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
 .role { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); height: 14px; display: flex; align-items: center; gap: 3px; white-space: nowrap; }
 .role.atk { color: var(--brass-2); }
@@ -298,9 +298,9 @@ button { font: inherit; color: inherit; }
 .btn {
   appearance: none; cursor: pointer; border: 0; border-radius: 12px; height: 40px; padding: 0 16px;
   font-weight: 700; font-size: 14px; letter-spacing: .01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
-  background: linear-gradient(180deg, #f3dc8c 0%, #d4af37 55%, #b3902c 100%); color: var(--brass-ink); box-shadow: 0 1px 0 rgba(255,255,255,.45) inset, 0 -1px 0 rgba(0,0,0,.2) inset, 0 6px 16px -8px rgba(212,175,55,.8);
+  background: var(--brass); color: var(--brass-ink); box-shadow: 0 6px 16px -8px rgba(212,175,55,.8);
 }
-.btn:hover { background: linear-gradient(180deg, #f8e6a4 0%, #e0bd48 55%, #bf9a33 100%); }
+.btn:hover { background: var(--brass-2); }
 .btn.ghost { background: var(--panel); color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
 .btn.ghost:hover { border-color: var(--brass); }
 .btn.alarm { background: transparent; color: var(--alarm); border: 1.5px solid var(--alarm); box-shadow: none; }
@@ -387,7 +387,7 @@ button { font: inherit; color: inherit; }
 .critic .cav { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 25px; background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); border: 1.5px solid var(--brass); box-shadow: 0 8px 18px -8px rgba(0,0,0,.9); order: 2; }
 .critic .cbub { position: relative; min-width: 0; padding: 9px 12px 10px; border-radius: 16px 16px 4px 16px; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
 .critic .cbub b { display: block; font-family: var(--f-display); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass-2); margin-bottom: 3px; }
-.critic .cbub p { margin: 0; font-size: 13.5px; line-height: 1.35; color: var(--ink); text-wrap: pretty; }
+.critic .cbub p { margin: 0; font-size: 14px; line-height: 1.38; color: var(--ink); text-wrap: pretty; }
 .critic.mock .cbub { border-color: var(--silver-3); }
 .critic.mock .cbub b { color: var(--silver); }
 .critic.mock .cav { border-color: var(--silver-3); }
@@ -423,7 +423,7 @@ button { font: inherit; color: inherit; }
 .lobby { min-height: 0; overflow-y: auto; display: grid; gap: 12px; align-content: start; padding: 4px 0 12px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 820px) { .lobby { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; } .lobby .hero { grid-column: 1 / -1; } }
 .hero { padding: 10px 2px 2px; }
-.hero h1 { margin: 0; font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 7.6vw, 48px); letter-spacing: .01em; line-height: 1.08; background: linear-gradient(180deg, #f6e3a1, #d4af37 60%, #a98629); -webkit-background-clip: text; background-clip: text; color: transparent; text-wrap: balance; }
+.hero h1 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(26px, 7.6vw, 48px); letter-spacing: .02em; line-height: 1.1; color: var(--brass); text-wrap: balance; }
 .hero h1 small { display: block; margin-top: 6px; font-weight: 500; font-size: 12px; letter-spacing: .14em; color: var(--ink-3); }
 .hero p { margin: 10px 0 0; color: var(--ink-2); max-width: 52ch; text-wrap: pretty; }
 .panel { background: var(--panel); border: 1px solid var(--line-2); border-radius: 18px; padding: 14px; min-width: 0; }
@@ -2245,54 +2245,62 @@ const E = (() => {
   // ===================================================================
   // Kommentator: Baron Zuschauski lobt und lästert
   // ===================================================================
-  const CRITIC = { name: "Baron Zuschauski", face: "🧐" };
+  const CRITIC = { face: "👴" };
   const PRAISE = [
-    "Exzellenter Zug! Der Adel verneigt sich vor Eurer Genialität.",
-    "Majestätisch. Man sollte diesen Zug in Marmor meißeln.",
-    "Die Großmeister von Sankt Petersburg verneigen sich. Alle. Gleichzeitig.",
-    "Pure Eleganz. Selbst die Karten applaudieren leise.",
-    "So spielt nur, wer von den Göttern persönlich unterrichtet wurde.",
-    "Chapeau! Ich fordere einen eigenen Feiertag für diesen Zug.",
-    "Brillant. Ich habe Gänsehaut, und ich besitze nicht einmal Haut.",
-    "Ein Zug von solcher Schönheit, dass die Zarenfamilie Beifall klatschen würde.",
-    "Genial. Schreibt das jemand mit? Für die Nachwelt?",
-    "Ein Zug wie aus dem Lehrbuch. Das Lehrbuch hat Tränen in den Augen.",
-    "Ich bin sprachlos. Und das will bei mir etwas heißen.",
-    "Das war kein Zug, das war ein Kunstwerk. Das Museum ruft bereits an.",
+    "Eure Lordschaft! Dieser Zug wird in tausend Jahren noch in Kathedralen besungen.",
+    "Ein Zug von solcher Größe, dass Napoleon kurz aus dem Grab geklettert ist, um zu applaudieren. Dann wieder rein.",
+    "Die Götter haben Euch zugesehen, Eure Lordschaft, und machen sich jetzt Notizen.",
+    "Ich habe Kriege gesehen, Eure Lordschaft, aber nie eine so schöne Hinrichtung.",
+    "Majestätisch! Irgendwo stirbt gerade ein Großmeister vor Neid. Verdient.",
+    "Eure Lordschaft, dieser Zug war so gut, dass ich kurz meinen Namen vergessen habe. Ich bin alt, aber das war trotzdem Euer Verdienst.",
+    "Chapeau! Die Karten weinen vor Glück. Der Gegner weint aus anderen Gründen.",
+    "Unfassbar. Hätte ich noch Zähne, würde ich auf diesen Zug beißen. Reinstes Gold, Eure Lordschaft.",
+    "So eine Eleganz! Der Gegner wird heute Nacht davon träumen. Es wird kein schöner Traum.",
+    "Eure Lordschaft! Ich bin 94 und habe auf genau diesen Zug gewartet. Jetzt kann ich in Frieden gehen.",
+    "Brillant! Man sollte Euren Namen in die Sterne ritzen. Mit einem sehr großen Messer.",
+    "Göttlich. Wenn ich sterbe, und das wird bald sein, will ich genau das als Letztes gesehen haben.",
+    "Eine Meisterleistung, Eure Lordschaft. Der Gegner sollte heute Nacht die Türen abschließen.",
+    "Grandios! Selbst der Sensenmann hat kurz den Hut gezogen. Und der zieht für niemanden den Hut.",
+    "Eure Lordschaft, die Kaiser Europas hätten für diesen Zug ihre Kronen verpfändet. Alle. Auch die hässlichen.",
+    "Das war kein Zug, das war ein Staatsakt. Mit Salutschüssen. Auf den Gegner.",
   ];
   const MOCK = [
-    "Äh. Das war… eine Entscheidung.",
-    "Ich habe schon Hühner klügere Karten legen sehen. Charmant, aber mutig.",
-    "Mutig. Falsch, aber mutig.",
-    "Das war so kühn, dass sogar der Stapel kurz weggeschaut hat.",
-    "Die Karten haben sich das nicht ausgesucht. Die können nichts dafür.",
-    "Ich sage nichts. Ich schaue nur sehr, sehr lange.",
-    "Ein Zug, der im Lehrbuch unter „Bitte nicht“ steht.",
-    "Strategisch interessant. So wie ein Regenschirm bei Windstille.",
-    "Ich habe das meinem Monokel gezeigt. Es ist beschlagen.",
-    "Das war entweder Genie oder das Gegenteil. Ich tippe auf das Gegenteil.",
-    "Wenn das ein Plan war, dann ein sehr geheimer. Selbst vor Euch.",
+    "Eure Lordschaft… ich habe Hühner klüger sterben sehen.",
+    "Das war so dumm, dass mein Herzschrittmacher kurz überlegt hat, Feierabend zu machen.",
+    "Mutig. Falsch. Aber mutig. Das stand auch auf dem Grabstein meines Bruders.",
+    "Eure Lordschaft, ich sage nichts. Ich schaue nur so, wie man eine Beerdigung anschaut.",
+    "Der Zug war wie meine zweite Ehe: kurz, schmerzhaft, und alle haben es kommen sehen.",
+    "Ich bin alt, Eure Lordschaft, aber so einen Zug überlebe ich kein zweites Mal.",
+    "Haben Euch die Karten etwas getan? Das war eine Hinrichtung. Eure eigene.",
+    "Ein Zug wie ein Fallschirm, der sich erst am Boden öffnet.",
+    "Eure Lordschaft, die Titanic hatte auch einen Plan. Hat auch nicht geklappt.",
+    "Großartig. Der Gegner schickt gleich Blumen. Für die Beerdigung Eures Blatts.",
+    "Ich habe das meinem Monokel gezeigt. Es ist aus dem Fenster gesprungen.",
+    "Das war kein Zug, Eure Lordschaft. Das war ein Hilferuf.",
+    "Selbst mein Grab hat mehr Perspektive als dieses Blatt.",
+    "Wenn das Strategie war, dann die Sorte, über die man später vor Gericht spricht.",
+    "Eure Lordschaft, ich habe Pferde mit besserem Kartengefühl gekannt. Die sind auch tot, aber trotzdem.",
+    "Ich würde Euch tadeln, aber in meinem Alter spart man sich die Luft für wichtige Dinge. Zum Beispiel Atmen.",
   ];
   const SPECIAL = {
-    cheapest: ["Mit der kleinsten Karte gestochen. Sparsam wie ein schwäbischer Großfürst.", "Knapp, präzise, gnadenlos. Ein Florett-Stich, kein Keulenschlag."],
-    trumpWaste: ["Ein Trumpf auf so eine Karte? Der Trumpf weint. Ich weine mit.", "Mit Kanonen auf Spatzen. Teure Kanonen."],
-    bigTrump: ["Ein hoher Trumpf, so früh im Spiel. Großzügig wie ein Erbe am ersten Tag.", "Den hohen Trumpf jetzt schon? Der hätte später Könige gestürzt."],
-    aceEarly: ["Ein Ass, einfach so verschenkt. Die Diener weinen in der Küche.", "Ass zum Anfang. Mutig. Der Gegner sagt Danke."],
-    trumpOpen: ["Mit Trumpf eröffnen, obwohl die Hand voller Alternativen ist. Interessant. Sehr interessant.", "Trumpf zum Angriff? Man verschießt kein Silber auf Spatzen."],
-    pair: ["Ein Pärchen in der Hand, das kleine zuerst. Durchdacht wie ein Schachzug.", "Mit System angegriffen. Da bebt der Verteidiger."],
-    low: ["Mit der kleinen Karte angreifen und die großen hüten. Klassisch, elegant, klug.", "Bescheiden eröffnet, später wird geerntet. Eine Lehrstunde."],
-    pressure: ["Nachgelegt, bis die Hand des Gegners zittert. Herrlich grausam.", "Eine Karte mehr, und die Festung bröckelt. Ihr spürt Schwäche."],
-    pile: ["Noch eine obendrauf. Der Gegner nimmt alles, Ihr gebt nur das Schlechteste. Teuflisch.", "Nachgeworfen wie Konfetti. Nur dass der andere es aufheben muss."],
-    takeWeak: ["Aufgenommen, obwohl Ihr stechen konntet? Großzügig. Sehr großzügig.", "Die Karte zum Stechen lag in Eurer Hand. Sie hat gewinkt. Ihr habt weggeschaut."],
-    xfer: ["Weitergeschoben! Das Problem gehört jetzt jemand anderem. Das nenne ich Adel.", "Elegant abgewälzt. Die Diplomatie wäre stolz auf Euch."],
-    bito: ["Bito! Nichts kam durch. Eine Festung aus Karten, mit Zinnen aus Trumpf.", "Alles abgewehrt. Der Angreifer geht nach Hause und weint in sein Kissen."],
-    took: ["Alles aufgenommen. Die Hand wird schwer, das Herz auch.", "Da kam ein ganzer Stapel. Aber gut, mehr Karten, mehr Möglichkeiten. Theoretisch."],
-    cheat: ["Das hat doch keiner gesehen… oder? Ich jedenfalls habe nichts gesehen. Nichts.", "Hust. Ich bin gerade sehr beschäftigt mit meinem Monokel."],
-    gotCaught: ["Erwischt! Das Pokerface braucht noch Übung. Viel Übung.", "Beim Schummeln ertappt. Der Hof tuschelt. Der Hof tuschelt laut."],
-    caughtOther: ["Erwischt! Ein Auge wie ein Falke mit Monokel.", "Entlarvt! Der Schwindel fliegt auf, und Ihr habt ihn aufgespürt. Bravo!"],
-    falseAlarm: ["Fehlalarm. Der Falke hatte offenbar das Monokel verlegt.", "Jemanden zu Unrecht beschuldigt. Peinlich. Für Euch. Sehr."],
-    out: ["Als Erster raus! Der Hof erhebt sich, Fanfaren erklingen, Tauben steigen auf.", "Keine Karten mehr! Ein Triumph, den man den Enkeln erzählt."],
-    durak: ["Durak! Aber ein Durak mit Stil. Zumindest das.", "Der Letzte mit Karten. Das Monokel fällt. Ich sage nichts mehr."],
+    cheapest: ["Mit der kleinsten Karte gestochen, Eure Lordschaft. Sparsam wie ein Totengräber mit der Erde.", "Knapp, präzise, gnadenlos. Ein Florettstich ins Herz. Der Gegner hat es nicht einmal gemerkt."],
+    trumpWaste: ["Ein Trumpf auf so eine Karte? Eure Lordschaft, der Trumpf weint. Ich weine mit. Der Gegner lacht.", "Mit der Kanone auf den Spatzen. Und der Spatz war schon tot."],
+    bigTrump: ["Der hohe Trumpf, so früh? Großzügig wie ein Erbe am Tag nach der Beerdigung.", "Eure Lordschaft, dieser Trumpf hätte später Könige gestürzt. Jetzt liegt er da wie ich nach dem Mittagessen."],
+    aceEarly: ["Ein Ass, einfach verschenkt. In der Küche weinen die Diener, Eure Lordschaft.", "Ass zum Anfang. Mutig. Der Gegner lässt Euch Blumen schicken."],
+    trumpOpen: ["Mit Trumpf eröffnen, bei vollem Blatt? Eure Lordschaft, man verschießt kein Silber auf Spatzen.", "Trumpf zum Angriff. Das letzte Mal sah ich so etwas 1962. Der Mann ist nicht gut gealtert."],
+    pair: ["Ein Pärchen in der Hand, das kleine zuerst. Durchdacht wie ein Giftmord, Eure Lordschaft.", "Mit System angegriffen. Der Verteidiger bebt. Zu Recht."],
+    low: ["Mit der kleinen Karte angreifen und die großen hüten. Klassisch, elegant, tödlich.", "Bescheiden eröffnet, Eure Lordschaft. Die Ernte kommt später. Und sie wird blutig."],
+    pressure: ["Nachgelegt, bis dem Gegner die Hand zittert. Herrlich grausam, Eure Lordschaft.", "Eine Karte mehr, und die Festung fällt. Ihr riecht Schwäche wie ein alter Wolf."],
+    pile: ["Noch eine obendrauf. Der Gegner schluckt alles, Ihr gebt nur Abfall. Teuflisch, Eure Lordschaft.", "Nachgeworfen wie Erde aufs Grab. Und er muss alles aufheben."],
+    takeWeak: ["Aufgenommen, obwohl Ihr stechen konntet? Eure Lordschaft, die Karte hat gewinkt. Ihr habt weggeschaut.", "Freiwillig aufgenommen. So kapituliert man, wenn der Feind noch gar nicht da ist."],
+    xfer: ["Weitergeschoben! Das Problem gehört jetzt jemand anderem. So regiert man, Eure Lordschaft.", "Elegant abgewälzt. Die Diplomatie wäre stolz. Der Nachbar nicht."],
+    bito: ["Bito! Nichts kam durch. Eine Festung aus Karten, Eure Lordschaft, mit Zinnen aus Trumpf.", "Alles abgewehrt. Der Angreifer geht heim und weint in sein Kissen. Ich habe es gehört."],
+    cheat: ["Das hat doch keiner gesehen, Eure Lordschaft… oder? Ich jedenfalls habe nichts gesehen. Nichts.", "Hust. Ich bin gerade sehr beschäftigt mit meinem Monokel. Sehr beschäftigt."],
+    gotCaught: ["Erwischt! Eure Lordschaft, das Pokerface braucht Übung. Oder einen Sack über dem Kopf.", "Beim Schummeln ertappt. Der Hof tuschelt. Der Hof tuschelt laut und zeigt mit dem Finger."],
+    caughtOther: ["Entlarvt! Ein Auge wie ein Falke, Eure Lordschaft. Ein sehr alter, sehr böser Falke.", "Erwischt! Der Schwindler zittert. Soll er. Gnade ist etwas für Jüngere."],
+    falseAlarm: ["Fehlalarm. Eure Lordschaft, der Falke hatte das Monokel verlegt. Peinlich. Für Euch.", "Jemanden zu Unrecht beschuldigt. Und jetzt eine Strafkarte. Das Leben ist hart, der Baron ist härter."],
+    out: ["Als Erster raus! Der Hof erhebt sich, Fanfaren erklingen, irgendwo fällt ein Gegner in Ohnmacht.", "Keine Karten mehr, Eure Lordschaft! Ein Triumph, den man den Enkeln erzählt. Falls Ihr welche habt."],
+    durak: ["Durak, Eure Lordschaft. Aber ein Durak mit Stil. Das steht dann auch auf dem Grabstein.", "Der Letzte mit Karten. Das Monokel fällt. Ich sage nichts mehr. Ich habe auch nicht mehr lange."],
   };
   let critEl = null, critT = 0, critT2 = 0, lastCrit = "", lastCritAt = 0;
   const pick = (arr) => { let t = arr[Math.floor(rnd() * arr.length)]; if (arr.length > 1 && t === lastCrit) t = arr[(arr.indexOf(t) + 1) % arr.length]; lastCrit = t; return t; };
@@ -2309,7 +2317,7 @@ const E = (() => {
     const el = document.createElement("div");
     el.className = "critic " + (kind === "good" ? "praise" : "mock");
     el.setAttribute("role", "status");
-    el.innerHTML = `<div class="cbub"><b>${CRITIC.name}</b><p></p></div><div class="cav" aria-hidden="true">${CRITIC.face}</div>`;
+    el.innerHTML = `<div class="cbub"><p></p></div><div class="cav" aria-hidden="true">${CRITIC.face}</div>`;
     el.querySelector("p").textContent = text;
     el.addEventListener("click", () => hideCritic(false));
     // Unter der Meldungszeile auf dem Tisch, damit die Karten frei bleiben
@@ -3206,7 +3214,7 @@ const E = (() => {
       <li>Ist der Angriff vorbei, gilt alles, was auf dem Tisch lag.</li>
     </ul></div>
     <h3>Bedienung</h3>
-    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Das Spiel zeigt dir nicht, welche Karten passen. Darauf musst du selbst achten.${c.cheat ? " Legst du eine falsche Karte, liegt sie trotzdem, und die anderen können dich erwischen." : " Eine falsche Karte geht zurück auf deine Hand."}</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein markiertes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Den Ton schaltest du oben mit dem Lautsprecher an und aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken. Unten rechts öffnest du den Chat.</li><li>Baron Zuschauski sitzt am Rand und kommentiert deine Züge. Nimm ihn nicht zu ernst.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
+    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Das Spiel zeigt dir nicht, welche Karten passen. Darauf musst du selbst achten.${c.cheat ? " Legst du eine falsche Karte, liegt sie trotzdem, und die anderen können dich erwischen." : " Eine falsche Karte geht zurück auf deine Hand."}</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein markiertes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Den Ton schaltest du oben mit dem Lautsprecher an und aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken. Unten rechts öffnest du den Chat.</li><li>Ein alter Herr sitzt am Rand und kommentiert deine Züge. Nimm ihn nicht zu ernst.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
     </div></div>`;
   }
 
