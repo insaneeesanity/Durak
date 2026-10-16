@@ -359,7 +359,7 @@ button { font: inherit; color: inherit; }
 .dragcard.drop .dc-tag { opacity: 0; }
 
 .emo-tray {
-  position: absolute; pointer-events: auto; display: flex; gap: 2px; padding: 5px; border-radius: 999px;
+  position: absolute; pointer-events: auto; display: flex; flex-wrap: wrap; gap: 2px; padding: 5px; border-radius: 26px; max-width: calc(100vw - 20px);
   background: var(--panel-2); border: 1px solid var(--line); box-shadow: 0 16px 34px -12px rgba(0,0,0,.85);
   animation: tray .22s cubic-bezier(.2,1.4,.4,1) both; transform-origin: 20px 100%;
 }
@@ -381,6 +381,18 @@ button { font: inherit; color: inherit; }
   80% { transform: translateY(-4px) scale(1); opacity: 1; }
   100% { transform: translateY(-24px) scale(.85); opacity: 0; }
 }
+
+/* ---------- Memes ---------- */
+.meme-layer { position: fixed; z-index: 0; border-radius: 22px; overflow: hidden; background: #000; pointer-events: none; }
+.meme-layer[hidden] { display: none; }
+.meme-layer video, .meme-layer img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.felt.meme { background: radial-gradient(90% 70% at 50% 45%, rgba(0,0,0,.08), rgba(0,0,0,.35)); }
+.felt.meme::before { display: none; }
+.felt.meme .logline { background: rgba(12,12,16,.82); }
+.felt.meme .idle-hint, .felt.meme .pile .lbl { text-shadow: 0 1px 3px rgba(0,0,0,.95), 0 0 10px rgba(0,0,0,.9); color: var(--ink-2); }
+.emo-sep { width: 1px; height: 30px; margin: 8px 4px; background: var(--line); flex: 0 0 auto; }
+.emo-tray button.meme { font-size: 24px; position: relative; }
+.emo-tray button.meme::after { content: "🎬"; position: absolute; right: 2px; bottom: 2px; font-size: 11px; }
 
 /* ---------- Kommentator ---------- */
 .critic { position: fixed; z-index: 45; left: 50%; transform: translateX(-50%); top: 30%; width: max-content; max-width: min(90vw, 560px); pointer-events: auto; cursor: pointer; animation: critIn .4s cubic-bezier(.2,1.3,.4,1) both; }
@@ -1101,7 +1113,12 @@ const E = (() => {
       !st.ps.includes(j) && st.pl[j].h.length > 0 && (st.cfg.cheat || st.pl[j].h.some((c) => ranks.has(c[0]))));
     if (st.tk || !unbeaten(st)) {
       // Mehr Zeit zum Reagieren: Einwerfen und Schummler-Erwischen
-      if (!add || !waiting.length) return { k: "end", ms: st.cfg.cheat ? 7000 : 3000, key: `end:${st.tc}:${st.tk}` };
+      if (!add || !waiting.length) {
+        // Haben alle Angreifer schon Bito/Fertig gedrückt, geht es zügig weiter
+        const allPassed = attackers(st).every((j) => st.ps.includes(j) || !st.pl[j].h.length);
+        const ms = allPassed ? (st.cfg.cheat ? 2500 : 1000) : (st.cfg.cheat ? 7000 : 3000);
+        return { k: "end", ms, key: `end:${st.tc}:${st.tk}:${allPassed ? 1 : 0}` };
+      }
       return { k: "win", ms: st.tk ? 25000 : 30000, key: `win:${st.tc}:${st.tk}` };
     }
     return null;
@@ -1235,6 +1252,16 @@ const E = (() => {
   };
   const metrics = { hw: 64, tw: 64, pw: 40, cols: 3, handW: 360 };
   const EMOS = ["😡", "😂", "🤡", "😏", "🥱"];
+  // Memes: laufen als Hintergrund des Tischs, die Karten bleiben vorn. Clips kommen von Tenor (mp4, bei Fehler das GIF).
+  const MEMES = [
+    { id: "style", label: "My style rocks", icon: "💅", mp4: "https://media.tenor.com/XI7c8jla6CcAAAPo/sport1-my-style-rocks.mp4", gif: "https://media1.tenor.com/m/XI7c8jla6CcAAAAC/sport1-my-style-rocks.gif" },
+    { id: "elmo", label: "Elmo brennt", icon: "🔥", mp4: "https://media.tenor.com/_pj7e4VKqDoAAAPo/elmo-burning.mp4", gif: "https://media1.tenor.com/m/_pj7e4VKqDoAAAAC/elmo-burning.gif" },
+    { id: "fine", label: "Alles gut", icon: "☕", mp4: "https://media.tenor.com/5ety3Lx3QccAAAPo/its-fine-dog-fine.mp4", gif: "https://media1.tenor.com/m/5ety3Lx3QccAAAAC/its-fine-dog-fine.gif" },
+    { id: "lol", label: "Lachflash", icon: "🤣", mp4: "https://media.tenor.com/rL4hulhuEIYAAAPo/funny-laughing.mp4", gif: "https://media1.tenor.com/m/rL4hulhuEIYAAAAC/funny-laughing.gif" },
+    { id: "lieo", label: "Liiieoo", icon: "😵", mp4: "https://media.tenor.com/6Ug_C4RjC4kAAAPo/%D9%84%D9%8A%D9%8A%D9%88%D9%88.mp4", gif: "https://media1.tenor.com/m/6Ug_C4RjC4kAAAAC/%D9%84%D9%8A%D9%8A%D9%88%D9%88.gif" },
+  ];
+  const MEME_MS = 9000;
+  const memeById = (id) => MEMES.find((m) => m.id === id);
   const EMO_NAMES = ["Wütend", "Lachen", "Clown", "Grinsen", "Gähnen"];
   let myEm = [], lastEmAt = 0;
   let myCh = [], chat = { msgs: [], open: false, unread: 0, seen: new Map() };
@@ -1910,6 +1937,7 @@ const E = (() => {
   }
   let resizeT = 0;
   window.addEventListener("resize", () => { clearTimeout(resizeT); resizeT = setTimeout(() => { measure(); render(); }, 80); });
+  window.addEventListener("scroll", () => { if (ui.meme) placeMeme(); }, { passive: true });
 
   // ---------- Rendern ----------
   // Während jemand in ein Textfeld tippt, nicht neu aufbauen (sonst springt die Tastatur und der Text verschwindet)
@@ -1955,6 +1983,7 @@ const E = (() => {
     const snap = captureLayout();
     app.innerHTML = html;
     measureTable();
+    placeMeme();
     try { animateAfter(snap); } catch (e) { console.warn("Animation", e); }
     ui.prevInfo = infoOf();
 
@@ -2136,7 +2165,7 @@ const E = (() => {
     const banner = ui.banner ? `<div class="banner ${ui.banner.x}"><h3>${ui.banner.x === "caught" ? "Erwischt!" : "Fehlalarm!"}</h3><p>${esc(ui.banner.m.replace(/^(Erwischt|Fehlalarm)! /, ""))}</p></div>` : "";
     const over = st.ph === "over" ? overHtml() : "";
     const corners = ["tl", "tr", "bl", "br"].map((k) => `<svg class="orn-c ${k}" viewBox="0 0 40 40" aria-hidden="true"><use href="#flourish" width="40" height="40"></use></svg>`).join("");
-    return `<div class="felt">${corners}<div class="felt-top">${logline || '<div class="logline" style="visibility:hidden">·</div>'}</div><div class="mid"><div class="pile deckp">${deck}</div><div class="pairs"><div class="pairs-in">${pairs}</div></div><div class="pile discp">${disc}</div></div>${banner}${over}</div>`;
+    return `<div class="felt ${ui.meme ? "meme" : ""}">${corners}<div class="felt-top">${logline || '<div class="logline" style="visibility:hidden">·</div>'}</div><div class="mid"><div class="pile deckp">${deck}</div><div class="pairs"><div class="pairs-in">${pairs}</div></div><div class="pile discp">${disc}</div></div>${banner}${over}</div>`;
   }
 
   function overHtml() {
@@ -2373,6 +2402,59 @@ const E = (() => {
     else if (l.x === "out" && l.m.startsWith(P.n + " ") && P.o === 1) critic("good", "out");
     else if (l.x === "durak" && st.res && st.res.dur === me) critic("bad", "durak");
     else if (l.x === "" && ui.prevInfo && ui.prevInfo.def === me && /^.+ nimmt auf\./.test(l.m) && l.m.startsWith(P.n + " ")) { /* eigenes Aufnehmen wird schon beim Zug bewertet */ }
+  }
+
+  // ===================================================================
+  // Memes: Clip als Tisch-Hintergrund, Karten bleiben davor
+  // ===================================================================
+  const memeLayer = document.createElement("div");
+  memeLayer.className = "meme-layer";
+  memeLayer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(memeLayer);
+  let memeT = 0;
+  function placeMeme() {
+    const felt = app.querySelector(".felt");
+    if (!felt || !ui.meme) { memeLayer.hidden = true; return; }
+    const r = felt.getBoundingClientRect();
+    Object.assign(memeLayer.style, { left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px" });
+    memeLayer.hidden = false;
+  }
+  function stopMeme() {
+    clearTimeout(memeT);
+    ui.meme = null;
+    const v = memeLayer.querySelector("video");
+    if (v) { try { v.pause(); } catch (e) { /* egal */ } }
+    memeLayer.innerHTML = "";
+    memeLayer.hidden = true;
+    const felt = app.querySelector(".felt");
+    if (felt) felt.classList.remove("meme");
+  }
+  function playMeme(id) {
+    const m = memeById(id);
+    if (!m || !st || st.ph === "lobby") return;
+    stopMeme();
+    ui.meme = id;
+    const felt = app.querySelector(".felt");
+    if (felt) felt.classList.add("meme");
+    const useGif = () => {
+      if (ui.meme !== id) return;
+      memeLayer.innerHTML = "";
+      const img = document.createElement("img");
+      img.alt = "";
+      img.addEventListener("error", stopMeme);
+      img.src = m.gif;
+      memeLayer.appendChild(img);
+      placeMeme();
+    };
+    const v = document.createElement("video");
+    v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("muted", ""); v.preload = "auto";
+    v.addEventListener("error", useGif);
+    v.src = m.mp4;
+    memeLayer.appendChild(v);
+    placeMeme();
+    const p = v.play();
+    if (p && p.catch) p.catch(useGif);
+    memeT = setTimeout(stopMeme, MEME_MS);
   }
 
   // ===================================================================
@@ -3054,7 +3136,8 @@ const E = (() => {
     tray = document.createElement("div");
     tray.className = "emo-tray";
     tray.setAttribute("role", "menu");
-    tray.innerHTML = EMOS.map((e, k) => `<button type="button" role="menuitem" data-emo="${k}" aria-label="${EMO_NAMES[k]}">${e}</button>`).join("");
+    tray.innerHTML = EMOS.map((e, k) => `<button type="button" role="menuitem" data-emo="${k}" aria-label="${EMO_NAMES[k]}">${e}</button>`).join("")
+      + (MEMES.length ? `<span class="emo-sep" aria-hidden="true"></span>` + MEMES.map((m) => `<button type="button" role="menuitem" class="meme" data-meme="${esc(m.id)}" aria-label="Meme: ${esc(m.label)}" title="${esc(m.label)}">${m.icon}</button>`).join("") : "");
     fx.appendChild(tray);
     const tw = tray.offsetWidth;
     const left = Math.max(8, Math.min(window.innerWidth - tw - 8, r.left - 4));
@@ -3067,6 +3150,8 @@ const E = (() => {
     if (first && !matchMedia("(pointer: coarse)").matches) first.focus();
   }
   fx.addEventListener("click", (ev) => {
+    const m = ev.target.closest("[data-meme]");
+    if (m) { sendEmote("m:" + m.dataset.meme); closeEmo(); return; }
     const b = ev.target.closest("[data-emo]");
     if (!b) return;
     sendEmote(Number(b.dataset.emo));
@@ -3075,8 +3160,9 @@ const E = (() => {
   document.addEventListener("pointerdown", (ev) => {
     if (tray && !tray.contains(ev.target) && !ev.target.closest(".me-av")) closeEmo();
   }, true);
+  const validEm = (k) => (Number.isInteger(k) && k >= 0 && k < EMOS.length) || (typeof k === "string" && k.startsWith("m:") && !!memeById(k.slice(2)));
   function sendEmote(k) {
-    if (!myPid || !(k >= 0 && k < EMOS.length)) return;
+    if (!myPid || !validEm(k)) return;
     const now = Date.now();
     if (now - lastEmAt < 900) return;
     lastEmAt = now;
@@ -3098,7 +3184,7 @@ const E = (() => {
       const prevMax = seenEm.get(p.peer);
       let max = prevMax == null ? -1 : prevMax;
       for (const x of list) {
-        if (!x || !Number.isFinite(x.s) || typeof x.p !== "string" || !Number.isInteger(x.e) || x.e < 0 || x.e >= EMOS.length) continue;
+        if (!x || !Number.isFinite(x.s) || typeof x.p !== "string" || !validEm(x.e)) continue;
         if (prevMax != null && x.s > prevMax) showEmote(x.p, x.e);
         if (x.s > max) max = x.s;
       }
@@ -3106,6 +3192,7 @@ const E = (() => {
     }
   }
   function showEmote(pid, k) {
+    if (typeof k === "string") { playMeme(k.slice(2)); k = -1; }
     let el = null, mine = pid === myPid;
     if (mine) el = app.querySelector('[data-anchor="mepf"]');
     else el = Array.from(app.querySelectorAll(".opp[data-pid]")).find((o) => o.dataset.pid === pid);
@@ -3114,7 +3201,7 @@ const E = (() => {
     const r = el.getBoundingClientRect();
     const b = document.createElement("div");
     b.className = "emo-pop " + (mine ? "u" : "r");
-    b.textContent = EMOS[k];
+    b.textContent = k < 0 ? "🎬" : EMOS[k];
     sfx.play("pop", 0, 0.8);
     let x, y;
     if (mine) { x = r.left + r.width / 2; y = r.top - 36; }
