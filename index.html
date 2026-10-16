@@ -383,17 +383,17 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------- Kommentator ---------- */
-.critic { position: fixed; z-index: 45; right: max(10px, env(safe-area-inset-right, 0px)); top: 38%; width: min(68vw, 270px); display: flex; align-items: flex-end; gap: 6px; pointer-events: auto; cursor: pointer; animation: critIn .5s cubic-bezier(.2,1.3,.4,1) both; }
-.critic.out { animation: critOut .35s ease-in both; }
+.critic { position: fixed; z-index: 45; left: 50%; transform: translateX(-50%); top: 30%; width: max-content; max-width: min(86vw, 360px); pointer-events: auto; cursor: pointer; animation: critIn .4s cubic-bezier(.2,1.3,.4,1) both; }
+.critic.out { animation: critOut .3s ease-in both; }
 .critic .cav { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 19px; background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); border: 1.5px solid var(--brass); box-shadow: 0 8px 18px -8px rgba(0,0,0,.9); order: 2; }
-.critic .cbub { position: relative; min-width: 0; padding: 7px 10px 8px; border-radius: 14px 14px 4px 14px; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
+.critic .cbub { position: relative; min-width: 0; padding: 5px 11px 6px; border-radius: 999px; text-align: center; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
 .critic .cbub b { display: block; font-family: var(--f-display); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass-2); margin-bottom: 3px; }
-.critic .cbub p { margin: 0; font-size: 12.5px; line-height: 1.35; color: var(--ink); text-wrap: pretty; }
+.critic .cbub p { margin: 0; font-size: 11.5px; line-height: 1.3; color: var(--ink); text-wrap: balance; }
 .critic.mock .cbub { border-color: var(--silver-3); }
 .critic.mock .cbub b { color: var(--silver); }
 .critic.mock .cav { border-color: var(--silver-3); }
-@keyframes critIn { from { transform: translateX(110%) rotate(3deg); opacity: 0; } }
-@keyframes critOut { to { transform: translateX(110%); opacity: 0; } }
+@keyframes critIn { from { transform: translateX(-50%) translateY(-10px) scale(.92); opacity: 0; } }
+@keyframes critOut { to { transform: translateX(-50%) translateY(-6px); opacity: 0; } }
 
 /* ---------- Chat ---------- */
 .chat-fab { position: relative; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--brass); background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); color: var(--brass-2); display: grid; place-items: center; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); appearance: none; padding: 0; }
@@ -2323,17 +2323,18 @@ const E = (() => {
     const el = document.createElement("div");
     el.className = "critic " + (kind === "good" ? "praise" : "mock");
     el.setAttribute("role", "status");
-    el.innerHTML = `<div class="cbub"><p></p></div><div class="cav" aria-hidden="true">${CRITIC.face}</div>`;
+    el.innerHTML = `<div class="cbub"><p></p></div>`;
     el.querySelector("p").textContent = text;
     el.addEventListener("click", () => hideCritic(false));
     // Unter der Meldungszeile auf dem Tisch, damit die Karten frei bleiben
-    const ft = app.querySelector(".felt .felt-top");
-    if (ft) { const r = ft.getBoundingClientRect(); el.style.top = Math.round(r.bottom + 8) + "px"; }
+    const ft = app.querySelector(".felt .felt-top"), box = app.querySelector(".felt .pairs");
+    if (ft && box) { const a = ft.getBoundingClientRect().bottom, b = box.getBoundingClientRect(); el.style.top = Math.round(a + Math.max(4, (b.top + b.height * 0.5 - (metrics.tw * 0.84)) - a) * 0.5) + "px"; }
+    else if (ft) el.style.top = Math.round(ft.getBoundingClientRect().bottom + 6) + "px";
     document.body.appendChild(el);
     critEl = el;
     sfx.play(kind === "good" ? "fanfare" : "tsk", 120);
     clearTimeout(critT);
-    critT = setTimeout(() => hideCritic(false), 4600);
+    critT = setTimeout(() => hideCritic(false), 4200);
   }
   function hideCritic(now) {
     clearTimeout(critT); clearTimeout(critT2);
