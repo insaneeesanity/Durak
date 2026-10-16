@@ -1101,8 +1101,8 @@ const E = (() => {
       !st.ps.includes(j) && st.pl[j].h.length > 0 && (st.cfg.cheat || st.pl[j].h.some((c) => ranks.has(c[0]))));
     if (st.tk || !unbeaten(st)) {
       // Mehr Zeit zum Reagieren: Einwerfen und Schummler-Erwischen
-      if (!add || !waiting.length) return { k: "end", ms: st.cfg.cheat ? 5000 : 2200, key: `end:${st.tc}:${st.tk}` };
-      return { k: "win", ms: st.tk ? 16000 : 20000, key: `win:${st.tc}:${st.tk}` };
+      if (!add || !waiting.length) return { k: "end", ms: st.cfg.cheat ? 7000 : 3000, key: `end:${st.tc}:${st.tk}` };
+      return { k: "win", ms: st.tk ? 25000 : 30000, key: `win:${st.tc}:${st.tk}` };
     }
     return null;
   }
@@ -2302,7 +2302,7 @@ const E = (() => {
     critEl = el;
     sfx.play(kind === "good" ? "fanfare" : "tsk", 120);
     clearTimeout(critT);
-    critT = setTimeout(() => hideCritic(false), 4200);
+    critT = setTimeout(() => hideCritic(false), 7000);
   }
   function hideCritic(now) {
     clearTimeout(critT); clearTimeout(critT2);
