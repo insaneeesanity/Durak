@@ -385,7 +385,16 @@ button { font: inherit; color: inherit; }
 /* ---------- Memes ---------- */
 .meme-layer { position: fixed; z-index: 0; border-radius: 22px; overflow: hidden; background: #000; pointer-events: none; }
 .meme-layer[hidden] { display: none; }
-.meme-layer video, .meme-layer img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.meme-layer video, .meme-layer img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.7) contrast(1.05) brightness(.85) sepia(.12); }
+/* Alter Fernseher, ganz leise: Scanlines, Korn, dunkle Ecken */
+.meme-layer::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; opacity: .55; }
+.meme-layer::after { content: ""; position: absolute; inset: -20%; pointer-events: none; z-index: 2; opacity: .26; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: tvnoise .25s steps(4) infinite; }
+.meme-layer .vign { position: absolute; inset: 0; pointer-events: none; z-index: 3; background: radial-gradient(80% 70% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%); box-shadow: inset 0 0 60px rgba(0,0,0,.6); }
+@keyframes tvnoise { 0% { transform: translate(0,0); } 25% { transform: translate(-4%,3%); } 50% { transform: translate(3%,-5%); } 75% { transform: translate(-2%,-2%); } 100% { transform: translate(4%,4%); } }
+@media (prefers-reduced-motion: reduce) { .meme-layer::after { animation: none; } }
 .felt.meme { background: radial-gradient(90% 70% at 50% 45%, rgba(0,0,0,.08), rgba(0,0,0,.35)); }
 .felt.meme::before { display: none; }
 .felt.meme .logline { background: rgba(12,12,16,.82); }
@@ -2438,18 +2447,18 @@ const E = (() => {
     if (felt) felt.classList.add("meme");
     const useGif = () => {
       if (ui.meme !== id) return;
-      memeLayer.innerHTML = "";
+      memeLayer.innerHTML = '<div class="vign"></div>';
       const img = document.createElement("img");
       img.alt = "";
       img.addEventListener("error", stopMeme);
       img.src = m.gif;
-      memeLayer.appendChild(img);
+      memeLayer.insertBefore(img, memeLayer.firstChild);
       placeMeme();
     };
     // Clip läuft genau einmal durch (mp4, sonst webm). Nur wenn beides nicht geht, das GIF kurz zeigen.
     const tryVideo = (src, onFail) => {
       if (ui.meme !== id) return;
-      memeLayer.innerHTML = "";
+      memeLayer.innerHTML = '<div class="vign"></div>';
       const v = document.createElement("video");
       v.muted = true; v.loop = false; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("muted", ""); v.preload = "auto";
       let failed = false;
@@ -2458,12 +2467,12 @@ const E = (() => {
       v.addEventListener("ended", () => { if (v.isConnected) stopMeme(); });
       v.addEventListener("loadedmetadata", () => { if (ui.meme === id && v.isConnected) { clearTimeout(memeT); memeT = setTimeout(stopMeme, Math.min(MEME_MS, (v.duration || 6) * 1000 + 400)); } });
       v.src = src;
-      memeLayer.appendChild(v);
+      memeLayer.insertBefore(v, memeLayer.firstChild);
       placeMeme();
       const p = v.play();
       if (p && p.catch) p.catch(fail);
     };
-    tryVideo(m.mp4, () => tryVideo(m.mp4.replace("AAAPo", "AAAPs").replace(/\.mp4$/, ".webm"), () => { useGif(); clearTimeout(memeT); memeT = setTimeout(stopMeme, 4500); }));
+    tryVideo(m.mp4, () => tryVideo(m.mp4.replace("AAAPo", "AAAPs").replace(/\.mp4$/, ".webm"), () => { useGif(); clearTimeout(memeT); memeT = setTimeout(stopMeme, 2000); }));
     memeT = setTimeout(stopMeme, MEME_MS);
   }
 
