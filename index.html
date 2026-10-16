@@ -12,14 +12,14 @@
 <style>
 /* Layout: Kartentisch als eine Bildschirmspalte – Kopf, Gegner mit verdecktem Fächer, schwarzer Tisch mit Gold- und Silberrahmen (Stapel links mittig, Paare, Bito rechts), Aktionsleiste mit eigenem Profil, gefächerte eigene Hand. Karten: schwarzes Blatt, Silber für Pik/Kreuz, Gold für Herz/Karo. */
 :root {
-  --felt-0: #07070a;
-  --felt-1: #15151b;
-  --felt-2: #24242d;
+  --felt-0: #101014;
+  --felt-1: #1e1e26;
+  --felt-2: #2f2f3a;
   --ink: #efeee9;
   --ink-2: #bcbab3;
   --ink-3: #85837c;
-  --brass: #d4af37;
-  --brass-2: #f0d77c;
+  --brass: #c6a356;
+  --brass-2: #e2cb8c;
   --brass-ink: #241a04;
   --silver: #c9cdd5;
   --silver-2: #f2f3f6;
@@ -30,14 +30,14 @@
   --xfer: #9fd8ff;
   --panel: rgba(12, 12, 16, .66);
   --panel-2: rgba(12, 12, 16, .9);
-  --line: rgba(212, 175, 55, .3);
+  --line: rgba(198, 163, 86, .32);
   --line-2: rgba(201, 205, 213, .14);
-  --card: #17181d;
-  --card-hi: #23242b;
-  --card-lo: #0f1014;
-  --card-edge: #3b3d47;
+  --card: #121318;
+  --card-hi: #1c1d24;
+  --card-lo: #0a0a0e;
+  --card-edge: #4a4d58;
   --card-ink: #f2f3f6;
-  --card-red: #f0d77c;
+  --card-red: #e2cb8c;
   --court-blue: #23508e;
   --court-gold: #e2b448;
   --court-cream: #fbf2dc;
@@ -77,8 +77,8 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Kopfzeile ---------- */
 .top { display: flex; align-items: center; gap: 8px; min-height: 42px; min-width: 0; }
-.mark { display: flex; align-items: baseline; gap: 8px; margin-right: auto; min-width: 0; }
-.mark b { font-family: var(--f-display); font-weight: 700; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+.mark { display: flex; align-items: baseline; gap: 8px; margin-right: auto; flex: 0 0 auto; }
+.mark b { font-family: var(--f-display); font-weight: 700; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); white-space: nowrap; }
 .mark span { font-family: var(--f-display); font-weight: 500; font-size: 11px; color: var(--ink-3); letter-spacing: .04em; }
 .net { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); white-space: nowrap; flex: 0 0 auto; }
 .net i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); box-shadow: 0 0 0 3px rgba(122,151,139,.18); }
@@ -99,6 +99,7 @@ button { font: inherit; color: inherit; }
 @media (max-width: 440px) { .linkbox { flex-wrap: wrap; } .linkbox input { flex: 1 1 100%; } .linkbox .btn { flex: 1 1 0; justify-content: center; } }
 @media (max-width: 440px) {
   .mark span, .net .nt { display: none; }
+  .mark b { font-size: 16px; letter-spacing: .1em; }
   .icon-btn.inv span { display: none; }
   .icon-btn.inv { padding: 0 9px; }
   .icon-btn { padding: 0 10px; }
@@ -112,14 +113,14 @@ button { font: inherit; color: inherit; }
   padding: 4px 4px 5px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line-2);
   transition: border-color .2s, box-shadow .2s;
 }
-.opp.turn { border-color: var(--brass); box-shadow: 0 0 0 3px rgba(212,175,55,.16), 0 6px 18px -8px rgba(212,175,55,.6); }
+.opp.turn { border-color: var(--brass); box-shadow: 0 0 0 3px rgba(198,163,86,.16), 0 6px 18px -8px rgba(198,163,86,.6); }
 .opp.off { opacity: .55; }
 .opp.out { opacity: .7; }
 .ofan { position: relative; z-index: 1; isolation: isolate; width: 100%; height: calc(var(--ow) * 1.5); }
 .ofan .card {
   --w: var(--ow); position: absolute; left: 50%; top: calc(var(--ow) * .12); margin-left: calc(var(--ow) * -.5);
   transform-origin: 50% 210%; transform: rotate(var(--r, 0deg)); transition: transform .35s cubic-bezier(.2,.9,.3,1);
-  box-shadow: inset 0 0 0 calc(var(--w) * .035) #0a0a0e, inset 0 0 0 calc(var(--w) * .05) #cfd3da, inset 0 0 0 calc(var(--w) * .062) #0a0a0e, inset 0 0 0 calc(var(--w) * .072) rgba(212,175,55,.75), -1px 2px 4px -1px rgba(0,0,0,.7);
+  box-shadow: inset 0 0 0 calc(var(--w) * .035) #0a0a0e, inset 0 0 0 calc(var(--w) * .05) #cfd3da, inset 0 0 0 calc(var(--w) * .062) #0a0a0e, inset 0 0 0 calc(var(--w) * .072) rgba(198,163,86,.75), -1px 2px 4px -1px rgba(0,0,0,.7);
 }
 .ofan.none::after { content: ""; position: absolute; left: 50%; top: 30%; width: calc(var(--ow) * 1.1); height: calc(var(--ow) * .8); transform: translateX(-50%); border: 1.5px dashed var(--line); border-radius: 6px; }
 .avrow { position: relative; z-index: 2; margin-top: calc(var(--ow) * -.42); display: flex; justify-content: center; }
@@ -141,8 +142,8 @@ button { font: inherit; color: inherit; }
 /* ---------- Filz / Tisch ---------- */
 .felt {
   position: relative; min-height: 0; border-radius: 22px;
-  background: radial-gradient(90% 70% at 50% 45%, rgba(255,255,255,.05), rgba(0,0,0,.4));
-  box-shadow: inset 0 0 0 1px rgba(212,175,55,.55), inset 0 0 0 4px rgba(7,7,10,.9), inset 0 0 0 5px rgba(201,205,213,.22), inset 0 0 70px rgba(0,0,0,.5), 0 20px 50px -30px rgba(0,0,0,.9);
+  background: radial-gradient(90% 70% at 50% 45%, rgba(255,255,255,.09), rgba(0,0,0,.3));
+  box-shadow: inset 0 0 0 1px rgba(198,163,86,.55), inset 0 0 0 4px rgba(7,7,10,.9), inset 0 0 0 5px rgba(201,205,213,.22), inset 0 0 70px rgba(0,0,0,.5), 0 20px 50px -30px rgba(0,0,0,.9);
   display: grid; grid-template-rows: auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr);
   padding: 10px; gap: 4px; transition: box-shadow .2s;
 }
@@ -234,7 +235,7 @@ button { font: inherit; color: inherit; }
   --w: 64px; width: var(--w); height: calc(var(--w) * 1.4); border-radius: calc(var(--w) * .085);
   background: linear-gradient(160deg, var(--card-hi) 0%, var(--card) 50%, var(--card-lo) 100%);
   color: var(--silver-2); position: relative; flex: 0 0 auto;
-  box-shadow: inset 0 0 0 1px var(--card-edge), inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(201,205,213,.28), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85);
+  box-shadow: inset 0 0 0 1px var(--card-edge), inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(201,205,213,.34), 0 0 0 1px rgba(255,255,255,.07), 0 2px 0 rgba(0,0,0,.5), 0 10px 20px -8px rgba(0,0,0,.95);
   font-family: var(--f-card); user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; overflow: hidden;
   --robe: var(--court-blue); --robe2: var(--card-red); --metal: url(#g-silver); --metal-ink: #e9ebef;
 }
@@ -243,8 +244,8 @@ button { font: inherit; color: inherit; }
   border: 1px solid rgba(201,205,213,.22);
 }
 .card.red { color: var(--brass-2); --robe: var(--card-red); --robe2: var(--court-blue); --metal: url(#g-gold); --metal-ink: #f0d77c; }
-.card.red::before { border-color: rgba(212,175,55,.3); }
-.card.red { box-shadow: inset 0 0 0 1px var(--card-edge), inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(212,175,55,.32), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85); }
+.card.red::before { border-color: rgba(198,163,86,.3); }
+.card.red { box-shadow: inset 0 0 0 1px var(--card-edge), inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(198,163,86,.38), 0 0 0 1px rgba(255,255,255,.07), 0 2px 0 rgba(0,0,0,.5), 0 10px 20px -8px rgba(0,0,0,.95); }
 .card .su { fill: var(--metal); filter: drop-shadow(0 0 .5px rgba(255,255,255,.35)); }
 .card .ix { color: var(--metal-ink); text-shadow: 0 0 1px rgba(255,255,255,.25), 0 1px 1px rgba(0,0,0,.6); }
 .card .ix { position: absolute; left: 2.5%; top: 3%; width: 20%; display: flex; flex-direction: column; align-items: center; font-size: calc(var(--w) * .24); line-height: .95; letter-spacing: -.07em; }
@@ -264,7 +265,7 @@ button { font: inherit; color: inherit; }
 .court {
   position: absolute; inset: 6% 21%; border-radius: calc(var(--w) * .03); overflow: hidden; background: #0b0c10;
 }
-.court::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px var(--metal-ink), inset 0 0 0 2px #0b0c10, inset 0 0 0 2.6px rgba(212,175,55,.6); }
+.court::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px var(--metal-ink), inset 0 0 0 2px #0b0c10, inset 0 0 0 2.6px rgba(198,163,86,.6); }
 .court .fig { position: absolute; inset: 0; width: 100%; height: 100%; display: block; filter: grayscale(1) brightness(1.18) contrast(1.12); opacity: .96; }
 .card.red .court .fig { filter: grayscale(1) sepia(1) saturate(1.7) hue-rotate(-6deg) brightness(.9) contrast(1.18); }
 .court .cp { position: absolute; left: 6%; top: 3%; width: 22%; aspect-ratio: 1; }
@@ -279,7 +280,7 @@ button { font: inherit; color: inherit; }
   background-size: 100% 100%, calc(var(--w) * .16) calc(var(--w) * .16), 100% 100%;
   background-position: center, center, center;
   background-repeat: no-repeat, repeat, no-repeat;
-  box-shadow: inset 0 0 0 calc(var(--w) * .035) #0a0a0e, inset 0 0 0 calc(var(--w) * .05) #cfd3da, inset 0 0 0 calc(var(--w) * .062) #0a0a0e, inset 0 0 0 calc(var(--w) * .072) rgba(212,175,55,.75), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85);
+  box-shadow: inset 0 0 0 calc(var(--w) * .035) #0a0a0e, inset 0 0 0 calc(var(--w) * .05) #cfd3da, inset 0 0 0 calc(var(--w) * .062) #0a0a0e, inset 0 0 0 calc(var(--w) * .072) rgba(198,163,86,.75), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85);
 }
 .card.back::before { display: none; }
 
@@ -298,7 +299,7 @@ button { font: inherit; color: inherit; }
 .btn {
   appearance: none; cursor: pointer; border: 0; border-radius: 12px; height: 40px; padding: 0 16px;
   font-weight: 700; font-size: 14px; letter-spacing: .01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
-  background: var(--brass); color: var(--brass-ink); box-shadow: 0 6px 16px -8px rgba(212,175,55,.8);
+  background: var(--brass); color: var(--brass-ink); box-shadow: 0 6px 16px -8px rgba(198,163,86,.8);
 }
 .btn:hover { background: var(--brass-2); }
 .btn.ghost { background: var(--panel); color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
@@ -395,11 +396,11 @@ button { font: inherit; color: inherit; }
 @keyframes critOut { to { transform: translateX(110%); opacity: 0; } }
 
 /* ---------- Chat ---------- */
-.chat-fab { position: fixed; z-index: 44; right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--brass); background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); color: var(--brass-2); display: grid; place-items: center; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); appearance: none; padding: 0; }
-.chat-fab .su { width: 22px; height: 22px; fill: none; }
-.chat-fab .badge { position: absolute; right: -4px; top: -4px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--alarm); color: #fff; font: 700 11px/20px var(--f-ui); text-align: center; box-shadow: 0 0 0 2px var(--felt-0); }
+.chat-fab { position: relative; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--brass); background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); color: var(--brass-2); display: grid; place-items: center; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); appearance: none; padding: 0; }
+.chat-fab .su { width: 20px; height: 20px; fill: none; }
+.chat-fab .badge { position: absolute; right: -5px; top: -5px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--alarm); color: #fff; font: 700 11px/18px var(--f-ui); text-align: center; box-shadow: 0 0 0 2px var(--felt-0); }
 .chat-fab[hidden] { display: none; }
-.chat-peek { position: fixed; z-index: 44; right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 70px); max-width: min(72vw, 300px); padding: 7px 11px; border-radius: 14px 14px 4px 14px; background: var(--panel-2); border: 1px solid var(--line); font-size: 13px; color: var(--ink); box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); animation: pop2 .25s ease-out; cursor: pointer; }
+.chat-peek { position: fixed; z-index: 44; right: max(12px, env(safe-area-inset-right, 0px)); bottom: 50%; max-width: min(72vw, 300px); padding: 7px 11px; border-radius: 14px 14px 4px 14px; background: var(--panel-2); border: 1px solid var(--line); font-size: 13px; color: var(--ink); box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); animation: pop2 .25s ease-out; cursor: pointer; }
 .chat-peek b { color: var(--brass-2); font-weight: 600; }
 .chat-peek span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .chat { position: fixed; z-index: 46; right: max(10px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); width: min(100vw - 20px, 360px); height: min(62vh, 440px); display: flex; flex-direction: column; border-radius: 18px; background: #121318; border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 24px 60px -20px rgba(0,0,0,.95); animation: chatIn .25s cubic-bezier(.2,1.2,.4,1); overflow: hidden; }
@@ -411,7 +412,7 @@ button { font: inherit; color: inherit; }
 .chat-empty { margin: auto; text-align: center; color: var(--ink-3); font-size: 13px; max-width: 24ch; }
 .msg { max-width: 86%; align-self: flex-start; padding: 6px 10px 7px; border-radius: 14px 14px 14px 4px; background: rgba(255,255,255,.06); border: 1px solid var(--line-2); font-size: 13.5px; line-height: 1.35; overflow-wrap: anywhere; }
 .msg b { display: block; font-size: 11px; font-weight: 600; color: var(--brass-2); margin-bottom: 1px; }
-.msg.me { align-self: flex-end; border-radius: 14px 14px 4px 14px; background: rgba(212,175,55,.14); border-color: rgba(212,175,55,.35); }
+.msg.me { align-self: flex-end; border-radius: 14px 14px 4px 14px; background: rgba(198,163,86,.14); border-color: rgba(198,163,86,.35); }
 .msg.me b { display: none; }
 .msg.sys { align-self: center; background: transparent; border: 0; color: var(--ink-3); font-size: 12px; }
 .chat-form { display: flex; gap: 6px; padding: 8px; border-top: 1px solid var(--line-2); }
@@ -494,7 +495,7 @@ button { font: inherit; color: inherit; }
 
 @media (min-width: 720px) {
   .opp .nm { font-size: 13px; }
-  .mark b { font-size: 22px; }
+  .mark b { font-size: 22px; letter-spacing: .16em; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; }
@@ -592,7 +593,7 @@ button { font: inherit; color: inherit; }
   <symbol id="ct-Q" viewBox="0 0 100 212"><g clip-path="url(#ct-clip)"><use href="#fig-Q"/></g><g transform="rotate(180 50 106)"><g clip-path="url(#ct-clip)"><use href="#fig-Q"/></g></g><path d="M0 116L100 96" stroke="#23508e" stroke-width="1.6"/></symbol>
   <symbol id="ct-J" viewBox="0 0 100 212"><g clip-path="url(#ct-clip)"><use href="#fig-J"/></g><g transform="rotate(180 50 106)"><g clip-path="url(#ct-clip)"><use href="#fig-J"/></g></g><path d="M0 116L100 96" stroke="#23508e" stroke-width="1.6"/></symbol>
   <linearGradient id="g-silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#b9bdc6"/><stop offset=".5" stop-color="#f4f5f8"/><stop offset=".72" stop-color="#9ea2ab"/><stop offset="1" stop-color="#e3e5ea"/></linearGradient>
-  <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c4"/><stop offset=".3" stop-color="#d4af37"/><stop offset=".5" stop-color="#fbe9a6"/><stop offset=".72" stop-color="#b08d2a"/><stop offset="1" stop-color="#f0d77c"/></linearGradient>
+  <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e7bd"/><stop offset=".3" stop-color="#c6a356"/><stop offset=".5" stop-color="#eedcA6"/><stop offset=".72" stop-color="#96782f"/><stop offset="1" stop-color="#dcc27f"/></linearGradient>
   <symbol id="flourish" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2 38V11q0-9 9-9h27"/><path d="M6.5 38V14q0-7.5 7.5-7.5h24" stroke-opacity=".55" stroke-width=".9"/><path d="M11 11q8 0 8 8q0-8 8-8" stroke-opacity=".9"/><circle cx="19" cy="19" r="1.5" fill="currentColor" stroke="none"/><path d="M11 11l-3-3M11 11l3-3M11 11l-3 3" stroke-opacity=".5" stroke-width=".9"/></g></symbol>
   <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 8h8M8 11.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
   <symbol id="orn" viewBox="0 0 100 100">
@@ -1752,6 +1753,7 @@ const E = (() => {
       case "sit": wantSit = d.v === "1"; ls.set("durak.sit", wantSit ? "1" : "0"); pushPresence(); if (hosting) { syncSeats(); commit(); } else render(); break;
       case "rules": ui.sheet = "rules"; render(); break;
       case "sound": sfx.toggle(); render(); break;
+      case "chat": openChat(true); break;
       case "menu": ui.sheet = "menu"; render(); break;
       case "close": ui.sheet = null; render(); break;
       case "name": saveName(); break;
@@ -2189,7 +2191,8 @@ const E = (() => {
     const meBtn = me >= 0
       ? `<button class="me-av" data-act="emo" data-anchor="mepf" style="--c:${colorFor(st, me)}" aria-label="Emoji an den Tisch schicken" aria-expanded="${ui.emoOpen ? "true" : "false"}">${initial(st.pl[me].n)}<span class="smile" aria-hidden="true">😊</span></button>`
       : "";
-    return `<div class="bar">${tbar}${meBtn}<div class="say">${say}</div><div class="btns">${btns}</div>${confirm}</div>`;
+    const chatBtn = room ? `<button class="chat-fab" data-act="chat" aria-label="Tisch-Chat öffnen"><svg class="su" viewBox="0 0 24 24"><use href="#ic-chat" width="24" height="24"></use></svg>${chat.unread ? `<span class="badge">${chat.unread}</span>` : ""}</button>` : "";
+    return `<div class="bar">${tbar}${meBtn}<div class="say">${say}</div><div class="btns">${btns}</div>${chatBtn}${confirm}</div>`;
   }
 
   // Eigene Hand als Fächer: Karten auf einem Bogen, Trumpf ganz rechts
@@ -2408,23 +2411,33 @@ const E = (() => {
   const cleanMsg = (t) => String(t || "").replace(/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u2028-\u202e\u2060-\u206f\ufeff]/g, "").replace(/\s+/g, " ").trim().slice(0, 140);
   let peekT = 0;
   function renderChat() {
-    if (!st || st.ph === "lobby" && !room) { chatLayer.innerHTML = ""; return; }
-    if (!room) { chatLayer.innerHTML = ""; return; }
-    const list = chat.msgs.map((m) => m.sys ? `<div class="msg sys">${esc(m.m)}</div>` : `<div class="msg ${m.mine ? "me" : ""}"><b>${esc(m.nm)}</b>${esc(m.m)}</div>`).join("");
+    if (!st || !room) { chatLayer.innerHTML = ""; return; }
+    const list = chat.msgs.map((m) => m.sys ? `<div class="msg sys">${esc(m.m)}</div>` : `<div class="msg ${m.mine ? "me" : ""}"><b>${esc(m.nm)}</b>${esc(m.m)}</div>`).join("") || `<div class="chat-empty">Noch still hier. Schreib den anderen am Tisch etwas.</div>`;
     if (chat.open) {
       const n = new Set(viewers().map((p) => p.presence && p.presence.pid).filter(Boolean)).size || 1;
-      chatLayer.innerHTML = `<div class="chat" role="dialog" aria-label="Tisch-Chat"><div class="chat-head"><h2>Tisch-Chat</h2><small>${n} hier</small><button class="icon-btn" data-chat="close">Schließen</button></div><div class="chat-list" id="chatList">${list || `<div class="chat-empty">Noch still hier. Schreib den anderen am Tisch etwas.</div>`}</div><form class="chat-form" autocomplete="off"><input id="chatInput" maxlength="140" placeholder="Nachricht an den Tisch" aria-label="Nachricht" enterkeyhint="send" autocapitalize="sentences"><button class="btn" type="submit">Senden</button></form></div>`;
+      const have = chatLayer.querySelector(".chat");
+      if (have) {
+        // Fenster steht schon: nur Liste und Zähler auffrischen, damit die Eingabe nicht verloren geht
+        const l = document.getElementById("chatList");
+        if (l && l.innerHTML !== list) { l.innerHTML = list; l.scrollTop = l.scrollHeight; }
+        const c = have.querySelector(".chat-head small");
+        if (c) c.textContent = `${n} hier`;
+        return;
+      }
+      chatLayer.innerHTML = `<div class="chat" role="dialog" aria-label="Tisch-Chat"><div class="chat-head"><h2>Tisch-Chat</h2><small>${n} hier</small><button class="icon-btn" data-chat="close">Schließen</button></div><div class="chat-list" id="chatList">${list}</div><form class="chat-form" autocomplete="off"><input id="chatInput" maxlength="140" placeholder="Nachricht an den Tisch" aria-label="Nachricht" enterkeyhint="send" autocapitalize="sentences"><button class="btn" type="submit">Senden</button></form></div>`;
       const l = document.getElementById("chatList");
       l.scrollTop = l.scrollHeight;
     } else {
       const peek = chat.peek ? `<div class="chat-peek" data-chat="open"><b>${esc(chat.peek.nm)}:</b> <span>${esc(chat.peek.m)}</span></div>` : "";
-      chatLayer.innerHTML = `${peek}<button class="chat-fab" data-chat="open" aria-label="Tisch-Chat öffnen"><svg class="su" viewBox="0 0 24 24"><use href="#ic-chat" width="24" height="24"></use></svg>${chat.unread ? `<span class="badge">${chat.unread}</span>` : ""}</button>`;
+      if (chatLayer.innerHTML !== peek) chatLayer.innerHTML = peek;
     }
   }
   function openChat(open) {
     chat.open = open;
     if (open) { chat.unread = 0; chat.peek = null; clearTimeout(peekT); closeEmo(); }
     renderChat();
+    const fab = app.querySelector(".chat-fab .badge");
+    if (fab && !chat.unread) fab.remove();
     if (open) { const i = document.getElementById("chatInput"); if (i && !matchMedia("(pointer: coarse)").matches) i.focus(); }
   }
   chatLayer.addEventListener("click", (ev) => {
@@ -2456,7 +2469,7 @@ const E = (() => {
       peekT = setTimeout(() => { chat.peek = null; renderChat(); }, 5000);
       sfx.play("pop", 0, 0.7);
     }
-    renderChat();
+    if (!x.mine && !chat.open) render(); else renderChat();
   }
   function processChat() {
     if (!room) return;
@@ -3214,7 +3227,7 @@ const E = (() => {
       <li>Ist der Angriff vorbei, gilt alles, was auf dem Tisch lag.</li>
     </ul></div>
     <h3>Bedienung</h3>
-    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Das Spiel zeigt dir nicht, welche Karten passen. Darauf musst du selbst achten.${c.cheat ? " Legst du eine falsche Karte, liegt sie trotzdem, und die anderen können dich erwischen." : " Eine falsche Karte geht zurück auf deine Hand."}</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein markiertes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Den Ton schaltest du oben mit dem Lautsprecher an und aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken. Unten rechts öffnest du den Chat.</li><li>Ein alter Herr sitzt am Rand und kommentiert deine Züge. Nimm ihn nicht zu ernst.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
+    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Das Spiel zeigt dir nicht, welche Karten passen. Darauf musst du selbst achten.${c.cheat ? " Legst du eine falsche Karte, liegt sie trotzdem, und die anderen können dich erwischen." : " Eine falsche Karte geht zurück auf deine Hand."}</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein markiertes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Den Ton schaltest du oben mit dem Lautsprecher an und aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken. Rechts daneben öffnest du den Chat.</li><li>Ein alter Herr sitzt am Rand und kommentiert deine Züge. Nimm ihn nicht zu ernst.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
     </div></div>`;
   }
 
