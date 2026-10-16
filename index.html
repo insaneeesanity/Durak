@@ -383,10 +383,10 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------- Kommentator ---------- */
-.critic { position: fixed; z-index: 45; left: 50%; transform: translateX(-50%); top: 30%; width: max-content; max-width: min(86vw, 360px); pointer-events: auto; cursor: pointer; animation: critIn .4s cubic-bezier(.2,1.3,.4,1) both; }
+.critic { position: fixed; z-index: 45; left: 50%; transform: translateX(-50%); top: 30%; width: max-content; max-width: min(90vw, 560px); pointer-events: auto; cursor: pointer; animation: critIn .4s cubic-bezier(.2,1.3,.4,1) both; }
 .critic.out { animation: critOut .3s ease-in both; }
 .critic .cav { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 19px; background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); border: 1.5px solid var(--brass); box-shadow: 0 8px 18px -8px rgba(0,0,0,.9); order: 2; }
-.critic .cbub { position: relative; min-width: 0; padding: 5px 11px 6px; border-radius: 999px; text-align: center; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
+.critic .cbub { position: relative; min-width: 0; padding: 4px 13px 5px; border-radius: 999px; text-align: center; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
 .critic .cbub b { display: block; font-family: var(--f-display); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass-2); margin-bottom: 3px; }
 .critic .cbub p { margin: 0; font-size: 11.5px; line-height: 1.3; color: var(--ink); text-wrap: balance; }
 .critic.mock .cbub { border-color: var(--silver-3); }
@@ -2255,58 +2255,27 @@ const E = (() => {
     "Eure Lordschaft! Dieser Zug wird in tausend Jahren noch in Kathedralen besungen.",
     "Ein Zug von solcher Größe, dass Napoleon kurz aus dem Grab geklettert ist, um zu applaudieren. Dann wieder rein.",
     "Die Götter haben Euch zugesehen, Eure Lordschaft, und machen sich jetzt Notizen.",
-    "Ich habe Kriege gesehen, Eure Lordschaft, aber nie eine so schöne Hinrichtung.",
-    "Majestätisch! Irgendwo stirbt gerade ein Großmeister vor Neid. Verdient.",
-    "Eure Lordschaft, dieser Zug war so gut, dass ich kurz meinen Namen vergessen habe. Ich bin alt, aber das war trotzdem Euer Verdienst.",
-    "Chapeau! Die Karten weinen vor Glück. Der Gegner weint aus anderen Gründen.",
-    "Unfassbar. Hätte ich noch Zähne, würde ich auf diesen Zug beißen. Reinstes Gold, Eure Lordschaft.",
-    "So eine Eleganz! Der Gegner wird heute Nacht davon träumen. Es wird kein schöner Traum.",
-    "Eure Lordschaft! Ich bin 94 und habe auf genau diesen Zug gewartet. Jetzt kann ich in Frieden gehen.",
-    "Brillant! Man sollte Euren Namen in die Sterne ritzen. Mit einem sehr großen Messer.",
-    "Göttlich. Wenn ich sterbe, und das wird bald sein, will ich genau das als Letztes gesehen haben.",
-    "Eine Meisterleistung, Eure Lordschaft. Der Gegner sollte heute Nacht die Türen abschließen.",
-    "Grandios! Selbst der Sensenmann hat kurz den Hut gezogen. Und der zieht für niemanden den Hut.",
     "Eure Lordschaft, die Kaiser Europas hätten für diesen Zug ihre Kronen verpfändet. Alle. Auch die hässlichen.",
     "Das war kein Zug, das war ein Staatsakt. Mit Salutschüssen. Auf den Gegner.",
+    "Grandios! Selbst der Sensenmann hat kurz den Hut gezogen. Und der zieht für niemanden den Hut.",
+    "Eure Lordschaft! Ich bin 94 und habe auf genau diesen Zug gewartet. Jetzt kann ich in Frieden gehen.",
+    "Brillant! Man sollte Euren Namen in die Sterne ritzen. Mit einem sehr großen Messer.",
+    "Ich habe Kriege gesehen, Eure Lordschaft, aber nie eine so schöne Hinrichtung.",
+    "Unfassbar. Hätte ich noch Zähne, würde ich auf diesen Zug beißen. Reinstes Gold, Eure Lordschaft.",
   ];
   const MOCK = [
     "Eure Lordschaft… ich habe Hühner klüger sterben sehen.",
     "Das war so dumm, dass mein Herzschrittmacher kurz überlegt hat, Feierabend zu machen.",
     "Mutig. Falsch. Aber mutig. Das stand auch auf dem Grabstein meines Bruders.",
-    "Eure Lordschaft, ich sage nichts. Ich schaue nur so, wie man eine Beerdigung anschaut.",
     "Der Zug war wie meine zweite Ehe: kurz, schmerzhaft, und alle haben es kommen sehen.",
-    "Ich bin alt, Eure Lordschaft, aber so einen Zug überlebe ich kein zweites Mal.",
-    "Haben Euch die Karten etwas getan? Das war eine Hinrichtung. Eure eigene.",
-    "Ein Zug wie ein Fallschirm, der sich erst am Boden öffnet.",
     "Eure Lordschaft, die Titanic hatte auch einen Plan. Hat auch nicht geklappt.",
-    "Großartig. Der Gegner schickt gleich Blumen. Für die Beerdigung Eures Blatts.",
     "Ich habe das meinem Monokel gezeigt. Es ist aus dem Fenster gesprungen.",
-    "Das war kein Zug, Eure Lordschaft. Das war ein Hilferuf.",
     "Selbst mein Grab hat mehr Perspektive als dieses Blatt.",
-    "Wenn das Strategie war, dann die Sorte, über die man später vor Gericht spricht.",
     "Eure Lordschaft, ich habe Pferde mit besserem Kartengefühl gekannt. Die sind auch tot, aber trotzdem.",
+    "Großartig. Der Gegner schickt gleich Blumen. Für die Beerdigung Eures Blatts.",
     "Ich würde Euch tadeln, aber in meinem Alter spart man sich die Luft für wichtige Dinge. Zum Beispiel Atmen.",
   ];
-  const SPECIAL = {
-    cheapest: ["Mit der kleinsten Karte gestochen, Eure Lordschaft. Sparsam wie ein Totengräber mit der Erde.", "Ein Florettstich ins Herz, Eure Lordschaft. Der Gegner merkt es erst, wenn er umfällt."],
-    trumpWaste: ["Ein Trumpf auf so eine Karte? Eure Lordschaft, der Trumpf weint. Ich weine mit. Der Gegner lacht.", "Mit der Kanone auf den Spatzen. Und der Spatz war schon tot."],
-    bigTrump: ["Der hohe Trumpf, so früh? Großzügig wie ein Erbe am Tag nach der Beerdigung.", "Eure Lordschaft, dieser Trumpf hätte später Könige gestürzt. Jetzt liegt er da wie ich nach dem Mittagessen."],
-    aceEarly: ["Ein Ass, einfach verschenkt. In der Küche weinen die Diener, Eure Lordschaft.", "Ass zum Anfang. Mutig. Der Gegner lässt Euch Blumen schicken."],
-    trumpOpen: ["Mit Trumpf eröffnen, bei vollem Blatt? Eure Lordschaft, man verschießt kein Silber auf Spatzen.", "Trumpf zum Angriff. Das letzte Mal sah ich so etwas 1962. Der Mann ist nicht gut gealtert."],
-    pair: ["Ein Pärchen in der Hand, das kleine zuerst. Durchdacht wie ein Giftmord, Eure Lordschaft."],
-    low: ["Bescheiden eröffnet, Eure Lordschaft. Die Ernte kommt später. Und sie wird blutig."],
-    pressure: ["Nachgelegt, bis dem Gegner die Hand zittert. Herrlich grausam, Eure Lordschaft.", "Eine Karte mehr, und die Festung fällt. Ihr riecht Schwäche wie ein alter Wolf, Eure Lordschaft. Ich kenne den Geruch."],
-    pile: ["Noch eine obendrauf. Der Gegner schluckt alles, Ihr gebt nur Abfall. Teuflisch, Eure Lordschaft.", "Nachgeworfen wie Erde aufs Grab. Und er muss alles aufheben."],
-    takeWeak: ["Aufgenommen, obwohl Ihr stechen konntet? Eure Lordschaft, die Karte hat gewinkt. Ihr habt weggeschaut.", "Freiwillig aufgenommen. So kapituliert man, wenn der Feind noch gar nicht da ist."],
-    xfer: ["Weitergeschoben! Das Problem gehört jetzt jemand anderem. So regiert man, Eure Lordschaft.", "Abgewälzt wie eine Erbschuld, Eure Lordschaft. Der Nachbar erbt den Ärger."],
-    bito: ["Bito! Nichts kam durch. Eine Festung aus Karten, Eure Lordschaft, mit Zinnen aus Trumpf.", "Alles abgewehrt. Der Angreifer geht heim und weint in sein Kissen. Ich habe es gehört."],
-    cheat: ["Das hat doch keiner gesehen, Eure Lordschaft… oder? Ich jedenfalls habe nichts gesehen. Nichts.", "Hust. Ich bin gerade sehr beschäftigt mit meinem Monokel. Sehr beschäftigt."],
-    gotCaught: ["Erwischt! Eure Lordschaft, das Pokerface braucht Übung. Oder einen Sack über dem Kopf.", "Beim Schummeln ertappt. Der Hof tuschelt. Der Hof tuschelt laut und zeigt mit dem Finger."],
-    caughtOther: ["Entlarvt! Ein Auge wie ein Falke, Eure Lordschaft. Ein sehr alter, sehr böser Falke.", "Erwischt! Der Schwindler zittert. Soll er. Gnade ist etwas für Jüngere."],
-    falseAlarm: ["Fehlalarm. Eure Lordschaft, der Falke hatte das Monokel verlegt. Peinlich. Für Euch.", "Jemanden zu Unrecht beschuldigt. Und jetzt eine Strafkarte. Das Leben ist hart, der Baron ist härter."],
-    out: ["Als Erster raus! Der Hof erhebt sich, Fanfaren erklingen, irgendwo fällt ein Gegner in Ohnmacht.", "Keine Karten mehr, Eure Lordschaft! Ein Triumph, den man den Enkeln erzählt. Falls Ihr welche habt."],
-    durak: ["Durak, Eure Lordschaft. Aber ein Durak mit Stil. Das steht dann auch auf dem Grabstein.", "Der Letzte mit Karten. Das Monokel fällt. Ich sage nichts mehr. Ich habe auch nicht mehr lange."],
-  };
+  const SPECIAL = {};
   let critEl = null, critT = 0, critT2 = 0, lastCrit = "", lastCritAt = 0;
   const pick = (arr) => { let t = arr[Math.floor(rnd() * arr.length)]; if (arr.length > 1 && t === lastCrit) t = arr[(arr.indexOf(t) + 1) % arr.length]; lastCrit = t; return t; };
   const LOUD = new Set(["bito", "gotCaught", "caughtOther", "falseAlarm", "out", "durak"]);
@@ -2327,9 +2296,8 @@ const E = (() => {
     el.querySelector("p").textContent = text;
     el.addEventListener("click", () => hideCritic(false));
     // Unter der Meldungszeile auf dem Tisch, damit die Karten frei bleiben
-    const ft = app.querySelector(".felt .felt-top"), box = app.querySelector(".felt .pairs");
-    if (ft && box) { const a = ft.getBoundingClientRect().bottom, b = box.getBoundingClientRect(); el.style.top = Math.round(a + Math.max(4, (b.top + b.height * 0.5 - (metrics.tw * 0.84)) - a) * 0.5) + "px"; }
-    else if (ft) el.style.top = Math.round(ft.getBoundingClientRect().bottom + 6) + "px";
+    const ft = app.querySelector(".felt .felt-top");
+    if (ft) { const r = ft.getBoundingClientRect(); el.style.top = Math.round(r.top) + "px"; el.style.maxWidth = Math.round(r.width) + "px"; }
     document.body.appendChild(el);
     critEl = el;
     sfx.play(kind === "good" ? "fanfare" : "tsk", 120);
