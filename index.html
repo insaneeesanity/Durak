@@ -383,12 +383,12 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------- Kommentator ---------- */
-.critic { position: fixed; z-index: 45; right: max(10px, env(safe-area-inset-right, 0px)); top: 38%; width: min(78vw, 330px); display: flex; align-items: flex-end; gap: 8px; pointer-events: auto; cursor: pointer; animation: critIn .5s cubic-bezier(.2,1.3,.4,1) both; }
+.critic { position: fixed; z-index: 45; right: max(10px, env(safe-area-inset-right, 0px)); top: 38%; width: min(68vw, 270px); display: flex; align-items: flex-end; gap: 6px; pointer-events: auto; cursor: pointer; animation: critIn .5s cubic-bezier(.2,1.3,.4,1) both; }
 .critic.out { animation: critOut .35s ease-in both; }
-.critic .cav { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 25px; background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); border: 1.5px solid var(--brass); box-shadow: 0 8px 18px -8px rgba(0,0,0,.9); order: 2; }
-.critic .cbub { position: relative; min-width: 0; padding: 9px 12px 10px; border-radius: 16px 16px 4px 16px; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
+.critic .cav { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 19px; background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); border: 1.5px solid var(--brass); box-shadow: 0 8px 18px -8px rgba(0,0,0,.9); order: 2; }
+.critic .cbub { position: relative; min-width: 0; padding: 7px 10px 8px; border-radius: 14px 14px 4px 14px; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
 .critic .cbub b { display: block; font-family: var(--f-display); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass-2); margin-bottom: 3px; }
-.critic .cbub p { margin: 0; font-size: 14px; line-height: 1.38; color: var(--ink); text-wrap: pretty; }
+.critic .cbub p { margin: 0; font-size: 12.5px; line-height: 1.35; color: var(--ink); text-wrap: pretty; }
 .critic.mock .cbub { border-color: var(--silver-3); }
 .critic.mock .cbub b { color: var(--silver); }
 .critic.mock .cav { border-color: var(--silver-3); }
@@ -400,6 +400,8 @@ button { font: inherit; color: inherit; }
 .chat-fab .su { width: 20px; height: 20px; fill: none; }
 .chat-fab .badge { position: absolute; right: -5px; top: -5px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--alarm); color: #fff; font: 700 11px/18px var(--f-ui); text-align: center; box-shadow: 0 0 0 2px var(--felt-0); }
 .chat-fab[hidden] { display: none; }
+.chat-fab.new { animation: fabPulse 1.2s ease-in-out 3; }
+@keyframes fabPulse { 50% { box-shadow: 0 0 0 6px rgba(198,163,86,.35), 0 10px 24px -10px rgba(0,0,0,.9); } }
 .chat-peek { position: fixed; z-index: 44; right: max(12px, env(safe-area-inset-right, 0px)); bottom: 50%; max-width: min(72vw, 300px); padding: 7px 11px; border-radius: 14px 14px 4px 14px; background: var(--panel-2); border: 1px solid var(--line); font-size: 13px; color: var(--ink); box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); animation: pop2 .25s ease-out; cursor: pointer; }
 .chat-peek b { color: var(--brass-2); font-weight: 600; }
 .chat-peek span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -2191,7 +2193,7 @@ const E = (() => {
     const meBtn = me >= 0
       ? `<button class="me-av" data-act="emo" data-anchor="mepf" style="--c:${colorFor(st, me)}" aria-label="Emoji an den Tisch schicken" aria-expanded="${ui.emoOpen ? "true" : "false"}">${initial(st.pl[me].n)}<span class="smile" aria-hidden="true">😊</span></button>`
       : "";
-    const chatBtn = room ? `<button class="chat-fab" data-act="chat" aria-label="Tisch-Chat öffnen"><svg class="su" viewBox="0 0 24 24"><use href="#ic-chat" width="24" height="24"></use></svg>${chat.unread ? `<span class="badge">${chat.unread}</span>` : ""}</button>` : "";
+    const chatBtn = room ? `<button class="chat-fab ${chat.newAt && Date.now() - chat.newAt < 4000 ? "new" : ""}" data-act="chat" aria-label="Tisch-Chat öffnen"><svg class="su" viewBox="0 0 24 24"><use href="#ic-chat" width="24" height="24"></use></svg>${chat.unread ? `<span class="badge">${chat.unread}</span>` : ""}</button>` : "";
     return `<div class="bar">${tbar}${meBtn}<div class="say">${say}</div><div class="btns">${btns}</div>${chatBtn}${confirm}</div>`;
   }
 
@@ -2286,17 +2288,17 @@ const E = (() => {
     "Ich würde Euch tadeln, aber in meinem Alter spart man sich die Luft für wichtige Dinge. Zum Beispiel Atmen.",
   ];
   const SPECIAL = {
-    cheapest: ["Mit der kleinsten Karte gestochen, Eure Lordschaft. Sparsam wie ein Totengräber mit der Erde.", "Knapp, präzise, gnadenlos. Ein Florettstich ins Herz. Der Gegner hat es nicht einmal gemerkt."],
+    cheapest: ["Mit der kleinsten Karte gestochen, Eure Lordschaft. Sparsam wie ein Totengräber mit der Erde.", "Ein Florettstich ins Herz, Eure Lordschaft. Der Gegner merkt es erst, wenn er umfällt."],
     trumpWaste: ["Ein Trumpf auf so eine Karte? Eure Lordschaft, der Trumpf weint. Ich weine mit. Der Gegner lacht.", "Mit der Kanone auf den Spatzen. Und der Spatz war schon tot."],
     bigTrump: ["Der hohe Trumpf, so früh? Großzügig wie ein Erbe am Tag nach der Beerdigung.", "Eure Lordschaft, dieser Trumpf hätte später Könige gestürzt. Jetzt liegt er da wie ich nach dem Mittagessen."],
     aceEarly: ["Ein Ass, einfach verschenkt. In der Küche weinen die Diener, Eure Lordschaft.", "Ass zum Anfang. Mutig. Der Gegner lässt Euch Blumen schicken."],
     trumpOpen: ["Mit Trumpf eröffnen, bei vollem Blatt? Eure Lordschaft, man verschießt kein Silber auf Spatzen.", "Trumpf zum Angriff. Das letzte Mal sah ich so etwas 1962. Der Mann ist nicht gut gealtert."],
-    pair: ["Ein Pärchen in der Hand, das kleine zuerst. Durchdacht wie ein Giftmord, Eure Lordschaft.", "Mit System angegriffen. Der Verteidiger bebt. Zu Recht."],
-    low: ["Mit der kleinen Karte angreifen und die großen hüten. Klassisch, elegant, tödlich.", "Bescheiden eröffnet, Eure Lordschaft. Die Ernte kommt später. Und sie wird blutig."],
-    pressure: ["Nachgelegt, bis dem Gegner die Hand zittert. Herrlich grausam, Eure Lordschaft.", "Eine Karte mehr, und die Festung fällt. Ihr riecht Schwäche wie ein alter Wolf."],
+    pair: ["Ein Pärchen in der Hand, das kleine zuerst. Durchdacht wie ein Giftmord, Eure Lordschaft."],
+    low: ["Bescheiden eröffnet, Eure Lordschaft. Die Ernte kommt später. Und sie wird blutig."],
+    pressure: ["Nachgelegt, bis dem Gegner die Hand zittert. Herrlich grausam, Eure Lordschaft.", "Eine Karte mehr, und die Festung fällt. Ihr riecht Schwäche wie ein alter Wolf, Eure Lordschaft. Ich kenne den Geruch."],
     pile: ["Noch eine obendrauf. Der Gegner schluckt alles, Ihr gebt nur Abfall. Teuflisch, Eure Lordschaft.", "Nachgeworfen wie Erde aufs Grab. Und er muss alles aufheben."],
     takeWeak: ["Aufgenommen, obwohl Ihr stechen konntet? Eure Lordschaft, die Karte hat gewinkt. Ihr habt weggeschaut.", "Freiwillig aufgenommen. So kapituliert man, wenn der Feind noch gar nicht da ist."],
-    xfer: ["Weitergeschoben! Das Problem gehört jetzt jemand anderem. So regiert man, Eure Lordschaft.", "Elegant abgewälzt. Die Diplomatie wäre stolz. Der Nachbar nicht."],
+    xfer: ["Weitergeschoben! Das Problem gehört jetzt jemand anderem. So regiert man, Eure Lordschaft.", "Abgewälzt wie eine Erbschuld, Eure Lordschaft. Der Nachbar erbt den Ärger."],
     bito: ["Bito! Nichts kam durch. Eine Festung aus Karten, Eure Lordschaft, mit Zinnen aus Trumpf.", "Alles abgewehrt. Der Angreifer geht heim und weint in sein Kissen. Ich habe es gehört."],
     cheat: ["Das hat doch keiner gesehen, Eure Lordschaft… oder? Ich jedenfalls habe nichts gesehen. Nichts.", "Hust. Ich bin gerade sehr beschäftigt mit meinem Monokel. Sehr beschäftigt."],
     gotCaught: ["Erwischt! Eure Lordschaft, das Pokerface braucht Übung. Oder einen Sack über dem Kopf.", "Beim Schummeln ertappt. Der Hof tuschelt. Der Hof tuschelt laut und zeigt mit dem Finger."],
@@ -2307,10 +2309,11 @@ const E = (() => {
   };
   let critEl = null, critT = 0, critT2 = 0, lastCrit = "", lastCritAt = 0;
   const pick = (arr) => { let t = arr[Math.floor(rnd() * arr.length)]; if (arr.length > 1 && t === lastCrit) t = arr[(arr.indexOf(t) + 1) % arr.length]; lastCrit = t; return t; };
+  const LOUD = new Set(["bito", "gotCaught", "caughtOther", "falseAlarm", "out", "durak"]);
   function critic(kind, key, chance) {
     if (chance != null && rnd() > chance) return;
     const now = Date.now();
-    if (now - lastCritAt < 5000 && !key) return;
+    if (now - lastCritAt < 14000 && !LOUD.has(key)) return;
     lastCritAt = now;
     const text = key && SPECIAL[key] ? pick(SPECIAL[key]) : pick(kind === "good" ? PRAISE : MOCK);
     showCritic(kind, text);
@@ -2330,7 +2333,7 @@ const E = (() => {
     critEl = el;
     sfx.play(kind === "good" ? "fanfare" : "tsk", 120);
     clearTimeout(critT);
-    critT = setTimeout(() => hideCritic(false), 5200);
+    critT = setTimeout(() => hideCritic(false), 4600);
   }
   function hideCritic(now) {
     clearTimeout(critT); clearTimeout(critT2);
@@ -2352,41 +2355,41 @@ const E = (() => {
       const pr = st.tb.find((p) => p.a === a.a && !p.d);
       if (!pr) return;
       const c = a.c;
-      if (!E.beats(pr.a, c, ts)) { critic("bad", "cheat"); return; }
+      if (!E.beats(pr.a, c, ts)) { critic("bad", "cheat", 0.5); return; }
       const opts = P.h.filter((x) => E.beats(pr.a, x, ts)).sort((x, y) => val(x) - val(y));
       const cheapest = opts[0];
-      if (isT(c) && !isT(pr.a) && opts.some((x) => !isT(x))) { critic("bad", "trumpWaste"); return; }
-      if (isT(c) && rv(c) >= 11 && talon > 8 && cheapest !== c) { critic("bad", "bigTrump"); return; }
-      if (c === cheapest && val(c) - val(pr.a) <= 2 && rnd() < 0.6) { critic("good", "cheapest"); return; }
-      if (c === cheapest) { critic("good", null, 0.4); return; }
-      if (val(c) - val(cheapest) >= 4) { critic("bad", null, 0.7); return; }
+      if (isT(c) && !isT(pr.a) && opts.some((x) => !isT(x))) { critic("bad", "trumpWaste", 0.6); return; }
+      if (isT(c) && rv(c) >= 11 && talon > 8 && cheapest !== c) { critic("bad", "bigTrump", 0.6); return; }
+      if (c === cheapest && val(c) - val(pr.a) <= 2 && rnd() < 0.6) { critic("good", "cheapest", 0.35); return; }
+      if (c === cheapest) { critic("good", null, 0.12); return; }
+      if (val(c) - val(cheapest) >= 4) { critic("bad", null, 0.35); return; }
       return;
     }
     if (a.t === "p") {
       const c = a.c;
-      if (st.tb.length && !E.legalThrow(st, c)) { critic("bad", "cheat"); return; }
+      if (st.tb.length && !E.legalThrow(st, c)) { critic("bad", "cheat", 0.5); return; }
       const nonT = P.h.filter((x) => !isT(x));
       if (!st.tb.length) {
-        if (isT(c) && nonT.length && talon > 0) { critic("bad", "trumpOpen"); return; }
-        if (!isT(c) && rv(c) === 12 && talon > 6) { critic("bad", "aceEarly"); return; }
-        if (P.h.filter((x) => x[0] === c[0]).length >= 2 && rv(c) <= 9) { critic("good", "pair", 0.75); return; }
-        if (!isT(c) && rv(c) <= 7) { critic("good", "low", 0.45); return; }
+        if (isT(c) && nonT.length && talon > 0) { critic("bad", "trumpOpen", 0.5); return; }
+        if (!isT(c) && rv(c) === 12 && talon > 6) { critic("bad", "aceEarly", 0.5); return; }
+        if (P.h.filter((x) => x[0] === c[0]).length >= 2 && rv(c) <= 9) { critic("good", "pair", 0.35); return; }
+        if (!isT(c) && rv(c) <= 7) { critic("good", "low", 0.15); return; }
         return;
       }
       const D = st.pl[st.def];
-      if (isT(c) && talon > 6 && !st.tk) { critic("bad", "trumpWaste", 0.8); return; }
-      if (st.tk) { critic("good", "pile", 0.6); return; }
-      if (D && D.h.length - E.unbeaten(st) <= 1) { critic("good", "pressure", 0.7); return; }
-      if (!isT(c) && rv(c) <= 8) { critic("good", null, 0.3); return; }
+      if (isT(c) && talon > 6 && !st.tk) { critic("bad", "trumpWaste", 0.45); return; }
+      if (st.tk) { critic("good", "pile", 0.3); return; }
+      if (D && D.h.length - E.unbeaten(st) <= 1) { critic("good", "pressure", 0.3); return; }
+      if (!isT(c) && rv(c) <= 8) { critic("good", null, 0.08); return; }
       return;
     }
     if (a.t === "k") {
       const open = st.tb.filter((p) => !p.d).map((p) => p.a);
       const couldAll = open.length && open.every((x) => P.h.some((h) => E.beats(x, h, ts)));
-      if (couldAll && open.length === 1) critic("bad", "takeWeak");
+      if (couldAll && open.length === 1) critic("bad", "takeWeak", 0.6);
       return;
     }
-    if (a.t === "x") critic("good", "xfer", 0.8);
+    if (a.t === "x") critic("good", "xfer", 0.4);
     if (a.t === "c") ui.accusedAt = st.li;
   }
   // Ereignisse aus dem Spielverlauf bewerten
@@ -2468,6 +2471,8 @@ const E = (() => {
       clearTimeout(peekT);
       peekT = setTimeout(() => { chat.peek = null; renderChat(); }, 5000);
       sfx.play("pop", 0, 0.7);
+      chat.newAt = Date.now();
+      setTimeout(() => { const f = app.querySelector(".chat-fab"); if (f) { f.classList.add("new"); const r = f.getBoundingClientRect(); const b = document.createElement("div"); b.className = "emo-pop u"; b.textContent = "💬"; b.style.left = (r.left + r.width / 2) + "px"; b.style.top = (r.top - 34) + "px"; fx.appendChild(b); setTimeout(() => b.remove(), 2900); } }, 0);
     }
     if (!x.mine && !chat.open) render(); else renderChat();
   }
