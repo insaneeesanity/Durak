@@ -86,6 +86,8 @@ button { font: inherit; color: inherit; }
 }
 .icon-btn:hover { border-color: var(--brass); }
 .icon-btn .su { width: 15px; height: 15px; }
+.icon-btn.snd { padding: 0 9px; }
+.icon-btn.snd .su { width: 17px; height: 17px; }
 .linkbox { display: flex; gap: 8px; margin-bottom: 12px; }
 .linkbox input { flex: 1; min-width: 0; height: 42px; border-radius: 12px; border: 1px solid var(--line); background: rgba(0,0,0,.28); color: var(--ink-2); padding: 0 12px; font: inherit; font-size: 13px; }
 .sheet .steps li { color: var(--ink-2); }
@@ -166,9 +168,7 @@ button { font: inherit; color: inherit; }
 .pair .card { --w: var(--tw); position: absolute; left: 0; top: 0; }
 .pair .dfn { left: calc(var(--tw) * .2); top: calc(var(--tw) * .28); transform: rotate(7deg); }
 .pair.tgt { cursor: pointer; }
-.pair.tgt .atk { box-shadow: 0 0 0 3px var(--good), 0 0 22px rgba(95,213,159,.45); }
-.pair.tgt-x { cursor: pointer; }
-.pair.tgt-x .atk { box-shadow: 0 0 0 3px rgba(255,92,97,.75); }
+.pair.tgt .atk { box-shadow: 0 0 0 2.5px var(--brass-2), 0 0 18px rgba(242,220,164,.35); }
 .slot { width: calc(var(--tw) * 1.2); height: calc(var(--tw) * 1.68); display: grid; place-items: center; }
 .slot button {
   appearance: none; cursor: pointer; width: var(--tw); height: calc(var(--tw) * 1.4); border-radius: calc(var(--tw) * .09);
@@ -180,14 +180,11 @@ button { font: inherit; color: inherit; }
 .idle-hint { flex: 1 1 100%; align-self: center; text-align: center; color: var(--ink-3); font-size: 13px; max-width: 26ch; margin: 0 auto; text-wrap: balance; }
 
 /* Ziehen & Ablegen: Zielmarkierungen auf dem Tisch */
-.felt.drop-zone .pairs { box-shadow: inset 0 0 0 2px rgba(95,213,159,.35); background-color: rgba(95,213,159,.04); }
-.felt.drop-zone.hot .pairs { box-shadow: inset 0 0 0 2.5px var(--good), inset 0 0 40px rgba(95,213,159,.18); background-color: rgba(95,213,159,.08); }
-.felt.drop-zone.hot.cheat .pairs { box-shadow: inset 0 0 0 2.5px var(--alarm), inset 0 0 40px rgba(255,92,97,.18); background-color: rgba(255,92,97,.07); }
+.felt.drop-zone .pairs { box-shadow: inset 0 0 0 2px rgba(242,220,164,.26); background-color: rgba(242,220,164,.03); }
+.felt.drop-zone.hot .pairs { box-shadow: inset 0 0 0 2.5px var(--brass-2), inset 0 0 40px rgba(242,220,164,.14); background-color: rgba(242,220,164,.06); }
 .felt.drop-zone.hot.xfer .pairs { box-shadow: inset 0 0 0 2.5px var(--xfer), inset 0 0 40px rgba(159,216,255,.18); background-color: rgba(159,216,255,.07); }
-.pair.drop-can .atk { box-shadow: 0 0 0 2px rgba(95,213,159,.45); }
-.pair.drop-can.cheat-only .atk { box-shadow: 0 0 0 2px rgba(255,92,97,.4); }
-.pair.drop-hot .atk { box-shadow: 0 0 0 3px var(--good), 0 0 26px rgba(95,213,159,.6); transform: scale(1.06); transition: transform .12s; }
-.pair.drop-hot.cheat-only .atk { box-shadow: 0 0 0 3px var(--alarm), 0 0 26px rgba(255,92,97,.6); }
+.pair.drop-can .atk { box-shadow: 0 0 0 2px rgba(242,220,164,.4); }
+.pair.drop-hot .atk { box-shadow: 0 0 0 3px var(--brass-2), 0 0 26px rgba(242,220,164,.5); transform: scale(1.06); transition: transform .12s; }
 
 /* Noch nicht bestätigt (wartet auf den Gastgeber) */
 .card.pend { animation: pend 1s ease-in-out infinite; }
@@ -307,8 +304,6 @@ button { font: inherit; color: inherit; }
   transition: transform .2s cubic-bezier(.2,.9,.3,1.1), filter .16s, box-shadow .16s;
   box-shadow: inset 0 0 0 1px var(--card-edge), -2px 2px 3px -1px rgba(0,0,0,.35), 0 10px 18px -10px rgba(0,0,0,.75);
 }
-.hand .card.no { filter: brightness(.62) saturate(.6); }
-.hand .card.ok { --lift: -6px; box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 2px rgba(95,213,159,.85), 0 10px 18px -10px rgba(0,0,0,.75); }
 .hand .card.sel { --lift: -26px; filter: none; box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 3px var(--brass-2), 0 16px 26px -10px rgba(0,0,0,.85); }
 .hand-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ink-3); font-size: 13px; text-align: center; }
 
@@ -331,14 +326,12 @@ button { font: inherit; color: inherit; }
 .dragcard { position: absolute; left: 0; top: 0; will-change: transform; }
 .dragcard .dc-in { position: relative; animation: hover 1.3s ease-in-out infinite; }
 .dragcard .card { box-shadow: inset 0 0 0 1px var(--card-edge), 0 34px 40px -14px rgba(0,0,0,.7), 0 12px 20px -8px rgba(0,0,0,.55); transition: box-shadow .15s; }
-.dragcard.ok .card { box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 3px var(--good), 0 0 26px rgba(95,213,159,.55), 0 34px 40px -14px rgba(0,0,0,.7); }
-.dragcard.cheat .card { box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 3px var(--alarm), 0 0 26px rgba(255,92,97,.55), 0 34px 40px -14px rgba(0,0,0,.7); }
+.dragcard.ok .card { box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 3px var(--brass-2), 0 0 26px rgba(242,220,164,.45), 0 34px 40px -14px rgba(0,0,0,.7); }
 .dragcard.xfer .card { box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 3px var(--xfer), 0 0 26px rgba(159,216,255,.55), 0 34px 40px -14px rgba(0,0,0,.7); }
 .dragcard.bad .card { filter: saturate(.7) brightness(.92); }
 .dc-tag { position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%); white-space: nowrap; padding: 4px 10px; border-radius: 999px; font: 700 12px/1.2 var(--f-ui); color: var(--ink); background: var(--panel-2); border: 1px solid var(--line-2); opacity: 0; transition: opacity .12s; }
-.dragcard.ok .dc-tag, .dragcard.cheat .dc-tag, .dragcard.xfer .dc-tag, .dragcard.bad .dc-tag { opacity: 1; }
-.dragcard.ok .dc-tag { color: #062a1c; background: var(--good); border-color: transparent; }
-.dragcard.cheat .dc-tag { color: #fff; background: var(--alarm); border-color: transparent; }
+.dragcard.ok .dc-tag, .dragcard.xfer .dc-tag, .dragcard.bad .dc-tag { opacity: 1; }
+.dragcard.ok .dc-tag { color: var(--brass-ink); background: var(--brass-2); border-color: transparent; }
 .dragcard.xfer .dc-tag { color: #082033; background: var(--xfer); border-color: transparent; }
 @keyframes hover { 50% { transform: translateY(-5px); } }
 .dragcard.drop .dc-in { animation: none; }
@@ -549,6 +542,8 @@ button { font: inherit; color: inherit; }
   <symbol id="su-s" viewBox="0 0 100 100"><path d="M50 4C38 22 8 37 8 60c0 14 10 24 23 24 7 0 13-3 16-8-1 8-5 14-12 19h30c-7-5-11-11-12-19 3 5 9 8 16 8 13 0 23-10 23-24C92 37 62 22 50 4z"/></symbol>
   <symbol id="su-c" viewBox="0 0 100 100"><circle cx="50" cy="28" r="20"/><circle cx="27" cy="58" r="20"/><circle cx="73" cy="58" r="20"/><circle cx="50" cy="52" r="12"/><path d="M47 60c-1 14-5 25-13 35h32c-8-10-12-21-13-35z"/></symbol>
   <symbol id="ic-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="ic-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="ic-siren" viewBox="0 0 24 24"><path d="M12 3v2M4.2 6.2l1.4 1.4M19.8 6.2l-1.4 1.4M6 18v-5a6 6 0 0 1 12 0v5M4 21h16v-3H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -1286,7 +1281,8 @@ const E = (() => {
     for (const l of st.log) {
       if (l.i > ui.lastLog && (l.x === "caught" || l.x === "false")) {
         showBanner(l);
-        if (l.x === "caught") { if (l.c) ui.caught.add(l.c); ui.flash = true; }
+        if (l.x === "caught") { if (l.c) ui.caught.add(l.c); ui.flash = true; sfx.play("caught", 0); }
+        else sfx.play("false", 0);
       }
     }
     ui.lastLog = Math.max(ui.lastLog, top);
@@ -1609,16 +1605,6 @@ const E = (() => {
     r.canThrow = r.isAtt && !r.out && (st.tb.length === 0 ? r.att : E.canAdd(st));
     return r;
   }
-  function cardState(c, r) {
-    if (!st || st.ph !== "play" || r.out) return "";
-    if (r.def && !st.tk && r.open) {
-      const ok = st.tb.some((p) => !p.d && E.beats(p.a, c, st.ts)) || E.canTransfer(st, r.me, c);
-      return ok ? "ok" : "no";
-    }
-    if (r.canThrow) return E.legalThrow(st, c) ? "ok" : "no";
-    return "";
-  }
-
   // ---------- Klicks ----------
   function onCard(c) {
     if (!st || st.ph !== "play") return;
@@ -1626,8 +1612,6 @@ const E = (() => {
     if (r.out || ui.pending.has(c)) return;
     ui.accuse = false; ui.confirm = null;
     if (ui.sel === c) { playSelected(); return; }
-    const cs = cardState(c, r);
-    if (!cs) { ui.sel = c; render(); return; }
     ui.sel = c;
     render();
   }
@@ -1649,9 +1633,6 @@ const E = (() => {
       if (!pr) return;
       if (!E.beats(pr.a, c, st.ts)) {
         if (!st.cfg.cheat) { toast(`${E.label(c)} schlägt ${E.label(pr.a)} nicht.`); render(); return; }
-        ui.confirm = { a: { t: "b", c, a: tg }, text: `${E.label(c)} schlägt ${E.label(pr.a)} eigentlich nicht.` };
-        render();
-        return;
       }
       submit({ t: "b", c, a: tg });
       return;
@@ -1659,9 +1640,6 @@ const E = (() => {
     if (r.canThrow) {
       if (!E.legalThrow(st, c)) {
         if (!st.cfg.cheat) { toast("Einwerfen geht nur mit Rängen, die schon auf dem Tisch liegen."); render(); return; }
-        ui.confirm = { a: { t: "p", c }, text: `Kein ${E.rankLabel(c[0])} auf dem Tisch.` };
-        render();
-        return;
       }
       submit({ t: "p", c });
       return;
@@ -1705,6 +1683,7 @@ const E = (() => {
       case "repl": host.repl(Number(d.i)); break;
       case "sit": wantSit = d.v === "1"; ls.set("durak.sit", wantSit ? "1" : "0"); pushPresence(); if (hosting) { syncSeats(); commit(); } else render(); break;
       case "rules": ui.sheet = "rules"; render(); break;
+      case "sound": sfx.toggle(); render(); break;
       case "menu": ui.sheet = "menu"; render(); break;
       case "close": ui.sheet = null; render(); break;
       case "name": saveName(); break;
@@ -1947,7 +1926,8 @@ const E = (() => {
   function topHtml() {
     const menuBtn = hosting && st.ph !== "lobby" ? `<button class="icon-btn" data-act="menu" aria-label="Tisch-Menü">Tisch</button>` : "";
     const invBtn = room ? `<button class="icon-btn inv" data-act="invite" aria-label="Freunde einladen"><svg class="su" viewBox="0 0 24 24"><use href="#ic-link" width="24" height="24"></use></svg><span>Einladen</span></button>` : "";
-    return `<div class="top"><div class="mark"><b>Durak</b><span>Дурак</span></div>${netHtml()}${invBtn}<button class="icon-btn" data-act="rules">Regeln</button>${menuBtn}</div>`;
+    const sndBtn = `<button class="icon-btn snd" data-act="sound" aria-pressed="${sfx.on}" aria-label="${sfx.on ? "Ton ausschalten" : "Ton einschalten"}"><svg class="su" viewBox="0 0 24 24"><use href="#${sfx.on ? "ic-sound" : "ic-mute"}" width="24" height="24"></use></svg></button>`;
+    return `<div class="top"><div class="mark"><b>Durak</b><span>Дурак</span></div>${netHtml()}${invBtn}${sndBtn}<button class="icon-btn" data-act="rules">Regeln</button>${menuBtn}</div>`;
   }
 
   function online(pl) {
@@ -2044,9 +2024,7 @@ const E = (() => {
     st.tb.forEach((p) => {
       let cls = "", attrs = `data-pa="${p.a}"${p.d ? "" : ' data-open="1"'}`;
       if (selC && amDefending && !p.d) {
-        const ok = E.beats(p.a, selC, st.ts);
-        if (ok) { cls = "tgt"; attrs += ` data-act="pair" data-a="${p.a}"`; }
-        else if (st.cfg.cheat) { cls = "tgt-x"; attrs += ` data-act="pair" data-a="${p.a}"`; }
+        cls = "tgt"; attrs += ` data-act="pair" data-a="${p.a}"`;
       }
       const targeting = cls !== "";
       let aCls = "atk", aAttr = `data-cid="${p.a}" data-zone="table" data-rot="0"`;
@@ -2190,11 +2168,107 @@ const E = (() => {
     for (const it of items) {
       const left = W / 2 + it.dx - cw / 2;
       const bottom = maxDrop - it.drop + (rows === 2 && it.row === 0 ? rowLift : 0) + 4;
-      const cs = cardState(it.c, r);
       const sel = ui.sel === it.c ? "sel" : "";
-      out += cardHtml(it.c, `${cs} ${sel}`, `data-act="card" data-c="${it.c}" data-cid="${it.c}" data-zone="hand" data-rot="${it.deg.toFixed(2)}" role="button" tabindex="0" style="left:${left.toFixed(1)}px;bottom:${bottom.toFixed(1)}px;--r:${it.deg.toFixed(2)}deg;z-index:${it.z}"`);
+      out += cardHtml(it.c, sel, `data-act="card" data-c="${it.c}" data-cid="${it.c}" data-zone="hand" data-rot="${it.deg.toFixed(2)}" role="button" tabindex="0" style="left:${left.toFixed(1)}px;bottom:${bottom.toFixed(1)}px;--r:${it.deg.toFixed(2)}deg;z-index:${it.z}"`);
     }
     return `<div class="hand" data-anchor="hand" style="--hh:${hh}px">${out}</div>`;
+  }
+
+  // ===================================================================
+  // Töne: alles im Browser erzeugt, keine Dateien
+  // ===================================================================
+  const sfx = (() => {
+    let ctx = null, master = null, noise = null;
+    let on = ls.get("durak.sound") !== "0";
+    function init() {
+      if (ctx) { if (ctx.state === "suspended") ctx.resume().catch(() => {}); return ctx; }
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      try { ctx = new AC(); } catch (e) { ctx = null; return null; }
+      master = ctx.createGain();
+      master.gain.value = 0.8;
+      const comp = ctx.createDynamicsCompressor();
+      master.connect(comp);
+      comp.connect(ctx.destination);
+      const len = Math.floor(ctx.sampleRate);
+      noise = ctx.createBuffer(1, len, ctx.sampleRate);
+      const d = noise.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      return ctx;
+    }
+    // Browser erlauben Ton erst nach der ersten Berührung
+    ["pointerdown", "touchend", "keydown"].forEach((t) => window.addEventListener(t, () => { if (on) init(); }, { capture: true, passive: true }));
+    function env(g, t, a, peak, d) {
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak), t + a);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + a + d);
+    }
+    // gefiltertes Rauschen: Papier, Wischen, Klatschen
+    function nz(t, dur, type, f0, f1, q, peak, a) {
+      a = a || 0.004;
+      const s = ctx.createBufferSource();
+      s.buffer = noise;
+      s.playbackRate.value = 0.85 + Math.random() * 0.3;
+      const f = ctx.createBiquadFilter();
+      f.type = type;
+      f.Q.value = q;
+      f.frequency.setValueAtTime(f0, t);
+      if (f1) f.frequency.exponentialRampToValueAtTime(f1, t + a + dur);
+      const g = ctx.createGain();
+      env(g, t, a, peak, dur);
+      s.connect(f); f.connect(g); g.connect(master);
+      s.start(t, Math.random() * 0.6);
+      s.stop(t + a + dur + 0.05);
+    }
+    // kurzer Ton: Holz-Tock, Glöckchen, Summer
+    function osc(t, type, f0, f1, dur, peak, a) {
+      a = a || 0.003;
+      const o = ctx.createOscillator();
+      o.type = type;
+      o.frequency.setValueAtTime(f0, t);
+      if (f1 && f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + a + dur);
+      const g = ctx.createGain();
+      env(g, t, a, peak, dur);
+      o.connect(g); g.connect(master);
+      o.start(t);
+      o.stop(t + a + dur + 0.05);
+    }
+    const V = {
+      // Karte vom Stapel ziehen: kurzes Wischen
+      draw(t, v) { nz(t, 0.12, "bandpass", 3400, 1500, 0.9, 0.32 * v, 0.014); nz(t + 0.1, 0.025, "highpass", 2600, 0, 0.7, 0.1 * v); },
+      // Karte auf den Tisch legen: Wischen und weicher Aufschlag
+      play(t, v) { nz(t, 0.06, "bandpass", 2600, 1500, 0.8, 0.2 * v, 0.006); nz(t + 0.05, 0.05, "lowpass", 1500, 500, 0.7, 0.6 * v, 0.002); osc(t + 0.05, "sine", 190, 85, 0.09, 0.32 * v); },
+      // Karte schlagen: kräftiger draufklatschen
+      beat(t, v) { nz(t, 0.045, "bandpass", 3000, 1800, 0.8, 0.18 * v, 0.004); nz(t + 0.04, 0.07, "lowpass", 2600, 600, 0.6, 1.0 * v, 0.001); nz(t + 0.04, 0.02, "highpass", 4200, 0, 0.7, 0.3 * v, 0.001); osc(t + 0.04, "triangle", 260, 70, 0.14, 0.5 * v); },
+      // Bito: Karten zusammenschieben und ein helles Glöckchen
+      bito(t, v) { [0, 0.05, 0.1, 0.15].forEach((k) => nz(t + k, 0.11, "bandpass", 2200, 900, 0.8, 0.16 * v, 0.01)); osc(t + 0.2, "sine", 659, 659, 0.3, 0.14 * v, 0.008); osc(t + 0.32, "sine", 988, 988, 0.5, 0.13 * v, 0.008); osc(t + 0.32, "sine", 1318, 1318, 0.35, 0.04 * v, 0.008); },
+      // Aufnehmen: mehrere Karten werden eingesammelt
+      take(t, v) { [0, 0.06, 0.12, 0.19, 0.25].forEach((k) => nz(t + k, 0.1, "bandpass", 1800, 750, 0.8, 0.2 * v, 0.008)); osc(t + 0.05, "sine", 220, 150, 0.32, 0.07 * v, 0.02); },
+      // Erwischt: Summer und Stempel
+      caught(t, v) { osc(t, "sawtooth", 520, 250, 0.32, 0.1 * v, 0.005); osc(t + 0.01, "square", 523, 262, 0.3, 0.04 * v); nz(t + 0.34, 0.09, "lowpass", 900, 200, 0.7, 0.9 * v, 0.001); osc(t + 0.34, "sine", 130, 50, 0.2, 0.6 * v); },
+      // Fehlalarm: zwei tiefe Töne nach unten
+      false(t, v) { osc(t, "triangle", 330, 330, 0.12, 0.2 * v); osc(t + 0.15, "triangle", 247, 247, 0.22, 0.2 * v); },
+      // Emoji: Blubb
+      pop(t, v) { osc(t, "sine", 480, 1300, 0.08, 0.24 * v, 0.002); nz(t, 0.02, "highpass", 3000, 0, 0.7, 0.07 * v); },
+    };
+    return {
+      get on() { return on; },
+      toggle() {
+        on = !on;
+        ls.set("durak.sound", on ? "1" : "0");
+        if (on) { init(); setTimeout(() => this.play("pop"), 30); }
+        return on;
+      },
+      play(name, delayMs, vol) {
+        if (!on || !V[name] || !ctx || ctx.state !== "running" || document.hidden) return;
+        try { V[name](ctx.currentTime + 0.01 + Math.max(0, delayMs || 0) / 1000, vol == null ? 1 : vol); } catch (e) { /* egal */ }
+      },
+    };
+  })();
+  // Aufschlag-Ton passend zur Karte: Schlagen klingt kräftiger als Ausspielen
+  function landSound(cid, delay) {
+    const isDef = (st && st.tb.some((p) => p.d === cid)) || queue.some((q) => q.t === "b" && q.c === cid);
+    sfx.play(isDef ? "beat" : "play", Math.max(0, delay || 0));
   }
 
   // ===================================================================
@@ -2244,6 +2318,7 @@ const E = (() => {
   // Echte Karte von ihrer alten Stelle an die neue gleiten lassen
   function flipEl(el, old, o) {
     o = o || {};
+    if (reduceMotion) return;
     const r1 = el.getBoundingClientRect();
     const c1 = ctr(r1);
     const keep = el.style.transform;
@@ -2269,6 +2344,7 @@ const E = (() => {
   // Fliegende Kopie in der Effekt-Ebene (für Wege quer über den Bildschirm, mit Umdrehen)
   function ghost(o) {
     const { from, to, c } = o;
+    if (reduceMotion) { setTimeout(() => { if (o.done) o.done(); }, o.delay || 0); return o.delay || 0; }
     const w = from.w;
     const g = document.createElement("div");
     g.className = "flyer" + (o.caught ? " caught" : "");
@@ -2348,7 +2424,7 @@ const E = (() => {
       if (el) el.style.visibility = "hidden";
     }
     if (ui.flash) { ui.flash = false; flashFelt(); }
-    if (reduceMotion || !st || st.ph !== "play" || !prev) { ui.caught.clear(); return; }
+    if (!st || st.ph !== "play" || !prev) { ui.caught.clear(); return; }
     const me = myIdx();
     const A = anchorsNow();
     const deckA = A.deck, bitoA = A.bito;
@@ -2373,9 +2449,10 @@ const E = (() => {
             el.style.visibility = "hidden";
             const ms = ghost({ from: deckA, to: { x: t.x, y: t.y, w: el.offsetWidth, rot: Number(el.dataset.rot || 0) }, c: el.dataset.cid, flip: "in", delay, dur: 460, z: 10 + k });
             hideUntil(el.dataset.cid, ms);
+            sfx.play("draw", delay, 0.5);
           } else if (st.pl[i].h.length > round) {
             const f = fanOf(i);
-            if (f) ghost({ from: deckA, to: f, delay, dur: 420, z: 10 + k });
+            if (f) { ghost({ from: deckA, to: f, delay, dur: 420, z: 10 + k }); sfx.play("draw", delay, 0.35); }
           }
           k++;
         }
@@ -2387,7 +2464,7 @@ const E = (() => {
     const old = snap.cards;
     const seen = new Set();
     const toTable = new Map(); // Karte -> Spieler, der sie vom Tisch bekommen hat
-    let drawDelay = 0;
+    let drawDelay = 0, tookSound = false, bitoSound = false;
 
     // 1) Karten, die es weiterhin gibt: gleiten an ihren neuen Platz
     app.querySelectorAll("[data-cid]").forEach((el) => {
@@ -2406,10 +2483,11 @@ const E = (() => {
           const ms = ghost({ from: o, to: { x: c.x, y: c.y, w: el.offsetWidth, rot: Number(el.dataset.rot || 0) }, c: cid, dur: 380, z: 30, done: () => landRing(c.x, c.y, el.offsetWidth) });
           el.style.visibility = "hidden";
           hideUntil(cid, ms);
+          landSound(cid, ms - 60);
         } else {
           const caught = ui.caught.has(cid);
           flipEl(el, o, { dur: caught ? 900 : o.zone !== zone ? 480 : 300, shake: caught, lift: o.zone !== zone });
-          if (o.zone === "table" && zone === "hand") drawDelay = Math.max(drawDelay, 300);
+          if (o.zone === "table" && zone === "hand") { drawDelay = Math.max(drawDelay, 300); if (!caught) tookSound = true; }
         }
         return;
       }
@@ -2422,6 +2500,7 @@ const E = (() => {
         el.style.visibility = "hidden";
         const ms = ghost({ from: src, to: { x: c.x, y: c.y, w: el.offsetWidth, rot: Number(el.dataset.rot || 0) }, c: cid, flip: by !== me ? "in" : null, dur: 460, arc: 18, z: 30, done: () => landRing(c.x, c.y, el.offsetWidth) });
         hideUntil(cid, ms);
+        landSound(cid, ms - 60);
         return;
       }
       // 3) Neu in meiner Hand: vom Stapel gezogen
@@ -2439,13 +2518,15 @@ const E = (() => {
       const holder = st.pl.findIndex((p, i) => i !== me && p.h.includes(cid));
       const caught = ui.caught.has(cid);
       let dest = null;
-      if (holder >= 0) { dest = fanOf(holder); toTable.set(cid, holder); }
-      else if (!st.pl.some((p) => p.h.includes(cid))) dest = bitoA ? Object.assign({}, bitoA, { rot: (Math.random() * 30 - 15) }) : null;
+      if (holder >= 0) { dest = fanOf(holder); toTable.set(cid, holder); if (!caught) tookSound = true; }
+      else if (!st.pl.some((p) => p.h.includes(cid))) { dest = bitoA ? Object.assign({}, bitoA, { rot: (Math.random() * 30 - 15) }) : null; bitoSound = true; }
       if (!dest) continue;
       ghost({ from: o, to: dest, c: cid, flip: "out", delay: caught ? 0 : outDelay, dur: caught ? 1000 : 520, caught, z: 20 });
       outDelay += 45;
     }
     if (outDelay) drawDelay = Math.max(drawDelay, 380 + outDelay);
+    if (bitoSound) sfx.play("bito", 0);
+    else if (tookSound) sfx.play("take", 0);
 
     // 5) Nachziehen: vom Stapel in meine Hand (aufgedeckt) und in die Fächer der anderen (verdeckt)
     if (deckA) {
@@ -2455,6 +2536,7 @@ const E = (() => {
         const c = ctr(el.getBoundingClientRect());
         const ms = ghost({ from: deckA, to: { x: c.x, y: c.y, w: el.offsetWidth, rot: Number(el.dataset.rot || 0) }, c: el.dataset.cid, flip: "in", delay: drawDelay + k * 90, dur: 480, z: 40 + k });
         hideUntil(el.dataset.cid, ms);
+        sfx.play("draw", drawDelay + k * 90, 0.8);
         k++;
       });
       if (prev.tal > st.tal.length) {
@@ -2466,6 +2548,7 @@ const E = (() => {
           const f = fanOf(i);
           for (let j = 0; j < Math.min(delta, 8) && f; j++) {
             ghost({ from: deckA, to: f, delay: drawDelay + k * 90, dur: 440, z: 40 + k });
+            sfx.play("draw", drawDelay + k * 90, 0.4);
             k++;
           }
         });
@@ -2486,16 +2569,14 @@ const E = (() => {
     if (r.def && !st.tk && r.open) {
       const pairs = Array.from(box.querySelectorAll('.pair[data-open="1"]')).map((el) => {
         const a = el.dataset.pa;
-        const ok = E.beats(a, c, st.ts);
-        return { el, a, ok, cheat: !ok && !!st.cfg.cheat };
+        return { el, a, legal: E.beats(a, c, st.ts) };
       });
-      pairs.forEach((p) => { if (p.ok || p.cheat) { p.el.classList.add("drop-can"); if (!p.ok) p.el.classList.add("cheat-only"); } });
+      pairs.forEach((p) => p.el.classList.add("drop-can"));
       return { mode: "def", felt, box, pairs, xfer: E.canTransfer(st, r.me, c) };
     }
     if (r.canThrow) {
-      const ok = E.legalThrow(st, c);
       felt.classList.add("drop-zone");
-      return { mode: "att", felt, box, ok, cheat: !ok && !!st.cfg.cheat };
+      return { mode: "att", felt, box, legal: E.legalThrow(st, c) };
     }
     return { mode: "none", felt, box };
   }
@@ -2506,7 +2587,6 @@ const E = (() => {
     if (t.mode === "def") {
       let best = null, bd = 1e9;
       for (const p of t.pairs) {
-        if (!p.ok && !p.cheat) continue;
         const r = p.el.getBoundingClientRect();
         const pad = 18;
         if (x < r.left - pad || x > r.right + pad || y < r.top - pad || y > r.bottom + pad) continue;
@@ -2514,11 +2594,11 @@ const E = (() => {
         const d = Math.hypot(c.x - x, c.y - y);
         if (d < bd) { bd = d; best = p; }
       }
-      if (best) return { kind: "b", a: best.a, ok: best.ok, cheat: best.cheat, el: best.el };
+      if (best) return { kind: "b", a: best.a, legal: best.legal, el: best.el };
       if (t.xfer && inBox) return { kind: "x", ok: true };
       return null;
     }
-    if (inBox) return { kind: "p", ok: t.ok, cheat: t.cheat };
+    if (inBox) return { kind: "p", legal: t.legal };
     return null;
   }
   // Die Karte schwebt etwas über dem Finger, damit man sieht, wohin sie geht
@@ -2565,9 +2645,7 @@ const E = (() => {
     let cls = "dragcard", tag = "";
     if (hit) {
       if (hit.kind === "x") { cls += " xfer"; tag = "Weiterschieben"; }
-      else if (hit.ok) { cls += " ok"; tag = hit.kind === "b" ? "Loslassen zum Schlagen" : "Loslassen zum Ablegen"; }
-      else if (hit.cheat) { cls += " cheat"; tag = "😈 Schummeln"; }
-      else { cls += " bad"; tag = hit.kind === "p" ? "Rang liegt nicht" : "Sticht nicht"; }
+      else { cls += " ok"; tag = hit.kind === "b" ? "Loslassen zum Schlagen" : "Loslassen zum Ablegen"; }
     } else if (d.t.mode === "none") {
       cls += " bad"; tag = st && st.ph === "play" ? "Gerade nicht dran" : "";
       if (!tag) cls = "dragcard";
@@ -2580,14 +2658,13 @@ const E = (() => {
       const hot = !!(hit && (hit.kind === "p" || hit.kind === "x"));
       d.t.felt.classList.toggle("hot", hot);
       d.t.felt.classList.toggle("drop-zone", d.t.mode === "att" || hot);
-      d.t.felt.classList.toggle("cheat", !!(hot && hit.kind === "p" && !hit.ok && hit.cheat));
       d.t.felt.classList.toggle("xfer", !!(hot && hit.kind === "x"));
     }
   }
   function clearDropMarks() {
-    app.querySelectorAll(".drop-can,.drop-hot,.cheat-only").forEach((el) => el.classList.remove("drop-can", "drop-hot", "cheat-only"));
+    app.querySelectorAll(".drop-can,.drop-hot").forEach((el) => el.classList.remove("drop-can", "drop-hot"));
     const felt = app.querySelector(".felt");
-    if (felt) felt.classList.remove("drop-zone", "hot", "cheat", "xfer");
+    if (felt) felt.classList.remove("drop-zone", "hot", "xfer");
   }
   function returnDrag(d) {
     const f = d.f;
@@ -2621,6 +2698,7 @@ const E = (() => {
     const dur = reduceMotion ? 1 : 300;
     const a = f.animate([{ transform: f.style.transform }, { transform: under, offset: 0.78 }, { transform: end }], { duration: dur, easing: "cubic-bezier(.3,.7,.3,1)", fill: "forwards" });
     hideUntil(L.c, dur);
+    landSound(L.c, dur * 0.7);
     a.onfinish = a.oncancel = () => { f.remove(); landRing(c.x, c.y, w); };
   }
   function endDrag(ev, cancel) {
@@ -2631,7 +2709,9 @@ const E = (() => {
     ui.noClickUntil = Date.now() + 450;
     const hit = cancel ? null : d.hit;
     clearDropMarks();
-    if (hit && (hit.ok || hit.cheat) && st && st.ph === "play") {
+    // Ohne Schummeln werden falsche Karten erst beim Loslassen abgelehnt, nicht vorher angezeigt
+    const allowed = hit && (hit.kind === "x" || hit.legal || (st && st.cfg.cheat));
+    if (allowed && st && st.ph === "play") {
       ui.landing = { c: d.c, f: d.f, w: d.w };
       setTimeout(() => { if (ui.landing && ui.landing.c === d.c) { const L = ui.landing; ui.landing = null; landDragged(L); } }, 1500);
       if (hit.kind === "b") submit({ t: "b", c: d.c, a: hit.a });
@@ -2639,8 +2719,8 @@ const E = (() => {
       else submit({ t: "p", c: d.c });
       return;
     }
-    if (hit && hit.kind === "p" && !hit.ok) toast("Einwerfen geht nur mit Rängen, die schon auf dem Tisch liegen.");
-    else if (hit && hit.kind === "b" && !hit.ok) toast(`${E.label(d.c)} sticht diese Karte nicht.`);
+    if (hit && hit.kind === "p") toast("Einwerfen geht nur mit Rängen, die schon auf dem Tisch liegen.");
+    else if (hit && hit.kind === "b") toast(`${E.label(d.c)} sticht diese Karte nicht.`);
     returnDrag(d);
   }
   app.addEventListener("pointerdown", (ev) => {
@@ -2740,6 +2820,7 @@ const E = (() => {
     const b = document.createElement("div");
     b.className = "emo-pop " + (mine ? "u" : "r");
     b.textContent = EMOS[k];
+    sfx.play("pop", 0, 0.8);
     let x, y;
     if (mine) { x = r.left + r.width / 2; y = r.top - 36; }
     else { x = Math.min(window.innerWidth - 32, r.right + 32); y = r.top - 6; }
@@ -2825,7 +2906,7 @@ const E = (() => {
       <li>Ist der Angriff vorbei, gilt alles, was auf dem Tisch lag.</li>
     </ul></div>
     <h3>Bedienung</h3>
-    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Ein grüner Rand heißt: passt. Rot heißt: Das wäre geschummelt.</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein grünes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
+    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Das Spiel zeigt dir nicht, welche Karten passen. Darauf musst du selbst achten.${c.cheat ? " Legst du eine falsche Karte, liegt sie trotzdem, und die anderen können dich erwischen." : " Eine falsche Karte geht zurück auf deine Hand."}</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein markiertes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Den Ton schaltest du oben mit dem Lautsprecher an und aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
     </div></div>`;
   }
 
