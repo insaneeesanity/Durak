@@ -8,39 +8,42 @@
 <title>Durak-Tisch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=DM+Serif+Display&family=Onest:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: Kartentisch als eine Bildschirmspalte – Kopf, Gegner mit verdecktem Fächer, Malachit-Filz (Stapel links mittig, Paare, Bito rechts), Aktionsleiste mit eigenem Profil, gefächerte eigene Hand */
+/* Layout: Kartentisch als eine Bildschirmspalte – Kopf, Gegner mit verdecktem Fächer, schwarzer Tisch mit Gold- und Silberrahmen (Stapel links mittig, Paare, Bito rechts), Aktionsleiste mit eigenem Profil, gefächerte eigene Hand. Karten: schwarzes Blatt, Silber für Pik/Kreuz, Gold für Herz/Karo. */
 :root {
-  --felt-0: #061c17;
-  --felt-1: #0c372d;
-  --felt-2: #175a4b;
-  --ink: #eef3ee;
-  --ink-2: #b0c7bc;
-  --ink-3: #7a978b;
-  --brass: #d9b56b;
-  --brass-2: #f2dca4;
-  --brass-ink: #2a1f08;
+  --felt-0: #07070a;
+  --felt-1: #15151b;
+  --felt-2: #24242d;
+  --ink: #efeee9;
+  --ink-2: #bcbab3;
+  --ink-3: #85837c;
+  --brass: #d4af37;
+  --brass-2: #f0d77c;
+  --brass-ink: #241a04;
+  --silver: #c9cdd5;
+  --silver-2: #f2f3f6;
+  --silver-3: #8d919a;
   --alarm: #ff5c61;
   --alarm-bg: rgba(255, 92, 97, .14);
   --good: #5fd59f;
   --xfer: #9fd8ff;
-  --panel: rgba(4, 20, 16, .62);
-  --panel-2: rgba(4, 20, 16, .86);
-  --line: rgba(217, 181, 107, .24);
-  --line-2: rgba(238, 243, 238, .12);
-  --card: #fbf7ee;
-  --card-hi: #fffdf7;
-  --card-lo: #f1e9d6;
-  --card-edge: #ddd3bd;
-  --card-ink: #1c1e22;
-  --card-red: #c2162d;
+  --panel: rgba(12, 12, 16, .66);
+  --panel-2: rgba(12, 12, 16, .9);
+  --line: rgba(212, 175, 55, .3);
+  --line-2: rgba(201, 205, 213, .14);
+  --card: #17181d;
+  --card-hi: #23242b;
+  --card-lo: #0f1014;
+  --card-edge: #3b3d47;
+  --card-ink: #f2f3f6;
+  --card-red: #f0d77c;
   --court-blue: #23508e;
   --court-gold: #e2b448;
   --court-cream: #fbf2dc;
-  --back: #8a1c2e;
-  --back-2: #5a1120;
-  --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --back: #0f1014;
+  --back-2: #06060a;
+  --f-display: "Cinzel", "Times New Roman", Georgia, serif;
   --f-ui: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-card: "DM Serif Display", Georgia, "Times New Roman", serif;
   color-scheme: dark;
@@ -75,7 +78,7 @@ button { font: inherit; color: inherit; }
 /* ---------- Kopfzeile ---------- */
 .top { display: flex; align-items: center; gap: 8px; min-height: 42px; min-width: 0; }
 .mark { display: flex; align-items: baseline; gap: 8px; margin-right: auto; min-width: 0; }
-.mark b { font-family: var(--f-display); font-weight: 800; font-size: 19px; letter-spacing: .06em; text-transform: uppercase; color: var(--brass-2); }
+.mark b { font-family: var(--f-display); font-weight: 800; font-size: 20px; letter-spacing: .1em; text-transform: uppercase; background: linear-gradient(180deg, #f6e3a1, #d4af37 55%, #a98629); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .mark span { font-family: var(--f-display); font-weight: 500; font-size: 11px; color: var(--ink-3); letter-spacing: .04em; }
 .net { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); white-space: nowrap; flex: 0 0 auto; }
 .net i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); box-shadow: 0 0 0 3px rgba(122,151,139,.18); }
@@ -106,28 +109,28 @@ button { font: inherit; color: inherit; }
 .opps { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, var(--cw, 112px))); justify-content: center; gap: 6px; padding: 2px 0 6px; min-height: 0; }
 .opp {
   position: relative; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 4px 4px 5px; border-radius: 16px; background: var(--panel); border: 1px solid transparent;
+  padding: 4px 4px 5px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line-2);
   transition: border-color .2s, box-shadow .2s;
 }
-.opp.turn { border-color: var(--brass); box-shadow: 0 0 0 3px rgba(217,181,107,.18), 0 6px 18px -8px rgba(217,181,107,.6); }
+.opp.turn { border-color: var(--brass); box-shadow: 0 0 0 3px rgba(212,175,55,.16), 0 6px 18px -8px rgba(212,175,55,.6); }
 .opp.off { opacity: .55; }
 .opp.out { opacity: .7; }
 .ofan { position: relative; z-index: 1; isolation: isolate; width: 100%; height: calc(var(--ow) * 1.5); }
 .ofan .card {
   --w: var(--ow); position: absolute; left: 50%; top: calc(var(--ow) * .12); margin-left: calc(var(--ow) * -.5);
   transform-origin: 50% 210%; transform: rotate(var(--r, 0deg)); transition: transform .35s cubic-bezier(.2,.9,.3,1);
-  box-shadow: inset 0 0 0 calc(var(--w) * .045) #f6eedc, inset 0 0 0 calc(var(--w) * .06) var(--back-2), -1px 2px 4px -1px rgba(0,0,0,.55);
+  box-shadow: inset 0 0 0 calc(var(--w) * .035) #0a0a0e, inset 0 0 0 calc(var(--w) * .05) #cfd3da, inset 0 0 0 calc(var(--w) * .062) #0a0a0e, inset 0 0 0 calc(var(--w) * .072) rgba(212,175,55,.75), -1px 2px 4px -1px rgba(0,0,0,.7);
 }
 .ofan.none::after { content: ""; position: absolute; left: 50%; top: 30%; width: calc(var(--ow) * 1.1); height: calc(var(--ow) * .8); transform: translateX(-50%); border: 1.5px dashed var(--line); border-radius: 6px; }
 .avrow { position: relative; z-index: 2; margin-top: calc(var(--ow) * -.42); display: flex; justify-content: center; }
 .av {
   position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%); width: 26px; height: 26px; border-radius: 50%;
-  display: grid; place-items: center; font-weight: 700; font-size: 12px; color: #fff; background: var(--c, #555);
+  display: grid; place-items: center; font-weight: 700; font-size: 12px; font-family: var(--f-display); color: #fff; background: var(--c, #555);
   border: 2px solid var(--felt-1);
 }
 .opp .av { position: relative; left: auto; bottom: auto; transform: none; width: 32px; height: 32px; font-size: 14px; box-shadow: 0 4px 10px -4px rgba(0,0,0,.8); }
 .opp .cnt { position: absolute; left: calc(50% + 10px); top: -6px; }
-.cnt { min-width: 20px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--brass); color: var(--brass-ink); font-size: 11px; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.cnt { min-width: 20px; height: 18px; padding: 0 5px; border-radius: 9px; background: linear-gradient(180deg, #f0d77c, #d4af37); box-shadow: 0 0 0 1px rgba(0,0,0,.5); color: var(--brass-ink); font-size: 11px; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
 .opp .nm { max-width: 100%; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
 .role { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); height: 14px; display: flex; align-items: center; gap: 3px; white-space: nowrap; }
 .role.atk { color: var(--brass-2); }
@@ -137,16 +140,20 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Filz / Tisch ---------- */
 .felt {
-  position: relative; min-height: 0; border-radius: 26px;
-  background: radial-gradient(90% 70% at 50% 45%, rgba(255,255,255,.06), rgba(0,0,0,.18));
-  box-shadow: inset 0 0 0 1px var(--line), inset 0 0 60px rgba(0,0,0,.35);
+  position: relative; min-height: 0; border-radius: 22px;
+  background: radial-gradient(90% 70% at 50% 45%, rgba(255,255,255,.05), rgba(0,0,0,.4));
+  box-shadow: inset 0 0 0 1px rgba(212,175,55,.55), inset 0 0 0 4px rgba(7,7,10,.9), inset 0 0 0 5px rgba(201,205,213,.22), inset 0 0 70px rgba(0,0,0,.5), 0 20px 50px -30px rgba(0,0,0,.9);
   display: grid; grid-template-rows: auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr);
-  padding: 8px; gap: 4px; transition: box-shadow .2s;
+  padding: 10px; gap: 4px; transition: box-shadow .2s;
 }
-.felt::before { /* Malachit-Bänder, ganz leise */
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: .5;
-  background: repeating-radial-gradient(circle at 12% 110%, rgba(255,255,255,.035) 0 2px, transparent 2px 13px);
+.felt::before { /* feines Gitter wie auf Damast, ganz leise */
+  content: ""; position: absolute; inset: 6px; border-radius: 17px; pointer-events: none; opacity: .32;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='.28'%3E%3Cpath d='M10 0L20 10 10 20 0 10z'/%3E%3Cpath d='M10 5l5 5-5 5-5-5z' stroke-opacity='.16'/%3E%3C/g%3E%3Ccircle cx='10' cy='10' r='1.2' fill='%23d4af37' fill-opacity='.4'/%3E%3Ccircle cx='0' cy='0' r='1' fill='%23d4af37' fill-opacity='.3'/%3E%3Ccircle cx='20' cy='0' r='1' fill='%23d4af37' fill-opacity='.3'/%3E%3Ccircle cx='0' cy='20' r='1' fill='%23d4af37' fill-opacity='.3'/%3E%3Ccircle cx='20' cy='20' r='1' fill='%23d4af37' fill-opacity='.3'/%3E%3C/svg%3E"); background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(80% 70% at 50% 50%, #000 30%, transparent 100%); mask-image: radial-gradient(80% 70% at 50% 50%, #000 30%, transparent 100%);
 }
+.felt .orn-c { position: absolute; width: 40px; height: 40px; color: var(--brass); opacity: .8; pointer-events: none; z-index: 1; }
+.felt .orn-c.tl { left: 9px; top: 9px; } .felt .orn-c.tr { right: 9px; top: 9px; transform: scaleX(-1); }
+.felt .orn-c.bl { left: 9px; bottom: 9px; transform: scaleY(-1); } .felt .orn-c.br { right: 9px; bottom: 9px; transform: scale(-1); }
 .felt-top { position: relative; z-index: 2; display: flex; justify-content: center; min-width: 0; }
 .mid { position: relative; z-index: 1; min-height: 0; width: 100%; max-width: 820px; justify-self: center; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 6px; }
 .pile { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 0 auto; }
@@ -158,8 +165,10 @@ button { font: inherit; color: inherit; }
 .discp .stack .card { --w: var(--pw); position: absolute; left: 0; top: 0; }
 .pile .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); line-height: 1.1; text-align: center; }
 .pile .lbl b { display: block; font-family: var(--f-display); font-size: 14px; color: var(--ink); letter-spacing: 0; font-variant-numeric: tabular-nums; }
-.trump-suit { width: calc(var(--pw) * 1.05); height: calc(var(--pw) * 1.05); border-radius: 50%; display: grid; place-items: center; background: var(--card); color: var(--card-ink); box-shadow: 0 3px 10px -3px rgba(0,0,0,.6); flex: 0 0 auto; }
-.trump-suit.red { color: var(--card-red); }
+.trump-suit { width: calc(var(--pw) * 1.05); height: calc(var(--pw) * 1.05); border-radius: 50%; display: grid; place-items: center; background: var(--card); color: var(--silver-2); box-shadow: inset 0 0 0 1.5px var(--silver-3), 0 3px 10px -3px rgba(0,0,0,.6); flex: 0 0 auto; }
+.trump-suit .su { fill: url(#g-silver); }
+.trump-suit.red { color: var(--brass-2); box-shadow: inset 0 0 0 1.5px var(--brass), 0 3px 10px -3px rgba(0,0,0,.6); }
+.trump-suit.red .su { fill: url(#g-gold); }
 .trump-suit .su { width: 58%; height: 58%; }
 .empty-slot { width: var(--pw); height: calc(var(--pw) * 1.4); border-radius: 6px; border: 1.5px dashed var(--line); flex: 0 0 auto; }
 .pairs { position: relative; align-self: stretch; min-width: 0; min-height: 0; display: flex; align-items: center; justify-content: center; border-radius: 18px; transition: box-shadow .18s, background-color .18s; }
@@ -200,7 +209,7 @@ button { font: inherit; color: inherit; }
 
 .logline {
   min-width: 0; max-width: min(100%, 560px); display: flex; align-items: center; justify-content: center; text-align: center;
-  padding: 4px 12px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line-2);
+  padding: 4px 14px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); box-shadow: 0 0 0 3px rgba(7,7,10,.6);
   font-size: 12px; color: var(--ink-2); line-height: 1.3; text-wrap: balance;
 }
 .logline span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -223,16 +232,24 @@ button { font: inherit; color: inherit; }
 /* ---------- Karten: klassisches Blatt ---------- */
 .card {
   --w: 64px; width: var(--w); height: calc(var(--w) * 1.4); border-radius: calc(var(--w) * .085);
-  background: linear-gradient(165deg, var(--card-hi) 0%, var(--card) 55%, var(--card-lo) 100%);
-  color: var(--card-ink); position: relative; flex: 0 0 auto;
-  box-shadow: inset 0 0 0 1px var(--card-edge), 0 1px 0 rgba(0,0,0,.25), 0 8px 16px -8px rgba(0,0,0,.7);
+  background: linear-gradient(160deg, var(--card-hi) 0%, var(--card) 50%, var(--card-lo) 100%);
+  color: var(--silver-2); position: relative; flex: 0 0 auto;
+  box-shadow: inset 0 0 0 1px var(--card-edge), inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(201,205,213,.28), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85);
   font-family: var(--f-card); user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; overflow: hidden;
-  --robe: var(--court-blue); --robe2: var(--card-red);
+  --robe: var(--court-blue); --robe2: var(--card-red); --metal: url(#g-silver); --metal-ink: #e9ebef;
 }
-.card.red { color: var(--card-red); --robe: var(--card-red); --robe2: var(--court-blue); }
+.card::before { /* feiner Metallrahmen innen */
+  content: ""; position: absolute; inset: calc(var(--w) * .055); border-radius: calc(var(--w) * .05); pointer-events: none;
+  border: 1px solid rgba(201,205,213,.22);
+}
+.card.red { color: var(--brass-2); --robe: var(--card-red); --robe2: var(--court-blue); --metal: url(#g-gold); --metal-ink: #f0d77c; }
+.card.red::before { border-color: rgba(212,175,55,.3); }
+.card.red { box-shadow: inset 0 0 0 1px var(--card-edge), inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(212,175,55,.32), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85); }
+.card .su { fill: var(--metal); filter: drop-shadow(0 0 .5px rgba(255,255,255,.35)); }
+.card .ix { color: var(--metal-ink); text-shadow: 0 0 1px rgba(255,255,255,.25), 0 1px 1px rgba(0,0,0,.6); }
 .card .ix { position: absolute; left: 2.5%; top: 3%; width: 20%; display: flex; flex-direction: column; align-items: center; font-size: calc(var(--w) * .24); line-height: .95; letter-spacing: -.07em; }
 .card .ix .su { width: .6em; height: .6em; margin-top: .1em; }
-.card .ix u { text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .08em; }
+.card .ix u { text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .08em; text-decoration-color: currentColor; }
 .card .ix.b { left: auto; top: auto; right: 2.5%; bottom: 3%; transform: rotate(180deg); }
 .pips { position: absolute; inset: 12% 23% 12% 23%; }
 .pip { position: absolute; width: calc(var(--w) * .2); height: calc(var(--w) * .2); transform: translate(-50%, -50%); }
@@ -242,26 +259,29 @@ button { font: inherit; color: inherit; }
 .ace { position: absolute; inset: 0; display: grid; place-items: center; }
 .ace > .su { width: 40%; height: 40%; grid-area: 1 / 1; }
 .ace.orn > .su { width: 34%; height: 34%; }
-.ace .orn-svg { grid-area: 1 / 1; width: 74%; height: 74%; color: var(--card-ink); }
+.ace .orn-svg { grid-area: 1 / 1; width: 82%; height: 82%; color: var(--metal-ink); opacity: .9; }
+.ace .orn-svg .m { fill: var(--metal); }
 .court {
-  position: absolute; inset: 6% 21%; border-radius: calc(var(--w) * .03); overflow: hidden; background: var(--court-cream);
+  position: absolute; inset: 6% 21%; border-radius: calc(var(--w) * .03); overflow: hidden; background: #0b0c10;
 }
-.court::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px var(--court-blue), inset 0 0 0 2px var(--court-cream), inset 0 0 0 2.6px var(--court-gold); }
-.court .fig { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.court::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px var(--metal-ink), inset 0 0 0 2px #0b0c10, inset 0 0 0 2.6px rgba(212,175,55,.6); }
+.court .fig { position: absolute; inset: 0; width: 100%; height: 100%; display: block; filter: grayscale(1) brightness(1.18) contrast(1.12); opacity: .96; }
+.card.red .court .fig { filter: grayscale(1) sepia(1) saturate(1.7) hue-rotate(-6deg) brightness(.9) contrast(1.18); }
 .court .cp { position: absolute; left: 6%; top: 3%; width: 22%; aspect-ratio: 1; }
 .court .cp .su { width: 100%; height: 100%; }
 .court .cp.b { left: auto; top: auto; right: 6%; bottom: 3%; transform: rotate(180deg); }
 .card.back {
   background-color: var(--back);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Cg fill='none' stroke='%23f6e7cf'%3E%3Cellipse cx='50' cy='70' rx='25' ry='34' fill='%235a1120' stroke-width='2.2'/%3E%3Cellipse cx='50' cy='70' rx='19' ry='27' stroke-opacity='.55' stroke-width='1'/%3E%3Cpath d='M50 50c6 8 6 32 0 40-6-8-6-32 0-40zM34 70c8-6 24-6 32 0-8 6-24 6-32 0z' fill='%23f6e7cf' fill-opacity='.85' stroke='none'/%3E%3Ccircle cx='50' cy='70' r='3.2' fill='%238a1c2e' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='none' stroke='%23f6e7cf' stroke-opacity='.32'%3E%3Cpath d='M10 0L20 10 10 20 0 10z'/%3E%3Cpath d='M10 5l5 5-5 5-5-5z' stroke-opacity='.2'/%3E%3C/g%3E%3Ccircle cx='10' cy='10' r='1.4' fill='%23f6e7cf' fill-opacity='.45'/%3E%3Ccircle cx='0' cy='0' r='1.1' fill='%23f6e7cf' fill-opacity='.35'/%3E%3Ccircle cx='20' cy='0' r='1.1' fill='%23f6e7cf' fill-opacity='.35'/%3E%3Ccircle cx='0' cy='20' r='1.1' fill='%23f6e7cf' fill-opacity='.35'/%3E%3Ccircle cx='20' cy='20' r='1.1' fill='%23f6e7cf' fill-opacity='.35'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 50% 50%, var(--back) 0 30%, var(--back-2) 100%);
-  background-size: 100% 100%, calc(var(--w) * .2) calc(var(--w) * .2), 100% 100%;
+    url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 140%22%3E%3Cdefs%3E%3Cpath id=%22a%22 d=%22M50 70c-7-9-7-25 0-36 7 11 7 27 0 36z%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%22.8%22/%3E%3Cpath id=%22b%22 d=%22M50 70c-3.5-7-3.5-19 0-28 3.5 9 3.5 21 0 28z%22 fill=%22%23d9dce3%22 fill-opacity=%22.45%22/%3E%3Cpath id=%22c%22 d=%22M50 70c-9-14-9-34 0-50 9 16 9 36 0 50z%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%22.55%22 stroke-opacity=%22.8%22/%3E%3Cpath id=%22d%22 d=%22M50 70c-4-20 4-40 0-58%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%22.4%22 stroke-opacity=%22.6%22/%3E%3C/defs%3E%3Cg%3E%3Cuse href=%22%23c%22 transform=%22rotate(0.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(22.5 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(45.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(67.5 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(90.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(112.5 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(135.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(157.5 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(180.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(202.5 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(225.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(247.5 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(270.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(292.5 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(315.0 50 70)%22/%3E%3Cuse href=%22%23c%22 transform=%22rotate(337.5 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(0 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(15 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(30 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(45 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(60 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(75 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(90 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(105 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(120 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(135 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(150 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(165 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(180 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(195 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(210 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(225 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(240 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(255 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(270 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(285 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(300 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(315 50 70)%22/%3E%3Cuse href=%22%23a%22 transform=%22rotate(330 50 70)%22/%3E%3Cuse href=%22%23b%22 transform=%22rotate(345 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(7.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(22.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(37.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(52.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(67.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(82.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(97.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(112.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(127.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(142.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(157.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(172.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(187.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(202.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(217.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(232.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(247.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(262.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(277.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(292.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(307.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(322.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(337.5 50 70)%22/%3E%3Cuse href=%22%23d%22 transform=%22rotate(352.5 50 70)%22/%3E%3C/g%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%2244%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%220.9%22 stroke-opacity=%220.9%22/%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%2240%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%220.45%22 stroke-opacity=%220.6%22/%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%2233%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%220.6%22 stroke-opacity=%220.8%22/%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%2226%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%220.4%22 stroke-opacity=%220.6%22/%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%2218%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%220.8%22 stroke-opacity=%220.9%22/%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%2211%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%220.5%22 stroke-opacity=%220.7%22/%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%225%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%221.2%22 stroke-opacity=%221%22/%3E%3Ccircle cx=%2250%22 cy=%2270%22 r=%222.4%22 fill=%22%23d9dce3%22/%3E%3Cg transform=%22%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%22.9%22 stroke-opacity=%22.85%22%3E%3Cpath d=%22M7 20q3-10 13-13M7 20q7-1 12 4M20 7q-1 7 4 12%22/%3E%3Ccircle cx=%227%22 cy=%2220%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3Ccircle cx=%2220%22 cy=%227%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22scale(-1 1) translate(-100 0)%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%22.9%22 stroke-opacity=%22.85%22%3E%3Cpath d=%22M7 20q3-10 13-13M7 20q7-1 12 4M20 7q-1 7 4 12%22/%3E%3Ccircle cx=%227%22 cy=%2220%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3Ccircle cx=%2220%22 cy=%227%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22scale(1 -1) translate(0 -140)%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%22.9%22 stroke-opacity=%22.85%22%3E%3Cpath d=%22M7 20q3-10 13-13M7 20q7-1 12 4M20 7q-1 7 4 12%22/%3E%3Ccircle cx=%227%22 cy=%2220%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3Ccircle cx=%2220%22 cy=%227%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22scale(-1 -1) translate(-100 -140)%22 fill=%22none%22 stroke=%22%23d9dce3%22 stroke-width=%22.9%22 stroke-opacity=%22.85%22%3E%3Cpath d=%22M7 20q3-10 13-13M7 20q7-1 12 4M20 7q-1 7 4 12%22/%3E%3Ccircle cx=%227%22 cy=%2220%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3Ccircle cx=%2220%22 cy=%227%22 r=%221.4%22 fill=%22%23d9dce3%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='none' stroke='%23cfd3da' stroke-opacity='.28'%3E%3Cpath d='M10 0L20 10 10 20 0 10z'/%3E%3Cpath d='M10 5l5 5-5 5-5-5z' stroke-opacity='.16'/%3E%3C/g%3E%3Ccircle cx='10' cy='10' r='1.2' fill='%23cfd3da' fill-opacity='.4'/%3E%3Ccircle cx='0' cy='0' r='1' fill='%23cfd3da' fill-opacity='.3'/%3E%3Ccircle cx='20' cy='0' r='1' fill='%23cfd3da' fill-opacity='.3'/%3E%3Ccircle cx='0' cy='20' r='1' fill='%23cfd3da' fill-opacity='.3'/%3E%3Ccircle cx='20' cy='20' r='1' fill='%23cfd3da' fill-opacity='.3'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 50% 50%, #1a1b21 0 30%, var(--back-2) 100%);
+  background-size: 100% 100%, calc(var(--w) * .16) calc(var(--w) * .16), 100% 100%;
   background-position: center, center, center;
   background-repeat: no-repeat, repeat, no-repeat;
-  box-shadow: inset 0 0 0 calc(var(--w) * .05) #f6eedc, inset 0 0 0 calc(var(--w) * .065) var(--back-2), inset 0 0 0 calc(var(--w) * .075) rgba(246,231,207,.55), 0 1px 0 rgba(0,0,0,.3), 0 8px 16px -8px rgba(0,0,0,.7);
+  box-shadow: inset 0 0 0 calc(var(--w) * .035) #0a0a0e, inset 0 0 0 calc(var(--w) * .05) #cfd3da, inset 0 0 0 calc(var(--w) * .062) #0a0a0e, inset 0 0 0 calc(var(--w) * .072) rgba(212,175,55,.75), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85);
 }
+.card.back::before { display: none; }
 
 /* ---------- Aktionsleiste ---------- */
 .bar { position: relative; display: flex; align-items: center; gap: 8px; min-height: 52px; padding: 6px 0; flex-wrap: wrap; }
@@ -269,7 +289,7 @@ button { font: inherit; color: inherit; }
 .bar .say b { color: var(--ink); font-weight: 600; }
 .bar .btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .me-av {
-  appearance: none; position: relative; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; padding: 0;
+  appearance: none; position: relative; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; padding: 0; font-family: var(--f-display);
   display: grid; place-items: center; font-weight: 700; font-size: 15px; color: #fff; background: var(--c, #555);
   border: 2px solid var(--felt-1); box-shadow: 0 0 0 1.5px var(--line), 0 6px 14px -6px rgba(0,0,0,.8);
 }
@@ -278,9 +298,9 @@ button { font: inherit; color: inherit; }
 .btn {
   appearance: none; cursor: pointer; border: 0; border-radius: 12px; height: 40px; padding: 0 16px;
   font-weight: 700; font-size: 14px; letter-spacing: .01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
-  background: var(--brass); color: var(--brass-ink); box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 6px 16px -8px rgba(217,181,107,.7);
+  background: linear-gradient(180deg, #f3dc8c 0%, #d4af37 55%, #b3902c 100%); color: var(--brass-ink); box-shadow: 0 1px 0 rgba(255,255,255,.45) inset, 0 -1px 0 rgba(0,0,0,.2) inset, 0 6px 16px -8px rgba(212,175,55,.8);
 }
-.btn:hover { background: var(--brass-2); }
+.btn:hover { background: linear-gradient(180deg, #f8e6a4 0%, #e0bd48 55%, #bf9a33 100%); }
 .btn.ghost { background: var(--panel); color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
 .btn.ghost:hover { border-color: var(--brass); }
 .btn.alarm { background: transparent; color: var(--alarm); border: 1.5px solid var(--alarm); box-shadow: none; }
@@ -347,8 +367,8 @@ button { font: inherit; color: inherit; }
 .emo-tray button:active { transform: scale(.9); }
 @keyframes tray { from { opacity: 0; scale: .6; translate: 0 10px; } }
 .emo-pop { position: absolute; width: 54px; height: 54px; margin: -27px 0 0 -27px; display: grid; place-items: center; font-size: 30px; line-height: 1; animation: emo 2.8s cubic-bezier(.2,1.2,.4,1) forwards; }
-.emo-pop::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #fbf7ee; box-shadow: 0 10px 22px -8px rgba(0,0,0,.8); z-index: -1; }
-.emo-pop::after { content: ""; position: absolute; width: 12px; height: 12px; background: #fbf7ee; border-radius: 2px; transform: rotate(45deg); z-index: -1; }
+.emo-pop::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #f3e9cf; border: 1.5px solid var(--brass); box-shadow: 0 10px 22px -8px rgba(0,0,0,.8); z-index: -1; }
+.emo-pop::after { content: ""; position: absolute; width: 12px; height: 12px; background: #f3e9cf; border-radius: 2px; transform: rotate(45deg); z-index: -1; }
 .emo-pop.r::after { left: -3px; bottom: 9px; }
 .emo-pop.u::after { left: 50%; bottom: -4px; margin-left: -6px; }
 @keyframes emo {
@@ -361,11 +381,49 @@ button { font: inherit; color: inherit; }
   100% { transform: translateY(-24px) scale(.85); opacity: 0; }
 }
 
+/* ---------- Kommentator ---------- */
+.critic { position: fixed; z-index: 45; right: max(10px, env(safe-area-inset-right, 0px)); top: 38%; width: min(78vw, 330px); display: flex; align-items: flex-end; gap: 8px; pointer-events: auto; cursor: pointer; animation: critIn .5s cubic-bezier(.2,1.3,.4,1) both; }
+.critic.out { animation: critOut .35s ease-in both; }
+.critic .cav { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 25px; background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); border: 1.5px solid var(--brass); box-shadow: 0 8px 18px -8px rgba(0,0,0,.9); order: 2; }
+.critic .cbub { position: relative; min-width: 0; padding: 9px 12px 10px; border-radius: 16px 16px 4px 16px; background: linear-gradient(160deg, #1d1e25, #101116); border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 18px 36px -14px rgba(0,0,0,.9); }
+.critic .cbub b { display: block; font-family: var(--f-display); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brass-2); margin-bottom: 3px; }
+.critic .cbub p { margin: 0; font-size: 13.5px; line-height: 1.35; color: var(--ink); text-wrap: pretty; }
+.critic.mock .cbub { border-color: var(--silver-3); }
+.critic.mock .cbub b { color: var(--silver); }
+.critic.mock .cav { border-color: var(--silver-3); }
+@keyframes critIn { from { transform: translateX(110%) rotate(3deg); opacity: 0; } }
+@keyframes critOut { to { transform: translateX(110%); opacity: 0; } }
+
+/* ---------- Chat ---------- */
+.chat-fab { position: fixed; z-index: 44; right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--brass); background: radial-gradient(circle at 35% 30%, #2a2b33, #0f1014); color: var(--brass-2); display: grid; place-items: center; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); appearance: none; padding: 0; }
+.chat-fab .su { width: 22px; height: 22px; fill: none; }
+.chat-fab .badge { position: absolute; right: -4px; top: -4px; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--alarm); color: #fff; font: 700 11px/20px var(--f-ui); text-align: center; box-shadow: 0 0 0 2px var(--felt-0); }
+.chat-fab[hidden] { display: none; }
+.chat-peek { position: fixed; z-index: 44; right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 70px); max-width: min(72vw, 300px); padding: 7px 11px; border-radius: 14px 14px 4px 14px; background: var(--panel-2); border: 1px solid var(--line); font-size: 13px; color: var(--ink); box-shadow: 0 10px 24px -10px rgba(0,0,0,.9); animation: pop2 .25s ease-out; cursor: pointer; }
+.chat-peek b { color: var(--brass-2); font-weight: 600; }
+.chat-peek span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.chat { position: fixed; z-index: 46; right: max(10px, env(safe-area-inset-right, 0px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); width: min(100vw - 20px, 360px); height: min(62vh, 440px); display: flex; flex-direction: column; border-radius: 18px; background: #121318; border: 1px solid var(--brass); box-shadow: 0 0 0 3px rgba(7,7,10,.6), 0 24px 60px -20px rgba(0,0,0,.95); animation: chatIn .25s cubic-bezier(.2,1.2,.4,1); overflow: hidden; }
+@keyframes chatIn { from { transform: translateY(16px) scale(.96); opacity: 0; } }
+.chat-head { display: flex; align-items: center; gap: 8px; padding: 10px 10px 8px 14px; border-bottom: 1px solid var(--line-2); }
+.chat-head h2 { margin: 0; flex: 1; font-family: var(--f-display); font-size: 14px; letter-spacing: .08em; color: var(--brass-2); }
+.chat-head small { color: var(--ink-3); font-size: 11px; }
+.chat-list { flex: 1; min-height: 0; overflow-y: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; overscroll-behavior: contain; }
+.chat-empty { margin: auto; text-align: center; color: var(--ink-3); font-size: 13px; max-width: 24ch; }
+.msg { max-width: 86%; align-self: flex-start; padding: 6px 10px 7px; border-radius: 14px 14px 14px 4px; background: rgba(255,255,255,.06); border: 1px solid var(--line-2); font-size: 13.5px; line-height: 1.35; overflow-wrap: anywhere; }
+.msg b { display: block; font-size: 11px; font-weight: 600; color: var(--brass-2); margin-bottom: 1px; }
+.msg.me { align-self: flex-end; border-radius: 14px 14px 4px 14px; background: rgba(212,175,55,.14); border-color: rgba(212,175,55,.35); }
+.msg.me b { display: none; }
+.msg.sys { align-self: center; background: transparent; border: 0; color: var(--ink-3); font-size: 12px; }
+.chat-form { display: flex; gap: 6px; padding: 8px; border-top: 1px solid var(--line-2); }
+.chat-form input { flex: 1; min-width: 0; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: rgba(0,0,0,.35); color: var(--ink); padding: 0 12px; font: inherit; font-size: 15px; }
+.chat-form .btn { height: 40px; padding: 0 14px; }
+@media (max-width: 440px) { .chat { right: 0; left: 0; width: auto; bottom: 0; border-radius: 18px 18px 0 0; height: min(60vh, 420px); border-bottom: 0; } .chat-form { padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); } }
+
 /* ---------- Lobby ---------- */
 .lobby { min-height: 0; overflow-y: auto; display: grid; gap: 12px; align-content: start; padding: 4px 0 12px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 820px) { .lobby { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; } .lobby .hero { grid-column: 1 / -1; } }
 .hero { padding: 10px 2px 2px; }
-.hero h1 { margin: 0; font-family: var(--f-display); font-weight: 800; font-size: clamp(28px, 8.4vw, 52px); letter-spacing: -.01em; line-height: 1.02; color: var(--brass-2); text-wrap: balance; }
+.hero h1 { margin: 0; font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 7.6vw, 48px); letter-spacing: .01em; line-height: 1.08; background: linear-gradient(180deg, #f6e3a1, #d4af37 60%, #a98629); -webkit-background-clip: text; background-clip: text; color: transparent; text-wrap: balance; }
 .hero h1 small { display: block; margin-top: 6px; font-weight: 500; font-size: 12px; letter-spacing: .14em; color: var(--ink-3); }
 .hero p { margin: 10px 0 0; color: var(--ink-2); max-width: 52ch; text-wrap: pretty; }
 .panel { background: var(--panel); border: 1px solid var(--line-2); border-radius: 18px; padding: 14px; min-width: 0; }
@@ -416,10 +474,10 @@ button { font: inherit; color: inherit; }
 .over-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
 /* ---------- Toast, Blatt (Regeln/Menü) ---------- */
-.toast { position: fixed; z-index: 50; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 170px); transform: translateX(-50%); max-width: min(92%, 420px); padding: 9px 14px; border-radius: 12px; background: #f6efe0; color: #1e1a12; font-weight: 600; font-size: 13px; box-shadow: 0 12px 30px -10px rgba(0,0,0,.7); animation: pop2 .25s ease-out; text-align: center; }
+.toast { position: fixed; z-index: 50; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 170px); transform: translateX(-50%); max-width: min(92%, 420px); padding: 9px 14px; border-radius: 12px; background: #f3e9cf; color: #1e1a12; border: 1px solid var(--brass); font-weight: 600; font-size: 13px; box-shadow: 0 12px 30px -10px rgba(0,0,0,.7); animation: pop2 .25s ease-out; text-align: center; }
 @keyframes pop2 { from { transform: translate(-50%, 8px); opacity: 0; } }
 .sheet-bg { position: fixed; inset: 0; z-index: 20; background: rgba(2, 10, 8, .62); display: flex; align-items: flex-end; justify-content: center; animation: fade .2s; }
-.sheet { width: min(100%, 640px); max-height: 86%; overflow-y: auto; background: #0b2b23; border: 1px solid var(--line); border-bottom: 0; border-radius: 22px 22px 0 0; padding: 18px max(18px, env(safe-area-inset-right, 0px)) calc(22px + env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px)); }
+.sheet { width: min(100%, 640px); max-height: 86%; overflow-y: auto; background: #121318; border: 1px solid var(--line); border-bottom: 0; border-radius: 22px 22px 0 0; padding: 18px max(18px, env(safe-area-inset-right, 0px)) calc(22px + env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px)); }
 .sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
 .sheet h2 { margin: 0; font-family: var(--f-display); font-size: 20px; color: var(--brass-2); }
 .sheet h3 { margin: 18px 0 6px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
@@ -533,9 +591,15 @@ button { font: inherit; color: inherit; }
   <symbol id="ct-K" viewBox="0 0 100 212"><g clip-path="url(#ct-clip)"><use href="#fig-K"/></g><g transform="rotate(180 50 106)"><g clip-path="url(#ct-clip)"><use href="#fig-K"/></g></g><path d="M0 116L100 96" stroke="#23508e" stroke-width="1.6"/></symbol>
   <symbol id="ct-Q" viewBox="0 0 100 212"><g clip-path="url(#ct-clip)"><use href="#fig-Q"/></g><g transform="rotate(180 50 106)"><g clip-path="url(#ct-clip)"><use href="#fig-Q"/></g></g><path d="M0 116L100 96" stroke="#23508e" stroke-width="1.6"/></symbol>
   <symbol id="ct-J" viewBox="0 0 100 212"><g clip-path="url(#ct-clip)"><use href="#fig-J"/></g><g transform="rotate(180 50 106)"><g clip-path="url(#ct-clip)"><use href="#fig-J"/></g></g><path d="M0 116L100 96" stroke="#23508e" stroke-width="1.6"/></symbol>
+  <linearGradient id="g-silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#b9bdc6"/><stop offset=".5" stop-color="#f4f5f8"/><stop offset=".72" stop-color="#9ea2ab"/><stop offset="1" stop-color="#e3e5ea"/></linearGradient>
+  <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c4"/><stop offset=".3" stop-color="#d4af37"/><stop offset=".5" stop-color="#fbe9a6"/><stop offset=".72" stop-color="#b08d2a"/><stop offset="1" stop-color="#f0d77c"/></linearGradient>
+  <symbol id="flourish" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2 38V11q0-9 9-9h27"/><path d="M6.5 38V14q0-7.5 7.5-7.5h24" stroke-opacity=".55" stroke-width=".9"/><path d="M11 11q8 0 8 8q0-8 8-8" stroke-opacity=".9"/><circle cx="19" cy="19" r="1.5" fill="currentColor" stroke="none"/><path d="M11 11l-3-3M11 11l3-3M11 11l-3 3" stroke-opacity=".5" stroke-width=".9"/></g></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 8h8M8 11.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
   <symbol id="orn" viewBox="0 0 100 100">
-    <g fill="none" stroke="currentColor"><circle cx="50" cy="50" r="46" stroke-width="1.3"/><circle cx="50" cy="50" r="41.5" stroke-width=".7" stroke-dasharray="1.5 3"/><path d="M21 21q9 2 11 11M79 21q-9 2-11 11M21 79q9-2 11-11M79 79q-9-2-11-11" stroke-width="1.3" stroke-linecap="round"/></g>
-    <path d="M50 1l3.5 6h-7zM50 99l3.5-6h-7zM1 50l6 3.5v-7zM99 50l-6 3.5v-7z" fill="currentColor"/>
+    <defs><path id="mp" d="M50 50c-6-8-6-24 0-36 6 12 6 28 0 36z" fill="none" stroke="currentColor" stroke-width=".8" stroke-opacity=".9"/><path id="mq" d="M50 50c-3-10-3-30 0-46 3 16 3 36 0 46z" fill="none" stroke="currentColor" stroke-width=".45" stroke-opacity=".55"/></defs>
+    <g fill="none" stroke="currentColor"><circle cx="50" cy="50" r="48" stroke-width="1.1"/><circle cx="50" cy="50" r="44.5" stroke-width=".5" stroke-dasharray="1.2 2.6"/><circle cx="50" cy="50" r="27" stroke-width=".6" stroke-opacity=".7"/><circle cx="50" cy="50" r="22" stroke-width="1" class="m"/></g>
+    <use href="#mp" transform="rotate(0 50 50)"/><use href="#mp" transform="rotate(30 50 50)"/><use href="#mp" transform="rotate(60 50 50)"/><use href="#mp" transform="rotate(90 50 50)"/><use href="#mp" transform="rotate(120 50 50)"/><use href="#mp" transform="rotate(150 50 50)"/><use href="#mp" transform="rotate(180 50 50)"/><use href="#mp" transform="rotate(210 50 50)"/><use href="#mp" transform="rotate(240 50 50)"/><use href="#mp" transform="rotate(270 50 50)"/><use href="#mp" transform="rotate(300 50 50)"/><use href="#mp" transform="rotate(330 50 50)"/><use href="#mq" transform="rotate(11.25 50 50)"/><use href="#mq" transform="rotate(33.75 50 50)"/><use href="#mq" transform="rotate(56.25 50 50)"/><use href="#mq" transform="rotate(78.75 50 50)"/><use href="#mq" transform="rotate(101.25 50 50)"/><use href="#mq" transform="rotate(123.75 50 50)"/><use href="#mq" transform="rotate(146.25 50 50)"/><use href="#mq" transform="rotate(168.75 50 50)"/><use href="#mq" transform="rotate(191.25 50 50)"/><use href="#mq" transform="rotate(213.75 50 50)"/><use href="#mq" transform="rotate(236.25 50 50)"/><use href="#mq" transform="rotate(258.75 50 50)"/><use href="#mq" transform="rotate(281.25 50 50)"/><use href="#mq" transform="rotate(303.75 50 50)"/><use href="#mq" transform="rotate(326.25 50 50)"/><use href="#mq" transform="rotate(348.75 50 50)"/>
+    <path d="M50 .5l3 5.5h-6zM50 99.5l3-5.5h-6zM.5 50l5.5 3v-6zM99.5 50l-5.5 3v-6z" class="m"/>
   </symbol>
   <symbol id="su-h" viewBox="0 0 100 100"><path d="M50 91C21 69 5 53 5 33 5 18 16 8 29 8c9 0 17 5 21 14 4-9 12-14 21-14 13 0 24 10 24 25 0 20-16 36-45 58z"/></symbol>
   <symbol id="su-d" viewBox="0 0 100 100"><path d="M50 3c11 18 24 33 40 47-16 14-29 29-40 47C39 79 26 64 10 50 26 36 39 21 50 3z"/></symbol>
@@ -1170,6 +1234,7 @@ const E = (() => {
   const EMOS = ["😡", "😂", "🤡", "😏", "🥱"];
   const EMO_NAMES = ["Wütend", "Lachen", "Clown", "Grinsen", "Gähnen"];
   let myEm = [], lastEmAt = 0;
+  let myCh = [], chat = { msgs: [], open: false, unread: 0, seen: new Map() };
   const seenEm = new Map();
   const botEmAt = new Map();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -1213,6 +1278,7 @@ const E = (() => {
       kv: lastSt ? [lastSt.ep || 0, lastSt.v || 0] : [0, 0],
       st: hosting && st ? E.clone(st) : null,
       em: myEm,
+      ch: myCh,
     };
     room.presence(p).catch((e) => console.warn("presence", e && e.code, e && e.message));
   }
@@ -1284,6 +1350,7 @@ const E = (() => {
         if (l.x === "caught") { if (l.c) ui.caught.add(l.c); ui.flash = true; sfx.play("caught", 0); }
         else sfx.play("false", 0);
       }
+      if (l.i > ui.lastLog) { try { judgeEvent(l, me); } catch (e) { console.warn("Kommentator", e); } }
     }
     ui.lastLog = Math.max(ui.lastLog, top);
     if (!st.tb.length || !st.cfg.cheat) ui.accuse = false;
@@ -1532,6 +1599,7 @@ const E = (() => {
     const me = myIdx();
     if (me < 0 || !st) return;
     ui.sel = null; ui.accuse = false; ui.arm = null;
+    try { judgeMove(a); } catch (e) { console.warn("Kommentator", e); }
     if (hosting) {
       const err = E.act(st, me, a);
       if (err) toast(err);
@@ -1796,9 +1864,7 @@ const E = (() => {
     const lab = E.rankLabel(r);
     let mid;
     if (PIPS[r]) mid = `<div class="pips${r === "9" || r === "T" ? " dense" : ""}">${PIPS[r].map(([x, y, f]) => `<span class="pip${f ? " f" : ""}" style="left:${x}%;top:${y}%">${suitSvg(s)}</span>`).join("")}</div>`;
-    else if (r === "A") mid = s === "s"
-      ? `<div class="ace orn"><svg class="orn-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn" width="100" height="100"></use></svg>${suitSvg(s)}</div>`
-      : `<div class="ace">${suitSvg(s)}</div>`;
+    else if (r === "A") mid = `<div class="ace orn"><svg class="orn-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#orn" width="100" height="100"></use></svg>${suitSvg(s)}</div>`;
     else mid = `<div class="court"><svg class="fig" viewBox="0 0 100 212" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#ct-${r}" width="100" height="212"></use></svg><span class="cp">${suitSvg(s)}</span><span class="cp b">${suitSvg(s)}</span></div>`;
     const red = s === "h" || s === "d";
     const lx = r === "6" || r === "9" ? `<u>${lab}</u>` : lab;
@@ -1858,6 +1924,7 @@ const E = (() => {
   app.addEventListener("focusout", () => setTimeout(flushPending, 0));
   function render() {
     renderToast();
+    try { renderChat(); } catch (e) { console.warn("Chat", e); }
     if (typing() || pressing) { renderPending = true; return; }
     renderPending = false;
     if (!st) {
@@ -2064,7 +2131,8 @@ const E = (() => {
     const logline = last ? `<div class="logline ${last.x === "caught" || last.x === "false" ? last.x : ""}" aria-live="polite"><span>${esc(last.m)}</span></div>` : "";
     const banner = ui.banner ? `<div class="banner ${ui.banner.x}"><h3>${ui.banner.x === "caught" ? "Erwischt!" : "Fehlalarm!"}</h3><p>${esc(ui.banner.m.replace(/^(Erwischt|Fehlalarm)! /, ""))}</p></div>` : "";
     const over = st.ph === "over" ? overHtml() : "";
-    return `<div class="felt"><div class="felt-top">${logline || '<div class="logline" style="visibility:hidden">·</div>'}</div><div class="mid"><div class="pile deckp">${deck}</div><div class="pairs"><div class="pairs-in">${pairs}</div></div><div class="pile discp">${disc}</div></div>${banner}${over}</div>`;
+    const corners = ["tl", "tr", "bl", "br"].map((k) => `<svg class="orn-c ${k}" viewBox="0 0 40 40" aria-hidden="true"><use href="#flourish" width="40" height="40"></use></svg>`).join("");
+    return `<div class="felt">${corners}<div class="felt-top">${logline || '<div class="logline" style="visibility:hidden">·</div>'}</div><div class="mid"><div class="pile deckp">${deck}</div><div class="pairs"><div class="pairs-in">${pairs}</div></div><div class="pile discp">${disc}</div></div>${banner}${over}</div>`;
   }
 
   function overHtml() {
@@ -2175,6 +2243,235 @@ const E = (() => {
   }
 
   // ===================================================================
+  // Kommentator: Baron Zuschauski lobt und lästert
+  // ===================================================================
+  const CRITIC = { name: "Baron Zuschauski", face: "🧐" };
+  const PRAISE = [
+    "Exzellenter Zug! Der Adel verneigt sich vor Eurer Genialität.",
+    "Majestätisch. Man sollte diesen Zug in Marmor meißeln.",
+    "Die Großmeister von Sankt Petersburg verneigen sich. Alle. Gleichzeitig.",
+    "Pure Eleganz. Selbst die Karten applaudieren leise.",
+    "So spielt nur, wer von den Göttern persönlich unterrichtet wurde.",
+    "Chapeau! Ich fordere einen eigenen Feiertag für diesen Zug.",
+    "Brillant. Ich habe Gänsehaut, und ich besitze nicht einmal Haut.",
+    "Ein Zug von solcher Schönheit, dass die Zarenfamilie Beifall klatschen würde.",
+    "Genial. Schreibt das jemand mit? Für die Nachwelt?",
+    "Ein Zug wie aus dem Lehrbuch. Das Lehrbuch hat Tränen in den Augen.",
+    "Ich bin sprachlos. Und das will bei mir etwas heißen.",
+    "Das war kein Zug, das war ein Kunstwerk. Das Museum ruft bereits an.",
+  ];
+  const MOCK = [
+    "Äh. Das war… eine Entscheidung.",
+    "Ich habe schon Hühner klügere Karten legen sehen. Charmant, aber mutig.",
+    "Mutig. Falsch, aber mutig.",
+    "Das war so kühn, dass sogar der Stapel kurz weggeschaut hat.",
+    "Die Karten haben sich das nicht ausgesucht. Die können nichts dafür.",
+    "Ich sage nichts. Ich schaue nur sehr, sehr lange.",
+    "Ein Zug, der im Lehrbuch unter „Bitte nicht“ steht.",
+    "Strategisch interessant. So wie ein Regenschirm bei Windstille.",
+    "Ich habe das meinem Monokel gezeigt. Es ist beschlagen.",
+    "Das war entweder Genie oder das Gegenteil. Ich tippe auf das Gegenteil.",
+    "Wenn das ein Plan war, dann ein sehr geheimer. Selbst vor Euch.",
+  ];
+  const SPECIAL = {
+    cheapest: ["Mit der kleinsten Karte gestochen. Sparsam wie ein schwäbischer Großfürst.", "Knapp, präzise, gnadenlos. Ein Florett-Stich, kein Keulenschlag."],
+    trumpWaste: ["Ein Trumpf auf so eine Karte? Der Trumpf weint. Ich weine mit.", "Mit Kanonen auf Spatzen. Teure Kanonen."],
+    bigTrump: ["Ein hoher Trumpf, so früh im Spiel. Großzügig wie ein Erbe am ersten Tag.", "Den hohen Trumpf jetzt schon? Der hätte später Könige gestürzt."],
+    aceEarly: ["Ein Ass, einfach so verschenkt. Die Diener weinen in der Küche.", "Ass zum Anfang. Mutig. Der Gegner sagt Danke."],
+    trumpOpen: ["Mit Trumpf eröffnen, obwohl die Hand voller Alternativen ist. Interessant. Sehr interessant.", "Trumpf zum Angriff? Man verschießt kein Silber auf Spatzen."],
+    pair: ["Ein Pärchen in der Hand, das kleine zuerst. Durchdacht wie ein Schachzug.", "Mit System angegriffen. Da bebt der Verteidiger."],
+    low: ["Mit der kleinen Karte angreifen und die großen hüten. Klassisch, elegant, klug.", "Bescheiden eröffnet, später wird geerntet. Eine Lehrstunde."],
+    pressure: ["Nachgelegt, bis die Hand des Gegners zittert. Herrlich grausam.", "Eine Karte mehr, und die Festung bröckelt. Ihr spürt Schwäche."],
+    pile: ["Noch eine obendrauf. Der Gegner nimmt alles, Ihr gebt nur das Schlechteste. Teuflisch.", "Nachgeworfen wie Konfetti. Nur dass der andere es aufheben muss."],
+    takeWeak: ["Aufgenommen, obwohl Ihr stechen konntet? Großzügig. Sehr großzügig.", "Die Karte zum Stechen lag in Eurer Hand. Sie hat gewinkt. Ihr habt weggeschaut."],
+    xfer: ["Weitergeschoben! Das Problem gehört jetzt jemand anderem. Das nenne ich Adel.", "Elegant abgewälzt. Die Diplomatie wäre stolz auf Euch."],
+    bito: ["Bito! Nichts kam durch. Eine Festung aus Karten, mit Zinnen aus Trumpf.", "Alles abgewehrt. Der Angreifer geht nach Hause und weint in sein Kissen."],
+    took: ["Alles aufgenommen. Die Hand wird schwer, das Herz auch.", "Da kam ein ganzer Stapel. Aber gut, mehr Karten, mehr Möglichkeiten. Theoretisch."],
+    cheat: ["Das hat doch keiner gesehen… oder? Ich jedenfalls habe nichts gesehen. Nichts.", "Hust. Ich bin gerade sehr beschäftigt mit meinem Monokel."],
+    gotCaught: ["Erwischt! Das Pokerface braucht noch Übung. Viel Übung.", "Beim Schummeln ertappt. Der Hof tuschelt. Der Hof tuschelt laut."],
+    caughtOther: ["Erwischt! Ein Auge wie ein Falke mit Monokel.", "Entlarvt! Der Schwindel fliegt auf, und Ihr habt ihn aufgespürt. Bravo!"],
+    falseAlarm: ["Fehlalarm. Der Falke hatte offenbar das Monokel verlegt.", "Jemanden zu Unrecht beschuldigt. Peinlich. Für Euch. Sehr."],
+    out: ["Als Erster raus! Der Hof erhebt sich, Fanfaren erklingen, Tauben steigen auf.", "Keine Karten mehr! Ein Triumph, den man den Enkeln erzählt."],
+    durak: ["Durak! Aber ein Durak mit Stil. Zumindest das.", "Der Letzte mit Karten. Das Monokel fällt. Ich sage nichts mehr."],
+  };
+  let critEl = null, critT = 0, critT2 = 0, lastCrit = "", lastCritAt = 0;
+  const pick = (arr) => { let t = arr[Math.floor(rnd() * arr.length)]; if (arr.length > 1 && t === lastCrit) t = arr[(arr.indexOf(t) + 1) % arr.length]; lastCrit = t; return t; };
+  function critic(kind, key, chance) {
+    if (chance != null && rnd() > chance) return;
+    const now = Date.now();
+    if (now - lastCritAt < 5000 && !key) return;
+    lastCritAt = now;
+    const text = key && SPECIAL[key] ? pick(SPECIAL[key]) : pick(kind === "good" ? PRAISE : MOCK);
+    showCritic(kind, text);
+  }
+  function showCritic(kind, text) {
+    hideCritic(true);
+    const el = document.createElement("div");
+    el.className = "critic " + (kind === "good" ? "praise" : "mock");
+    el.setAttribute("role", "status");
+    el.innerHTML = `<div class="cbub"><b>${CRITIC.name}</b><p></p></div><div class="cav" aria-hidden="true">${CRITIC.face}</div>`;
+    el.querySelector("p").textContent = text;
+    el.addEventListener("click", () => hideCritic(false));
+    // Unter der Meldungszeile auf dem Tisch, damit die Karten frei bleiben
+    const ft = app.querySelector(".felt .felt-top");
+    if (ft) { const r = ft.getBoundingClientRect(); el.style.top = Math.round(r.bottom + 8) + "px"; }
+    document.body.appendChild(el);
+    critEl = el;
+    sfx.play(kind === "good" ? "fanfare" : "tsk", 120);
+    clearTimeout(critT);
+    critT = setTimeout(() => hideCritic(false), 5200);
+  }
+  function hideCritic(now) {
+    clearTimeout(critT); clearTimeout(critT2);
+    const el = critEl;
+    critEl = null;
+    if (!el) return;
+    if (now || reduceMotion) { el.remove(); return; }
+    el.classList.add("out");
+    critT2 = setTimeout(() => el.remove(), 380);
+  }
+  // Zug bewerten, bevor er ausgeführt wird (st ist noch der Stand davor)
+  function judgeMove(a) {
+    const me = myIdx();
+    if (me < 0 || !st || st.ph !== "play") return;
+    const P = st.pl[me], ts = st.ts, talon = st.tal.length, rv = E.rv;
+    const isT = (c) => c[1] === ts;
+    const val = (c) => rv(c) + (isT(c) ? 13 : 0);
+    if (a.t === "b") {
+      const pr = st.tb.find((p) => p.a === a.a && !p.d);
+      if (!pr) return;
+      const c = a.c;
+      if (!E.beats(pr.a, c, ts)) { critic("bad", "cheat"); return; }
+      const opts = P.h.filter((x) => E.beats(pr.a, x, ts)).sort((x, y) => val(x) - val(y));
+      const cheapest = opts[0];
+      if (isT(c) && !isT(pr.a) && opts.some((x) => !isT(x))) { critic("bad", "trumpWaste"); return; }
+      if (isT(c) && rv(c) >= 11 && talon > 8 && cheapest !== c) { critic("bad", "bigTrump"); return; }
+      if (c === cheapest && val(c) - val(pr.a) <= 2 && rnd() < 0.6) { critic("good", "cheapest"); return; }
+      if (c === cheapest) { critic("good", null, 0.4); return; }
+      if (val(c) - val(cheapest) >= 4) { critic("bad", null, 0.7); return; }
+      return;
+    }
+    if (a.t === "p") {
+      const c = a.c;
+      if (st.tb.length && !E.legalThrow(st, c)) { critic("bad", "cheat"); return; }
+      const nonT = P.h.filter((x) => !isT(x));
+      if (!st.tb.length) {
+        if (isT(c) && nonT.length && talon > 0) { critic("bad", "trumpOpen"); return; }
+        if (!isT(c) && rv(c) === 12 && talon > 6) { critic("bad", "aceEarly"); return; }
+        if (P.h.filter((x) => x[0] === c[0]).length >= 2 && rv(c) <= 9) { critic("good", "pair", 0.75); return; }
+        if (!isT(c) && rv(c) <= 7) { critic("good", "low", 0.45); return; }
+        return;
+      }
+      const D = st.pl[st.def];
+      if (isT(c) && talon > 6 && !st.tk) { critic("bad", "trumpWaste", 0.8); return; }
+      if (st.tk) { critic("good", "pile", 0.6); return; }
+      if (D && D.h.length - E.unbeaten(st) <= 1) { critic("good", "pressure", 0.7); return; }
+      if (!isT(c) && rv(c) <= 8) { critic("good", null, 0.3); return; }
+      return;
+    }
+    if (a.t === "k") {
+      const open = st.tb.filter((p) => !p.d).map((p) => p.a);
+      const couldAll = open.length && open.every((x) => P.h.some((h) => E.beats(x, h, ts)));
+      if (couldAll && open.length === 1) critic("bad", "takeWeak");
+      return;
+    }
+    if (a.t === "x") critic("good", "xfer", 0.8);
+    if (a.t === "c") ui.accusedAt = st.li;
+  }
+  // Ereignisse aus dem Spielverlauf bewerten
+  function judgeEvent(l, me) {
+    if (me < 0) return;
+    const P = st.pl[me];
+    if (l.x === "bito" && ui.prevInfo && ui.prevInfo.def === me) critic("good", "bito");
+    else if (l.x === "caught") {
+      if (l.c && P.h.includes(l.c)) critic("bad", "gotCaught");
+      else if (ui.accusedAt != null && l.i > ui.accusedAt) { critic("good", "caughtOther"); ui.accusedAt = null; }
+    } else if (l.x === "false" && l.m.startsWith("Fehlalarm! " + P.n + " ")) { critic("bad", "falseAlarm"); ui.accusedAt = null; }
+    else if (l.x === "out" && l.m.startsWith(P.n + " ") && P.o === 1) critic("good", "out");
+    else if (l.x === "durak" && st.res && st.res.dur === me) critic("bad", "durak");
+    else if (l.x === "" && ui.prevInfo && ui.prevInfo.def === me && /^.+ nimmt auf\./.test(l.m) && l.m.startsWith(P.n + " ")) { /* eigenes Aufnehmen wird schon beim Zug bewertet */ }
+  }
+
+  // ===================================================================
+  // Chat: Nachrichten laufen über die Anwesenheit mit, wie die Emojis
+  // ===================================================================
+  const chatLayer = document.createElement("div");
+  document.body.appendChild(chatLayer);
+  const cleanMsg = (t) => String(t || "").replace(/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u2028-\u202e\u2060-\u206f\ufeff]/g, "").replace(/\s+/g, " ").trim().slice(0, 140);
+  let peekT = 0;
+  function renderChat() {
+    if (!st || st.ph === "lobby" && !room) { chatLayer.innerHTML = ""; return; }
+    if (!room) { chatLayer.innerHTML = ""; return; }
+    const list = chat.msgs.map((m) => m.sys ? `<div class="msg sys">${esc(m.m)}</div>` : `<div class="msg ${m.mine ? "me" : ""}"><b>${esc(m.nm)}</b>${esc(m.m)}</div>`).join("");
+    if (chat.open) {
+      const n = new Set(viewers().map((p) => p.presence && p.presence.pid).filter(Boolean)).size || 1;
+      chatLayer.innerHTML = `<div class="chat" role="dialog" aria-label="Tisch-Chat"><div class="chat-head"><h2>Tisch-Chat</h2><small>${n} hier</small><button class="icon-btn" data-chat="close">Schließen</button></div><div class="chat-list" id="chatList">${list || `<div class="chat-empty">Noch still hier. Schreib den anderen am Tisch etwas.</div>`}</div><form class="chat-form" autocomplete="off"><input id="chatInput" maxlength="140" placeholder="Nachricht an den Tisch" aria-label="Nachricht" enterkeyhint="send" autocapitalize="sentences"><button class="btn" type="submit">Senden</button></form></div>`;
+      const l = document.getElementById("chatList");
+      l.scrollTop = l.scrollHeight;
+    } else {
+      const peek = chat.peek ? `<div class="chat-peek" data-chat="open"><b>${esc(chat.peek.nm)}:</b> <span>${esc(chat.peek.m)}</span></div>` : "";
+      chatLayer.innerHTML = `${peek}<button class="chat-fab" data-chat="open" aria-label="Tisch-Chat öffnen"><svg class="su" viewBox="0 0 24 24"><use href="#ic-chat" width="24" height="24"></use></svg>${chat.unread ? `<span class="badge">${chat.unread}</span>` : ""}</button>`;
+    }
+  }
+  function openChat(open) {
+    chat.open = open;
+    if (open) { chat.unread = 0; chat.peek = null; clearTimeout(peekT); closeEmo(); }
+    renderChat();
+    if (open) { const i = document.getElementById("chatInput"); if (i && !matchMedia("(pointer: coarse)").matches) i.focus(); }
+  }
+  chatLayer.addEventListener("click", (ev) => {
+    const el = ev.target.closest("[data-chat]");
+    if (!el) return;
+    openChat(el.dataset.chat === "open");
+  });
+  chatLayer.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const inp = document.getElementById("chatInput");
+    const m = cleanMsg(inp && inp.value);
+    if (!m || !myPid) return;
+    inp.value = "";
+    const s = Math.max(Date.now(), (myCh.length ? myCh[myCh.length - 1].s : 0) + 1);
+    myCh = myCh.concat([{ m, s }]).slice(-4);
+    addMsg({ nm: myName, m, s, mine: true, pid: myPid });
+    pushPresence();
+    sfx.play("pop", 0, 0.5);
+    inp.focus();
+  });
+  function addMsg(x) {
+    chat.msgs.push(x);
+    chat.msgs.sort((a, b) => a.s - b.s);
+    if (chat.msgs.length > 80) chat.msgs.splice(0, chat.msgs.length - 80);
+    if (!x.mine && !chat.open) {
+      chat.unread++;
+      chat.peek = x;
+      clearTimeout(peekT);
+      peekT = setTimeout(() => { chat.peek = null; renderChat(); }, 5000);
+      sfx.play("pop", 0, 0.7);
+    }
+    renderChat();
+  }
+  function processChat() {
+    if (!room) return;
+    for (const p of viewers()) {
+      if (p.sameTab) continue;
+      const pr = p.presence;
+      const list = pr && Array.isArray(pr.ch) ? pr.ch : [];
+      const prevMax = chat.seen.get(p.peer);
+      let max = prevMax == null ? -1 : prevMax;
+      for (const x of list) {
+        if (!x || !Number.isFinite(x.s) || typeof x.m !== "string") continue;
+        if (prevMax == null || x.s > prevMax) {
+          const m = cleanMsg(x.m);
+          if (m && !chat.msgs.some((y) => y.s === x.s && y.pid === pr.pid)) addMsg({ nm: cleanName(pr.nm) || "Gast", m, s: x.s, mine: pr.pid === myPid, pid: pr.pid });
+        }
+        if (x.s > max) max = x.s;
+      }
+      chat.seen.set(p.peer, max);
+    }
+  }
+  document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && chat.open) openChat(false); });
+
+  // ===================================================================
   // Töne: alles im Browser erzeugt, keine Dateien
   // ===================================================================
   const sfx = (() => {
@@ -2248,6 +2545,9 @@ const E = (() => {
       caught(t, v) { osc(t, "sawtooth", 520, 250, 0.32, 0.1 * v, 0.005); osc(t + 0.01, "square", 523, 262, 0.3, 0.04 * v); nz(t + 0.34, 0.09, "lowpass", 900, 200, 0.7, 0.9 * v, 0.001); osc(t + 0.34, "sine", 130, 50, 0.2, 0.6 * v); },
       // Fehlalarm: zwei tiefe Töne nach unten
       false(t, v) { osc(t, "triangle", 330, 330, 0.12, 0.2 * v); osc(t + 0.15, "triangle", 247, 247, 0.22, 0.2 * v); },
+      // Kommentator: kleine Fanfare bzw. Zungenschnalzen
+      fanfare(t, v) { osc(t, "triangle", 523, 523, 0.1, 0.12 * v); osc(t + 0.11, "triangle", 659, 659, 0.1, 0.12 * v); osc(t + 0.22, "triangle", 784, 784, 0.28, 0.14 * v); osc(t + 0.22, "sine", 1568, 1568, 0.25, 0.04 * v); },
+      tsk(t, v) { nz(t, 0.03, "bandpass", 2800, 1200, 2, 0.5 * v, 0.001); nz(t + 0.16, 0.03, "bandpass", 2600, 1100, 2, 0.45 * v, 0.001); osc(t + 0.3, "triangle", 196, 150, 0.22, 0.12 * v, 0.01); },
       // Emoji: Blubb
       pop(t, v) { osc(t, "sine", 480, 1300, 0.08, 0.24 * v, 0.002); nz(t, 0.02, "highpass", 3000, 0, 0.7, 0.07 * v); },
     };
@@ -2906,7 +3206,7 @@ const E = (() => {
       <li>Ist der Angriff vorbei, gilt alles, was auf dem Tisch lag.</li>
     </ul></div>
     <h3>Bedienung</h3>
-    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Das Spiel zeigt dir nicht, welche Karten passen. Darauf musst du selbst achten.${c.cheat ? " Legst du eine falsche Karte, liegt sie trotzdem, und die anderen können dich erwischen." : " Eine falsche Karte geht zurück auf deine Hand."}</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein markiertes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Den Ton schaltest du oben mit dem Lautsprecher an und aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
+    <ul><li>Zieh eine Karte aus deiner Hand auf den Tisch. Solange du sie festhältst, schwebt sie noch. Erst wenn du loslässt, liegt sie.</li><li>Das Spiel zeigt dir nicht, welche Karten passen. Darauf musst du selbst achten.${c.cheat ? " Legst du eine falsche Karte, liegt sie trotzdem, und die anderen können dich erwischen." : " Eine falsche Karte geht zurück auf deine Hand."}</li><li>Antippen geht auch: Karte antippen hebt sie an, nochmal tippen oder ein markiertes Ziel auf dem Tisch antippen spielt sie aus.</li><li>Den Ton schaltest du oben mit dem Lautsprecher an und aus.</li><li>Tipp auf dein Profil unten links, um ein Emoji an den Tisch zu schicken. Unten rechts öffnest du den Chat.</li><li>Baron Zuschauski sitzt am Rand und kommentiert deine Züge. Nimm ihn nicht zu ernst.</li><li>Fällt jemand aus, übernimmt nach 30 Sekunden ein Bot. Kommt die Person zurück, bekommt sie ihren Platz wieder.</li></ul>
     </div></div>`;
   }
 
@@ -2950,6 +3250,7 @@ const E = (() => {
       elect();
       if (hosting) hostSync();
       try { processEmotes(); } catch (e) { console.warn("Emoji", e); }
+      try { processChat(); } catch (e) { console.warn("Chat", e); }
       render();
     }, () => goSolo());
     pushPresence();
