@@ -1269,7 +1269,7 @@ const E = (() => {
     { id: "lol", label: "Lachflash", icon: "🤣", mp4: "https://media.tenor.com/rL4hulhuEIYAAAPo/funny-laughing.mp4", gif: "https://media1.tenor.com/m/rL4hulhuEIYAAAAC/funny-laughing.gif" },
     { id: "lieo", label: "Liiieoo", icon: "😵", mp4: "https://media.tenor.com/6Ug_C4RjC4kAAAPo/%D9%84%D9%8A%D9%8A%D9%88%D9%88.mp4", gif: "https://media1.tenor.com/m/6Ug_C4RjC4kAAAAC/%D9%84%D9%8A%D9%8A%D9%88%D9%88.gif" },
   ];
-  const MEME_MS = 12000;
+  const MEME_MS = 3000;
   const memeById = (id) => MEMES.find((m) => m.id === id);
   const EMO_NAMES = ["Wütend", "Lachen", "Clown", "Grinsen", "Gähnen"];
   let myEm = [], lastEmAt = 0;
@@ -2445,34 +2445,14 @@ const E = (() => {
     ui.meme = id;
     const felt = app.querySelector(".felt");
     if (felt) felt.classList.add("meme");
-    const useGif = () => {
-      if (ui.meme !== id) return;
-      memeLayer.innerHTML = '<div class="vign"></div>';
-      const img = document.createElement("img");
-      img.alt = "";
-      img.addEventListener("error", stopMeme);
-      img.src = m.gif;
-      memeLayer.insertBefore(img, memeLayer.firstChild);
-      placeMeme();
-    };
-    // Clip läuft genau einmal durch (mp4, sonst webm). Nur wenn beides nicht geht, das GIF kurz zeigen.
-    const tryVideo = (src, onFail) => {
-      if (ui.meme !== id) return;
-      memeLayer.innerHTML = '<div class="vign"></div>';
-      const v = document.createElement("video");
-      v.muted = true; v.loop = false; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("muted", ""); v.preload = "auto";
-      let failed = false;
-      const fail = () => { if (failed || !v.isConnected || ui.meme !== id) return; failed = true; onFail(); };
-      v.addEventListener("error", fail);
-      v.addEventListener("ended", () => { if (v.isConnected) stopMeme(); });
-      v.addEventListener("loadedmetadata", () => { if (ui.meme === id && v.isConnected) { clearTimeout(memeT); memeT = setTimeout(stopMeme, Math.min(MEME_MS, (v.duration || 6) * 1000 + 400)); } });
-      v.src = src;
-      memeLayer.insertBefore(v, memeLayer.firstChild);
-      placeMeme();
-      const p = v.play();
-      if (p && p.catch) p.catch(fail);
-    };
-    tryVideo(m.mp4, () => tryVideo(m.mp4.replace("AAAPo", "AAAPs").replace(/\.mp4$/, ".webm"), () => { useGif(); clearTimeout(memeT); memeT = setTimeout(stopMeme, 2000); }));
+    // Immer das GIF, immer genau MEME_MS lang
+    memeLayer.innerHTML = '<div class="vign"></div>';
+    const img = document.createElement("img");
+    img.alt = "";
+    img.addEventListener("error", stopMeme);
+    img.src = m.gif;
+    memeLayer.insertBefore(img, memeLayer.firstChild);
+    placeMeme();
     memeT = setTimeout(stopMeme, MEME_MS);
   }
 
