@@ -526,6 +526,100 @@ button { font: inherit; color: inherit; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; }
   .tbar i { animation-duration: inherit !important; }
 }
+
+/* ---------- Design-Schalter ---------- */
+.tsw { appearance: none; display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 10px 0 5px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--ink-2); font: 600 11px/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; flex: 0 0 auto; transition: border-color .2s, color .2s; }
+.tsw:hover { border-color: var(--brass); color: var(--ink); }
+.tsw i { position: relative; display: block; width: 30px; height: 18px; border-radius: 9px; background: rgba(255,255,255,.1); transition: background .25s; }
+.tsw i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--brass); transition: transform .25s cubic-bezier(.2,1.3,.4,1), box-shadow .25s; }
+.tsw.on i { background: rgba(255,45,122,.35); }
+.tsw.on i::after { transform: translateX(12px); background: #ff2d7a; box-shadow: 0 0 8px #ff2d7a, 0 0 18px rgba(255,45,122,.7); }
+.lobby-foot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 2px 0 6px; flex-wrap: wrap; }
+.lobby-foot .note { margin: 0; font-size: 11.5px; }
+@media (max-width: 440px) { .bar .tsw span { display: none; } .bar .tsw { padding-right: 5px; } }
+
+/* ---------- Neon-Club-Design (rot/pink, mit Glow) ---------- */
+html[data-theme="neon"] {
+  --felt-0: #07030b; --felt-1: #170a1f; --felt-2: #2a0f36;
+  --ink: #fff2f8; --ink-2: #e6bcd6; --ink-3: #ad7fa0;
+  --brass: #ff2d7a; --brass-2: #ff85bd; --brass-ink: #2b0415;
+  --silver: #d9c6ff; --silver-2: #f4edff; --silver-3: #9a7fd0;
+  --alarm: #ff5a3c; --alarm-bg: rgba(255,90,60,.16);
+  --good: #4dffc3; --xfer: #6ee7ff;
+  --panel: rgba(16, 5, 22, .7); --panel-2: rgba(16, 5, 22, .93);
+  --line: rgba(255, 45, 122, .45); --line-2: rgba(255, 133, 189, .16);
+  --card: #150a1b; --card-hi: #221029; --card-lo: #0b050f; --card-edge: #5c2a6a;
+  --card-ink: #fff2f8; --card-red: #ff4fae;
+  --court-blue: #5a1fb8; --court-gold: #ff3fa0; --court-cream: #ffe6f3;
+  --back: #130718; --back-2: #050208;
+}
+html[data-theme="neon"] body {
+  background:
+    radial-gradient(55% 45% at 12% 8%, rgba(255,45,122,.28), transparent 70%),
+    radial-gradient(50% 40% at 88% 92%, rgba(124,58,255,.3), transparent 70%),
+    radial-gradient(40% 30% at 80% 10%, rgba(255,20,60,.16), transparent 70%),
+    radial-gradient(120% 80% at 50% 38%, var(--felt-2) 0%, var(--felt-1) 46%, var(--felt-0) 100%);
+}
+html[data-theme="neon"] .mark b, html[data-theme="neon"] .hero h1 { color: #ff3d8a; text-shadow: 0 0 6px rgba(255,45,122,.9), 0 0 18px rgba(255,45,122,.55), 0 0 40px rgba(255,45,122,.3); }
+html[data-theme="neon"] .felt {
+  background: radial-gradient(90% 70% at 50% 45%, rgba(255,60,140,.1), rgba(0,0,0,.4));
+  box-shadow: inset 0 0 0 1px rgba(255,45,122,.9), inset 0 0 0 4px rgba(7,3,11,.95), inset 0 0 0 5px rgba(217,198,255,.25), inset 0 0 70px rgba(80,0,60,.55), 0 0 28px rgba(255,45,122,.35), 0 0 70px rgba(255,45,122,.15), 0 20px 50px -30px rgba(0,0,0,.9);
+}
+html[data-theme="neon"] .felt::before { opacity: .3; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='none' stroke='%23ff2d7a' stroke-opacity='.3'%3E%3Cpath d='M10 0L20 10 10 20 0 10z'/%3E%3Cpath d='M10 5l5 5-5 5-5-5z' stroke-opacity='.16'/%3E%3C/g%3E%3Ccircle cx='10' cy='10' r='1.2' fill='%23ff85bd' fill-opacity='.45'/%3E%3C/svg%3E"); }
+html[data-theme="neon"] .felt .orn-c { color: #ff3d8a; filter: drop-shadow(0 0 5px rgba(255,45,122,.9)); }
+html[data-theme="neon"] .felt.meme::before { display: none; }
+html[data-theme="neon"] .logline { border-color: rgba(255,45,122,.6); box-shadow: 0 0 0 3px rgba(7,3,11,.6), 0 0 14px rgba(255,45,122,.35); }
+html[data-theme="neon"] .trump-suit .su { fill: url(#g-uv); filter: drop-shadow(0 0 3px rgba(217,198,255,.9)); }
+html[data-theme="neon"] .trump-suit.red .su { fill: url(#g-pink); filter: drop-shadow(0 0 3px rgba(255,61,138,.95)); }
+html[data-theme="neon"] .trump-suit { box-shadow: inset 0 0 0 1.5px var(--silver-3), 0 0 12px rgba(217,198,255,.45); }
+html[data-theme="neon"] .trump-suit.red { box-shadow: inset 0 0 0 1.5px var(--brass), 0 0 12px rgba(255,45,122,.6); }
+/* Karten: UV-weiß für Schwarz, Hot Pink für Rot, alles leuchtet */
+html[data-theme="neon"] .card { color: #ece2ff; --metal: url(#g-uv); --metal-ink: #ece2ff; --robe: var(--court-blue); --robe2: var(--card-red);
+  box-shadow: inset 0 0 0 1px var(--card-edge), inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(217,198,255,.45), 0 0 0 1px rgba(255,255,255,.06), 0 0 10px rgba(190,150,255,.28), 0 2px 0 rgba(0,0,0,.5), 0 10px 20px -8px rgba(0,0,0,.95); }
+html[data-theme="neon"] .card::before { border-color: rgba(217,198,255,.28); }
+html[data-theme="neon"] .card.red { color: #ff8fc8; --metal: url(#g-pink); --metal-ink: #ff8fc8; --robe: var(--card-red); --robe2: var(--court-blue);
+  box-shadow: inset 0 0 0 1px #6a2446, inset 0 0 0 2px rgba(0,0,0,.7), inset 0 0 0 2.5px rgba(255,61,138,.55), 0 0 0 1px rgba(255,255,255,.06), 0 0 12px rgba(255,45,122,.38), 0 2px 0 rgba(0,0,0,.5), 0 10px 20px -8px rgba(0,0,0,.95); }
+html[data-theme="neon"] .card.red::before { border-color: rgba(255,61,138,.35); }
+html[data-theme="neon"] .card .su { filter: drop-shadow(0 0 2px currentColor); }
+html[data-theme="neon"] .card .ix { text-shadow: 0 0 5px currentColor, 0 0 12px currentColor; }
+html[data-theme="neon"] .court { background: #0b0510; }
+html[data-theme="neon"] .court::after { box-shadow: inset 0 0 0 1px var(--metal-ink), inset 0 0 0 2px #0b0510, inset 0 0 0 2.6px rgba(255,45,122,.6); }
+html[data-theme="neon"] .court .fig { filter: grayscale(1) brightness(1.05) contrast(1.15) sepia(1) hue-rotate(215deg) saturate(2.2); }
+html[data-theme="neon"] .card.red .court .fig { filter: grayscale(1) sepia(1) saturate(3) hue-rotate(290deg) brightness(.95) contrast(1.2); }
+html[data-theme="neon"] .card.back { box-shadow: inset 0 0 0 calc(var(--w) * .035) #0a0510, inset 0 0 0 calc(var(--w) * .05) #d9c6ff, inset 0 0 0 calc(var(--w) * .062) #0a0510, inset 0 0 0 calc(var(--w) * .072) rgba(255,45,122,.85), 0 0 10px rgba(255,45,122,.3), 0 1px 0 rgba(0,0,0,.4), 0 8px 16px -8px rgba(0,0,0,.85); }
+html[data-theme="neon"] .card.armed { box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 3px var(--alarm), 0 0 22px rgba(255,90,60,.75); }
+html[data-theme="neon"] .pair.tgt .atk { box-shadow: 0 0 0 2.5px var(--brass-2), 0 0 20px rgba(255,45,122,.6); }
+html[data-theme="neon"] .felt.drop-zone .pairs { box-shadow: inset 0 0 0 2px rgba(255,45,122,.3); background-color: rgba(255,45,122,.04); }
+html[data-theme="neon"] .felt.drop-zone.hot .pairs { box-shadow: inset 0 0 0 2.5px var(--brass-2), inset 0 0 40px rgba(255,45,122,.18); background-color: rgba(255,45,122,.07); }
+html[data-theme="neon"] .pair.drop-can .atk { box-shadow: 0 0 0 2px rgba(255,133,189,.5); }
+html[data-theme="neon"] .pair.drop-hot .atk { box-shadow: 0 0 0 3px var(--brass-2), 0 0 26px rgba(255,45,122,.7); }
+html[data-theme="neon"] .dragcard.ok .card { box-shadow: inset 0 0 0 1px var(--card-edge), 0 0 0 3px var(--brass-2), 0 0 26px rgba(255,45,122,.6), 0 34px 40px -14px rgba(0,0,0,.7); }
+html[data-theme="neon"] .land-ring { border-color: rgba(255,133,189,.85); box-shadow: 0 0 12px rgba(255,45,122,.7); }
+html[data-theme="neon"] .btn { box-shadow: 0 0 14px rgba(255,45,122,.55), 0 6px 16px -8px rgba(255,45,122,.9); }
+html[data-theme="neon"] .btn.ghost, html[data-theme="neon"] .btn.alarm, html[data-theme="neon"] .btn.blue, html[data-theme="neon"] .btn[disabled] { box-shadow: none; }
+html[data-theme="neon"] .btn.ghost:hover { box-shadow: 0 0 12px rgba(255,45,122,.35); }
+html[data-theme="neon"] .tbar i { box-shadow: 0 0 8px rgba(255,45,122,.9); }
+html[data-theme="neon"] .me-av .smile { box-shadow: 0 0 0 2px var(--felt-1), 0 0 8px rgba(255,45,122,.8); }
+html[data-theme="neon"] .me-av[aria-expanded="true"] { box-shadow: 0 0 0 2.5px var(--brass-2), 0 0 14px rgba(255,45,122,.8); }
+html[data-theme="neon"] .chat-fab { background: radial-gradient(circle at 35% 30%, #2b1033, #0e0512); box-shadow: 0 0 12px rgba(255,45,122,.5), 0 10px 24px -10px rgba(0,0,0,.9); }
+@keyframes fabPulseNeon { 50% { box-shadow: 0 0 0 6px rgba(255,45,122,.4), 0 0 18px rgba(255,45,122,.9); } }
+html[data-theme="neon"] .chat-fab.new { animation-name: fabPulseNeon; }
+html[data-theme="neon"] .chat, html[data-theme="neon"] .sheet { background: #140a1a; }
+html[data-theme="neon"] .chat { box-shadow: 0 0 0 3px rgba(7,3,11,.6), 0 0 24px rgba(255,45,122,.4), 0 24px 60px -20px rgba(0,0,0,.95); }
+html[data-theme="neon"] .msg.me { background: rgba(255,45,122,.16); border-color: rgba(255,45,122,.4); }
+html[data-theme="neon"] .chip.host { background: rgba(255,45,122,.2); }
+html[data-theme="neon"] .critic .cbub { background: linear-gradient(160deg, #241029, #120816); box-shadow: 0 0 0 3px rgba(7,3,11,.6), 0 0 18px rgba(255,45,122,.45), 0 18px 36px -14px rgba(0,0,0,.9); }
+html[data-theme="neon"] .critic.mock .cbub { box-shadow: 0 0 0 3px rgba(7,3,11,.6), 0 0 18px rgba(154,127,208,.45), 0 18px 36px -14px rgba(0,0,0,.9); }
+html[data-theme="neon"] .emo-pop::before, html[data-theme="neon"] .emo-pop::after { background: #ffe3f0; }
+html[data-theme="neon"] .emo-pop::before { box-shadow: 0 0 14px rgba(255,45,122,.7), 0 10px 22px -8px rgba(0,0,0,.8); }
+html[data-theme="neon"] .emo-tray { box-shadow: 0 0 20px rgba(255,45,122,.35), 0 16px 34px -12px rgba(0,0,0,.85); }
+html[data-theme="neon"] .toast { background: #ffe3f0; color: #2b0415; box-shadow: 0 0 16px rgba(255,45,122,.6), 0 12px 30px -10px rgba(0,0,0,.7); }
+html[data-theme="neon"] .over { background: rgba(14, 4, 20, .95); }
+html[data-theme="neon"] .sheet-bg { background: rgba(10, 2, 14, .66); }
+html[data-theme="neon"] .seg button.on { box-shadow: 0 0 10px rgba(255,45,122,.6); }
+html[data-theme="neon"] .panel { box-shadow: 0 0 0 1px rgba(255,45,122,.08), 0 0 30px -10px rgba(255,45,122,.25); }
+html[data-theme="neon"] .opp.turn { box-shadow: 0 0 0 3px rgba(255,45,122,.2), 0 0 16px rgba(255,45,122,.55), 0 6px 18px -8px rgba(255,45,122,.6); }
+html[data-theme="neon"] :focus-visible { outline-color: var(--brass-2); }
 </style>
 
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
@@ -618,6 +712,8 @@ button { font: inherit; color: inherit; }
   <symbol id="ct-Q" viewBox="0 0 100 212"><g clip-path="url(#ct-clip)"><use href="#fig-Q"/></g><g transform="rotate(180 50 106)"><g clip-path="url(#ct-clip)"><use href="#fig-Q"/></g></g><path d="M0 116L100 96" stroke="#23508e" stroke-width="1.6"/></symbol>
   <symbol id="ct-J" viewBox="0 0 100 212"><g clip-path="url(#ct-clip)"><use href="#fig-J"/></g><g transform="rotate(180 50 106)"><g clip-path="url(#ct-clip)"><use href="#fig-J"/></g></g><path d="M0 116L100 96" stroke="#23508e" stroke-width="1.6"/></symbol>
   <linearGradient id="g-silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#b9bdc6"/><stop offset=".5" stop-color="#f4f5f8"/><stop offset=".72" stop-color="#9ea2ab"/><stop offset="1" stop-color="#e3e5ea"/></linearGradient>
+  <linearGradient id="g-uv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".3" stop-color="#c9b2ff"/><stop offset=".5" stop-color="#f8f3ff"/><stop offset=".72" stop-color="#9a7fd0"/><stop offset="1" stop-color="#ece2ff"/></linearGradient>
+  <linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd2e8"/><stop offset=".3" stop-color="#ff2d7a"/><stop offset=".5" stop-color="#ffa3d0"/><stop offset=".72" stop-color="#c2175b"/><stop offset="1" stop-color="#ff6fb0"/></linearGradient>
   <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e7bd"/><stop offset=".3" stop-color="#c6a356"/><stop offset=".5" stop-color="#eedcA6"/><stop offset=".72" stop-color="#96782f"/><stop offset="1" stop-color="#dcc27f"/></linearGradient>
   <symbol id="flourish" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M2 38V11q0-9 9-9h27"/><path d="M6.5 38V14q0-7.5 7.5-7.5h24" stroke-opacity=".55" stroke-width=".9"/><path d="M11 11q8 0 8 8q0-8 8-8" stroke-opacity=".9"/><circle cx="19" cy="19" r="1.5" fill="currentColor" stroke="none"/><path d="M11 11l-3-3M11 11l3-3M11 11l-3 3" stroke-opacity=".5" stroke-width=".9"/></g></symbol>
   <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 8h8M8 11.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
@@ -1283,6 +1379,51 @@ const E = (() => {
   const EMO_NAMES = ["Wütend", "Lachen", "Clown", "Grinsen", "Gähnen"];
   let myEm = [], lastEmAt = 0;
   let myCh = [], chat = { msgs: [], open: false, unread: 0, seen: new Map() };
+  // Design für den ganzen Tisch: jeder darf umschalten, der Gastgeber trägt es in den Spielstand ein
+  let myTh = null;
+  const thSeen = new Map();
+  const themeOf = (s) => (s && s.cfg && s.cfg.theme === "neon" ? "neon" : "gold");
+  function applyTheme(t) {
+    const cur = document.documentElement.getAttribute("data-theme") || "gold";
+    if (cur === t) return;
+    document.documentElement.setAttribute("data-theme", t);
+    const m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute("content", t === "neon" ? "#07030b" : "#061c17");
+  }
+  function setTheme(t) {
+    if (!st) return;
+    t = t === "neon" ? "neon" : "gold";
+    ls.set("durak.theme", t);
+    ui.thOpt = { v: t, until: Date.now() + 5000 };
+    if (hosting) {
+      if (themeOf(st) === t) { render(); return; }
+      st.cfg.theme = t;
+      E.addLog(st, `${myName} schaltet den Tisch auf ${t === "neon" ? "Neon" : "Gold"}.`);
+      commit();
+    } else {
+      myTh = { v: t, s: Date.now() };
+      pushPresence();
+      render();
+    }
+  }
+  function processThemes() {
+    let ch = false;
+    for (const p of viewers()) {
+      if (p.sameTab) continue;
+      const pr = p.presence;
+      if (!pr || typeof pr.pid !== "string" || !pr.th || typeof pr.th !== "object") continue;
+      const sq = Number(pr.th.s);
+      if (!Number.isFinite(sq) || sq <= (thSeen.get(pr.pid) || 0)) continue;
+      thSeen.set(pr.pid, sq);
+      const t = pr.th.v === "neon" ? "neon" : "gold";
+      if (themeOf(st) === t) continue;
+      st.cfg.theme = t;
+      const who = st.pl.find((x) => x.id === pr.pid);
+      E.addLog(st, `${who ? who.n : typeof pr.nm === "string" ? pr.nm.slice(0, 16) : "Jemand"} schaltet den Tisch auf ${t === "neon" ? "Neon" : "Gold"}.`);
+      ch = true;
+    }
+    return ch;
+  }
   const seenEm = new Map();
   const botEmAt = new Map();
   const reduceMotion = (() => { try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } })();
@@ -1327,6 +1468,7 @@ const E = (() => {
       st: hosting && st ? E.clone(st) : null,
       em: myEm,
       ch: myCh,
+      th: myTh,
     };
     room.presence(p).catch((e) => console.warn("presence", e && e.code, e && e.message));
   }
@@ -1342,6 +1484,8 @@ const E = (() => {
       st = E.newState(myPid);
     }
     const now = Date.now();
+    for (const p of viewers()) { const pr = p.presence; if (pr && typeof pr.pid === "string" && pr.th && Number.isFinite(Number(pr.th.s))) thSeen.set(pr.pid, Math.max(thSeen.get(pr.pid) || 0, Number(pr.th.s))); }
+    if (!fromState && ls.get("durak.theme") === "neon") st.cfg.theme = "neon";
     st.pl.forEach((p) => lastSeen.set(p.id, now));
     if (st.pl.some((p) => p.rid)) st.pl.forEach((p) => p.rid && lastSeen.set(p.rid, 0));
     hostTimer = null; botPlan = null;
@@ -1551,6 +1695,7 @@ const E = (() => {
     if (!hosting || !st) return;
     let ch = syncSeats();
     if (processQueues()) ch = true;
+    if (processThemes()) ch = true;
     if (ch) commit();
   }
 
@@ -1800,6 +1945,7 @@ const E = (() => {
       case "sit": wantSit = d.v === "1"; ls.set("durak.sit", wantSit ? "1" : "0"); pushPresence(); if (hosting) { syncSeats(); commit(); } else render(); break;
       case "rules": ui.sheet = "rules"; render(); break;
       case "sound": sfx.toggle(); render(); break;
+      case "theme": { let t = themeOf(st); if (ui.thOpt && Date.now() < ui.thOpt.until) t = ui.thOpt.v; setTheme(t === "neon" ? "gold" : "neon"); break; }
       case "chat": openChat(true); break;
       case "menu": ui.sheet = "menu"; render(); break;
       case "close": ui.sheet = null; render(); break;
@@ -1987,6 +2133,9 @@ const E = (() => {
     const selStart = active && active.selectionStart, selEnd = active && active.selectionEnd;
     const draft = focusId === "nameInput" ? active.value : null;
 
+    let theme = themeOf(st);
+    if (ui.thOpt) { if (theme === ui.thOpt.v || Date.now() > ui.thOpt.until) ui.thOpt = null; else theme = ui.thOpt.v; }
+    applyTheme(theme);
     const r = roleInfo();
     let html = topHtml();
     if (st.ph === "lobby") {
@@ -2202,6 +2351,12 @@ const E = (() => {
     return `<div class="over"><div class="over-in">${head}<ul class="ranks">${list}</ul>${btns}</div></div>`;
   }
 
+  function themeSwitchHtml() {
+    let t = themeOf(st);
+    if (ui.thOpt && Date.now() < ui.thOpt.until) t = ui.thOpt.v;
+    const on = t === "neon";
+    return `<button class="tsw ${on ? "on" : ""}" data-act="theme" role="switch" aria-checked="${on}" aria-label="Neon-Club-Design für den ganzen Tisch" title="Design für alle am Tisch umschalten"><i></i><span>${on ? "Neon" : "Gold"}</span></button>`;
+  }
   function barHtml(r) {
     let say = "", btns = "";
     const defN = st.pl[st.def] ? esc(st.pl[st.def].n) : "";
@@ -2241,7 +2396,7 @@ const E = (() => {
       ? `<button class="me-av" data-act="emo" data-anchor="mepf" style="--c:${colorFor(st, me)}" aria-label="Emoji an den Tisch schicken" aria-expanded="${ui.emoOpen ? "true" : "false"}">${initial(st.pl[me].n)}<span class="smile" aria-hidden="true">😊</span></button>`
       : "";
     const chatBtn = room ? `<button class="chat-fab ${chat.newAt && Date.now() - chat.newAt < 4000 ? "new" : ""}" data-act="chat" aria-label="Tisch-Chat öffnen"><svg class="su" viewBox="0 0 24 24"><use href="#ic-chat" width="24" height="24"></use></svg>${chat.unread ? `<span class="badge">${chat.unread}</span>` : ""}</button>` : "";
-    return `<div class="bar">${tbar}${meBtn}<div class="say">${say}</div><div class="btns">${btns}</div>${chatBtn}${confirm}</div>`;
+    return `<div class="bar">${tbar}${meBtn}<div class="say">${say}</div><div class="btns">${btns}</div>${themeSwitchHtml()}${chatBtn}${confirm}</div>`;
   }
 
   // Eigene Hand als Fächer: Karten auf einem Bogen, Trumpf ganz rechts
@@ -3283,6 +3438,7 @@ const E = (() => {
       <div class="panel"><h2>Freunde einladen</h2>${invite}</div>
       <div class="panel"><h2>Regeln für diesen Tisch</h2>${opts}${hosting ? "" : `<p class="note">Nur der Gastgeber kann die Regeln ändern.</p>`}</div>
       <div class="panel"><h2>Dein Name</h2><form class="namebox" autocomplete="off"><input id="nameInput" maxlength="16" value="${esc(myName)}" aria-label="Dein Name"><button class="btn ghost" type="submit">Speichern</button></form><div style="height:10px"></div>${sitBtn}</div>
+      <div class="lobby-foot">${themeSwitchHtml()}<p class="note">Design · gilt für alle am Tisch</p></div>
     </div>`;
   }
 
